@@ -1,0 +1,19 @@
+2012-07-26 08:31:12 Error: Fatal Error (1): Call to undefined method PagesController::startCustomerSession() in [C:\wamp\www\cake20\carlsberg_glass\Controller\AppController.php, line 53]
+2012-07-26 08:31:12 Error: [FatalErrorException] Call to undefined method PagesController::startCustomerSession()
+#0 C:\wamp\www\cake20\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\wamp\www\cak...', 53)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\wamp\www\cak...', 53, Array)
+#2 C:\wamp\www\cake20\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\wamp\www\cak...', 53, Array)
+#3 C:\wamp\www\cake20\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-26 08:31:27 Error: [MissingHelperException] Helper class ProductHelper could not be found.
+#0 C:\wamp\www\cake20\Lib\Cake\View\View.php(861): HelperCollection->load('Product', Array)
+#1 C:\wamp\www\cake20\Lib\Cake\View\View.php(468): View->loadHelpers()
+#2 C:\wamp\www\cake20\Lib\Cake\Controller\Controller.php(957): View->render('home', NULL)
+#3 C:\wamp\www\cake20\carlsberg_glass\Controller\PagesController.php(71): Controller->render('home')
+#4 [internal function]: PagesController->display('home')
+#5 C:\wamp\www\cake20\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#6 C:\wamp\www\cake20\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#7 C:\wamp\www\cake20\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\wamp\www\cake20\carlsberg_glass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
