@@ -58,7 +58,7 @@ if (!defined('APP_DIR')) {
  *
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
-//define('CAKE_CORE_INCLUDE_PATH', __CAKE_PATH__);
+//define('CAKE_CORE_INCLUDE_PATH', '');
 
 /**
  * Editing below this line should NOT be necessary.
@@ -74,7 +74,7 @@ if (!defined('WWW_ROOT')) {
 
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
 	if (function_exists('ini_set')) {
-		ini_set('include_path', ROOT . DS . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
+		ini_set('include_path', ROOT . DS . 'Lib' . PATH_SEPARATOR . ROOT . DS . APP_DIR . DS . 'Lib' . PATH_SEPARATOR . ini_get('include_path'));
 	}
 	if (!include 'Cake' . DS . 'bootstrap.php') {
 		$failed = true;
