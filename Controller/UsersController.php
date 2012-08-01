@@ -7,12 +7,28 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+    /**
+     * login method
+     *
+     * @return void
+     */
+    public function admin_login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                return $this->redirect($this->Auth->redirect());
+            } else {
+                $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+            }
+        }
+        $this->set('showNav',false);
+    }
+
 /**
  * index method
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}

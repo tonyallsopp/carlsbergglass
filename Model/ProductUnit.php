@@ -45,26 +45,6 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'variant' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'image_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'origin' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -147,4 +127,13 @@ class ProductUnit extends AppModel {
 			'order' => ''
 		)
 	);
+
+    public function calcCapacityGroup($capacity){
+        $capArray = explode('/',$capacity);
+        $cap = preg_replace('/[^0-9.]/','',$capArray[0]) *1;
+        if($cap >= 0.44){
+            return 'large';
+        }
+        return 'small';
+    }
 }

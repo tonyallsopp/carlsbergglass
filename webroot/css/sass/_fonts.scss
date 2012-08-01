@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'CarlsbergSansBlack';
+  src: url('../fonts/carlsberg_sans_black-webfont.eot');
+  src: url('../fonts/carlsberg_sans_black-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/carlsberg_sans_black-webfont.woff') format('woff'),
+  url('../fonts/carlsberg_sans_black-webfont.ttf') format('truetype'),
+  url('../fonts/carlsberg_sans_black-webfont.svg#CarlsbergSansBlack') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'CarlsbergSansBold';
+  src: url('../fonts/carlsberg_sans_bold-webfont.eot');
+  src: url('../fonts/carlsberg_sans_bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/carlsberg_sans_bold-webfont.woff') format('woff'),
+  url('../fonts/carlsberg_sans_bold-webfont.ttf') format('truetype'),
+  url('../fonts/carlsberg_sans_bold-webfont.svg#CarlsbergSansBold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'CarlsbergSansLight';
+  src: url('../fonts/carlsberg_sans_light-webfont.eot');
+  src: url('../fonts/carlsberg_sans_light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/carlsberg_sans_light-webfont.woff') format('woff'),
+  url('../fonts/carlsberg_sans_light-webfont.ttf') format('truetype'),
+  url('../fonts/carlsberg_sans_light-webfont.svg#CarlsbergSansLight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$body-font: 14px Arial, Helvetica, Freesans, sans-serif;
+$title-font-light: 14px 'CarlsbergSansLight', Arial, Helvetica, Freesans, sans-serif;
+$title-font-black: 14px 'CarlsbergSansBlack', Arial, Helvetica, Freesans, sans-serif;
+$title-font-bold: 14px 'CarlsbergSansBold', Arial, Helvetica, Freesans, sans-serif;

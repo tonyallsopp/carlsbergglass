@@ -1,0 +1,140 @@
+@import "base";
+
+
+/* Core stuff
+-------------------------------------------------------------------------------*/
+
+/* using local fonts? make sure to read up on Paul Irish's
+        Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/ */
+
+a {color: #355189;}
+a:hover {color: #7083A8;}
+
+/* Custom text-selection colors (remove any text shadows: twitter.com/miketaylr/status/12228805301) */
+::-moz-selection{background: #fcd700; color: white; text-shadow: none;}
+::selection {background: #fcd700; color: white; text-shadow: none;}
+
+/*	j.mp/webkit-tap-highlight-color */
+a:link {-webkit-tap-highlight-color: #fcd700;}
+
+ins {background-color: #fcd700; color: black; text-decoration: none;}
+mark {background-color: #fcd700; color: black; font-style: italic; font-weight: bold;}
+
+
+// BASIC LAYOUT
+
+.col { @include float-left; }
+#main-header { @include float-left; }
+#container { overflow: hidden; }
+#content { width:100%; padding-left:200px;}
+#main-header {
+  width:200px;
+  background: url(../img/layout/logo.jpg) no-repeat 0 0 $dark-green;
+  height:100%;
+  ul {
+    background: url(../img/layout/main-nav-bg-top.jpg) no-repeat 0 0 $dark-green;
+  }
+
+  li {
+    list-style: none;
+    padding:0;
+    a {
+      @extend .white-shadow;
+      height:40px;
+      line-height: 40px;
+      border-top: 1px solid $dark-green-hl;
+      border-bottom: 1px solid $dark-green-sh;
+      padding:0 20px;
+      display: block;
+      text-decoration: none;
+    }
+    a:hover {
+      @include linear-grad-lr($menu-green-hl, $dark-green);
+    }
+  }
+  h1 {
+    height:140px;
+    text-indent: -9999px;
+  }
+  .current-user {
+    padding:20px 20px 0 20px;
+    height:64px;
+    border-bottom:1px solid $dark-green-sh;
+    color: white;
+    font-size: 18px;
+  }
+}
+#main-nav {
+  background: url(../img/layout/main-nav-bg.png) repeat-y 0 0 $dark-green;
+  overflow: hidden;
+}
+#content-inner {
+  width:730px;
+  padding:30px;
+}
+#breadcrumbs {
+  width:100%;
+  overflow:hidden;
+  background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
+  border-bottom: 1px solid $bc-border-grey;
+  li {
+    padding:0;
+    height:49px;
+    @include float-left;
+    background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
+    span {
+      background: url(../img/layout/bc-bg.png) no-repeat 0 0;
+      @include float-left;
+      padding:0 10px 0 26px;
+      line-height: 49px;
+    }
+    a {
+      @include float-left;
+      height:49px;
+      color: $mid-grey;
+      text-decoration: none;
+      text-shadow: 1px 1px 0 white;
+    }
+    a:hover {
+      color:$bc-hover-grey;
+    }
+  }
+  li.home span {
+    background: url(../img/layout/bc-home-bg.png) no-repeat 0 0;
+    a {
+      background: url(../img/layout/home-icon.png) no-repeat 0 17px;
+      text-indent: -9999px;
+      width:15px;
+    }
+  }
+}
+
+// PRODUCT LISTINGS
+
+.branded-products {
+  li {
+    list-style: none;
+    color:$mid-green-text;
+    font-weight: bold;
+  }
+}
+
+// PRODUCT DETAILS
+
+.product-details {
+  header {
+    background: $prod-header-bg;
+    border-bottom: 1px solid $prod-header-bdr;
+    .inner {
+      padding:30px;
+      overflow:hidden;
+      .col-1 {
+        width:510px;
+        padding:0 20px 0 0;
+      }
+      .prod-img {
+        border: 1px solid $prod-header-bdr;
+      }
+    }
+  }
+}

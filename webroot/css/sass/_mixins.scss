@@ -1,0 +1,44 @@
+// MIXINS
+
+@mixin float-left {
+  float:left;
+  display:inline;
+}
+
+@mixin rounded-corner($side, $radius: 5px) {
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+  border-#{$side}-radius: $radius;
+}
+
+@mixin rounded($radius: 5px) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin linear-grad($start, $stop) {
+  background: $start; /* Old browsers */
+  background: -moz-linear-gradient(top, $start 0%, $stop 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$start), color-stop(100%,$stop)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, $start 0%,$stop 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, $start 0%,$stop 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, $start 0%,$stop 100%); /* IE10+ */
+  background: linear-gradient(to bottom, $start 0%,$stop 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start', endColorstr='$stop',GradientType=0 ); /* IE6-9 */
+}
+@mixin linear-grad-lr($start, $stop) {
+  background: $start; /* Old browsers */
+  background: -moz-linear-gradient(left, $start 0%, $stop 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,$start), color-stop(100%,$stop)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, $start 0%,$stop 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, $start 0%,$stop 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, $start 0%,$stop 100%); /* IE10+ */
+  background: linear-gradient(to right, $start 0%,$stop 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start', endColorstr='$stop',GradientType=1 ); /* IE6-9 */
+}
+
+@mixin box-shadow($params) {
+  -moz-box-shadow: $params;
+  -webkit-box-shadow: $params;
+  box-shadow: $params;
+}

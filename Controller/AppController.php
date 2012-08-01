@@ -45,9 +45,9 @@ class AppController extends Controller {
         $this->_initAuth();
 
         //set the admin layout
-        if (isset($this->request->params['admin'])) {
+        /*if (isset($this->request->params['admin'])) {
             $this->layout = 'admin';
-        }
+        }*/
 
         //init sessionReferer
         $this->getSessionReferer();
@@ -71,7 +71,8 @@ class AppController extends Controller {
     private function _initAuth() {
         $this->Auth->authenticate = array(
             'Form' => array(
-                'scope' => array('User.enabled' => 1)
+                'scope' => array('User.enabled' => 1),
+                'fields' => array('username' => 'email')
             )
         );
         $this->Auth->authError = 'You do not have permission to view this page';
@@ -277,6 +278,26 @@ class AppController extends Controller {
             return $email->send();
         }
         return true;
+    }
+
+    /**
+     * returns parse csv text file as array
+     * @param $filepath
+     * @return array
+     */
+    public function parseCSVFile($filepath){
+        foreach( str_getcsv ( file_get_contents( $filepath ), $line = "\n" ) as $row ) {
+            $csv[] = str_getcsv( $row, $delim = ',', $enc = '"' );
+        }
+        return $csv;
+    }
+
+    public function uploadFile($tmpFile, $destDir = null){
+        if(!$destDir) $destDir = TMP_FILES;
+        if($destDir === TMP_FILES && !is_dir($destDir)){
+            mkdir($destDir);
+        }
+        return move_uploaded_file($tmpFile['tmp_name'], $destDir . $tmpFile['name']);
     }
 
 }

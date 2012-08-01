@@ -63,4 +63,35 @@ class AppModel extends Model {
         $slug = implode($seperator, $slug);
         return $slug;
     }
+
+    /**
+     * Returns true if file is uploaded, used with validation
+     * @param $params
+     * @return bool
+     */
+    public function isUploadedFile($params) {
+        $val = array_shift($params);
+        if ((isset($val['error']) && $val['error'] == 0) ||
+            (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
+        ) {
+            return is_uploaded_file($val['tmp_name']);
+        }
+        return false;
+    }
+
+    /**
+     * checks file properties against given validation params
+     * @param $params
+     * @param $validation
+     * @return bool
+     */
+    public function isValidFile($params, $validation){
+        $val = array_shift($params);
+        if ((isset($val['error']) && $val['error'] == 0)) {
+            if(in_array(substr($val['name'],strripos($val['name'],'.') +1),$validation['ext']) && $val['size'] <= $validation['max_size']){
+                return true;
+            }
+        }
+        return false;
+    }
 }
