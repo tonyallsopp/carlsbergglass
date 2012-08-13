@@ -41,12 +41,22 @@ class ProductGroupsController extends AppController {
     }
 
     public function change_options($slug){
-        if ($this->request->is('post')) {
+        if (!empty($this->request->data)) {
             $vers = $this->request->data['ProductGroup']['version'];
             $size = $this->request->data['ProductGroup']['size'];
-            $this->redirect("/branded_glassware/{$slug}/vers:{$vers}/size:{$size}");
+            if($this->request->is('ajax')){
+                $contain = array('ProductUnit');
+                $product = $this->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$slug), 'contain' => $contain));
+                $productSizes = $this->ProductGroup->getSizes($product);
+                $productVersions = $this->ProductGroup->getVersions($product);
+                $currentProdUnit = $this->ProductGroup->getCurrentUnit($product,array('variant'=>$productVersions[$vers],'size'=>$productSizes[$size] ));
+                $this->set('response',json_encode($currentProdUnit));
+                $this->render('/Elements/ajax','ajax');
+            } else {
+                $this->redirect("/branded_glassware/{$slug}/vers:{$vers}/size:{$size}");
+            }
         }
-        $this->redirect($this->referer());
+
     }
 
 

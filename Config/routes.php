@@ -1,9 +1,14 @@
 <?php
 
-Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+Router::connect('/', array('controller' => 'pages', 'action' => 'display','home'));
+Router::connect('/admin', array('controller' => 'users', 'action' => 'index','admin'=>true));
+
+Router::connect('/account', array('controller' => 'users', 'action' => 'account'));
+Router::connect('/contact', array('controller' => 'users', 'action' => 'contact'));
 
 Router::connect('/branded_glassware/index', array('controller' => 'product_groups', 'action' => 'index','branded'));
 Router::connect('/branded_glassware/*', array('controller' => 'product_groups', 'action' => 'view'));
+
 
 
 /**

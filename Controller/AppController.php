@@ -68,6 +68,8 @@ class AppController extends Controller {
         }
     }
 
+    private $_authAllowed = array('/users/register','/users/forgot_password','/users/register_thanks','/users/password_sent');
+
     private function _initAuth() {
         $this->Auth->authenticate = array(
             'Form' => array(
@@ -75,18 +77,37 @@ class AppController extends Controller {
                 'fields' => array('username' => 'email')
             )
         );
-        $this->Auth->authError = 'You do not have permission to view this page';
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => true);
+        $this->Auth->authError = 'Please log in to proceed';
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         //allow auth for non-admin
         if (isset($this->request->params['admin'])) {
             $this->Auth->deny('*');
-        } else {
+        } elseif($this->_isAuthorised() || $this->request->is('requested')) {
             $this->Auth->allow('*');
+        } else {
+            $this->Auth->deny('*');
         }
+
         $this->set('_user', $this->Auth->user());
+        $this->_user = $this->Auth->user();
 
         //set the current user id for use in created_by and updated_by fields
         $this->{$this->modelClass}->currentUserId = $this->Auth->user('id');
+
+        //set the admin layout
+        $this->set('adminLayout',isset($this->request->params['admin']));
+
+    }
+
+    private function _isAuthorised(){
+        $current = array($this->request->params['controller'],$this->request->params['action']);
+        if(isset($this->request->params['pass'][0])) $current[] = $this->request->params['pass'][0];
+        foreach($this->_authAllowed as $url){
+            if($url == '/' . implode('/',$current)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public function beforeRender() {

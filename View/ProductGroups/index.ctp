@@ -9,7 +9,7 @@
                 <h3><?php echo h($productGroup['ProductGroup']['name']); ?>&nbsp;</h3>
 
                 <p>
-                    <?php echo $this->Html->link($productGroup['ProductGroup']['name'], "/branded_glassware/{$productGroup['ProductGroup']['slug']}"); ?>
+                    <?php echo $this->Html->link('Details', "/branded_glassware/{$productGroup['ProductGroup']['slug']}",array('class'=>'btn-details')); ?>
                 </p>
             </li>
             <?php endforeach; ?>

@@ -21,6 +21,7 @@
         echo $this->Form->create('ProductGroup',array('url'=>"/product_groups/change_options/{$productGroup['ProductGroup']['slug']}"));
         echo $this->Form->input('version',array('options'=>$productVersions,'value'=>$selectedVersion));
         echo $this->Form->input('size',array('options'=>$productSizes,'value'=>$selectedSize));
+        echo $this->Form->hidden('slug',array('value'=>$productGroup['ProductGroup']['slug']));
         echo $this->Form->end('Update');
         ?>
 
@@ -30,31 +31,31 @@
             </tr>
             <tr>
                 <td>Product Description</td>
-                <td><?php echo h($currentUnit['name']); ?></td>
+                <td class="prodinfo-name"><?php echo h($currentUnit['name']); ?></td>
             </tr>
             <tr>
                 <td>Country of Origin</td>
-                <td><?php echo h($currentUnit['origin']); ?></td>
+                <td class="prodinfo-origin"><?php echo h($currentUnit['origin']); ?></td>
             </tr>
             <tr>
                 <td>Primary Packaging</td>
-                <td><?php echo h($currentUnit['packaging']); ?></td>
+                <td class="prodinfo-packaging"><?php echo h($currentUnit['packaging']); ?></td>
             </tr>
             <tr>
                 <td>Pallet Unit 90 x 120 x 120 (in pieces)</td>
-                <td><?php echo h($currentUnit['pallet_unit']); ?></td>
+                <td class="prodinfo-pallet_unit"><?php echo h($currentUnit['pallet_unit']); ?></td>
             </tr>
             <tr>
                 <td>Full Trailer Load 66 Pallet (in pieces)</td>
-                <td><?php echo h($currentUnit['trailer_load']); ?></td>
+                <td class="prodinfo-trailer_load"><?php echo h($currentUnit['trailer_load']); ?></td>
             </tr>
             <tr>
                 <td>FCA Location</td>
-                <td><?php echo h($currentUnit['fca_location']); ?></td>
+                <td class="prodinfo-fca_location"><?php echo h($currentUnit['fca_location']); ?></td>
             </tr>
             <tr>
                 <td>FCA Unit Price (1 piece in EUR)</td>
-                <td><?php echo h($currentUnit['price']); ?></td>
+                <td class="prodinfo-price"><?php echo h($currentUnit['price']); ?></td>
             </tr>
         </table>
 

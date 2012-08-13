@@ -4,12 +4,6 @@
 /* Core stuff
 -------------------------------------------------------------------------------*/
 
-/* using local fonts? make sure to read up on Paul Irish's
-        Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/ */
-
-a {color: #355189;}
-a:hover {color: #7083A8;}
-
 /* Custom text-selection colors (remove any text shadows: twitter.com/miketaylr/status/12228805301) */
 ::-moz-selection{background: #fcd700; color: white; text-shadow: none;}
 ::selection {background: #fcd700; color: white; text-shadow: none;}
@@ -27,10 +21,13 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 #main-header { @include float-left; }
 #container { overflow: hidden; }
 #content { width:100%; padding-left:200px;}
+
+// MAIN HEADER (LHS green menu)
 #main-header {
   width:200px;
   background: url(../img/layout/logo.jpg) no-repeat 0 0 $dark-green;
-  height:100%;
+  position:absolute;
+  top:0; bottom:0; left:0;
   ul {
     background: url(../img/layout/main-nav-bg-top.jpg) no-repeat 0 0 $dark-green;
   }
@@ -52,6 +49,16 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
       @include linear-grad-lr($menu-green-hl, $dark-green);
     }
   }
+  .admin-home, .my-account, .logout, .back {
+    span {
+      display: block;
+      background: url(../img/layout/menu.png) no-repeat 0 10px;
+      padding-left:30px;
+    }
+  }
+  .my-account span { background-position: 0 -50px;}
+  .logout span { background-position: 0 -108px;}
+  .back span { background-position: 0 -146px;}
   h1 {
     height:140px;
     text-indent: -9999px;
@@ -67,6 +74,11 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 #main-nav {
   background: url(../img/layout/main-nav-bg.png) repeat-y 0 0 $dark-green;
   overflow: hidden;
+}
+#admin-nav {
+  position: absolute;
+  bottom:0;
+  width:100%;
 }
 #content-inner {
   width:730px;
@@ -121,20 +133,78 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 
 // PRODUCT DETAILS
 
-.product-details {
-  header {
-    background: $prod-header-bg;
-    border-bottom: 1px solid $prod-header-bdr;
-    .inner {
-      padding:30px;
-      overflow:hidden;
-      .col-1 {
-        width:510px;
-        padding:0 20px 0 0;
-      }
-      .prod-img {
-        border: 1px solid $prod-header-bdr;
-      }
+.page-header {
+  background: $prod-header-bg;
+  border-bottom: 1px solid $prod-header-bdr;
+  .inner {
+    padding:30px;
+    overflow:hidden;
+    .col-1 {
+      width:510px;
+      padding:0 20px 0 0;
     }
+    .prod-img {
+      border: 1px solid $prod-header-bdr;
+    }
+  }
+}
+
+// LOGGED OUT PAGES (GREEN BACKGROUND)
+
+.main {
+  background: url('../img/layout/main-bg.jpg') no-repeat center top  $dark-green;
+  h1 {
+    font: $title-font-black;
+    font-size: 62px;
+    color:white;
+    text-transform: uppercase;
+    line-height: 1em;
+    padding-bottom: 30px;
+  }
+  #container {
+    width:940px;
+    margin:0 auto;
+    position: relative;
+    min-height: 640px;
+  }
+  #content {
+    width:400px;
+    padding: 94px 0 100px 480px;
+  }
+  #group-logo {
+    position: absolute;
+    top:30px;
+    left:30px;
+    width:130px;
+    height:73px;
+    text-indent: -9999px;
+    background: url('../img/layout/group-logo.png') no-repeat;
+  }
+  #main-footer {
+    position: absolute;
+    bottom:10px;
+    left:50%;
+    margin-left:-470px;
+    width:940px;
+    text-align: center;
+    p { color: $large-form-text; }
+    a {
+      color:white;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline;}
+  }
+  div.confirm {
+    padding:20px;
+    border:1px solid $large-input-brdr-green;
+    background: rgba($dark-green, 0.2);
+    h2 {
+      font: $title-font-light;
+      font-size: 26px;
+      color:white;
+      text-transform: uppercase;
+      padding-bottom: 20px;
+    }
+    p { color:white;}
   }
 }
