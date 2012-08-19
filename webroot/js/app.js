@@ -1,37 +1,20 @@
 $(function(){
 
-    //update product info
-
-    if($('#ProductGroupVersion').length){
-        $vers = $('#ProductGroupVersion');
-        $size = $('#ProductGroupSize');
-
-        function updateProductInfo(){
-            $('#ProductGroupSize, #ProductGroupVersion').change(function(){
-                var data = {'data[ProductGroup][version]':$('#ProductGroupVersion').val(), 'data[ProductGroup][size]':$('#ProductGroupSize').val() }
-                var url = webroot + 'product_groups/change_options/' + $('#ProductGroupSlug').val();
-                $.ajax({
-                    url: url,
-                    data: data,
-                    type: 'post',
-                    dataType : 'json',
-                    success: function(data) {
-                        for(var p in data){
-                            var elem = $('td.prodinfo-' + p);
-                            if(elem.length){
-                                elem.text(data[p]);
-                            }
-                        }
-                    }
-                });
-            });
+    //set side menu height
+    (function setMenuHeight(){
+        $menu = $('#main-header');
+        $content = $('#content');
+        $container = $('#container');
+        console.log($content.height(), $menu.outerHeight());
+        if($menu.length && ($content.outerHeight() > $menu.outerHeight())){
+            $menu.height($content.height()+100);
         }
-        updateProductInfo();
+    })();
 
-    }
+
 
     //submit link
-    function submitFormButtons(){
+    (function submitFormButtons(){
         //clicking button submits form
         $("#content").delegate("a.submit", "click", function(e) {
             e.preventDefault();
@@ -50,11 +33,12 @@ $(function(){
             var $newBtn = '<a href="#" class="submit">' + $(this).val() + '<span>&raquo;</span></a>';
             $(this).after($newBtn).remove();
         });
-    }
-    submitFormButtons();
+        //insert >> into standard buttons
+        $('a.btn-details').append('<span>&raquo;</span>');
+    })();
 
     //placeholder text support for all browsers
-    function initPlaceholderText(){
+    (function initPlaceholderText(){
         jQuery.support.placeholder = false;
         test = document.createElement('input');
         if('placeholder' in test) jQuery.support.placeholder = true;
@@ -76,8 +60,14 @@ $(function(){
                 $(this).find('.hasPlaceholder').each(function() { $(this).val(''); });
             });
         }
-    }
-    initPlaceholderText();
+    })();
+
+    //replace select fields
+    (function replaceSelect(){
+        $('select').each(function(){
+            prettySelect($(this));
+        });
+    })();
 
     //flash messages
     $('#flashMessage').delay(10000).fadeOut();
@@ -85,4 +75,76 @@ $(function(){
     // debug output
     $('div.cake-debug-output').appendTo('body');
 
+    //update product info
+    if($('.product-details').length){
+        $productVersionSelect = $('div[rel="ProductGroupVersion"] li');
+        $productSizeSelect = $('div[rel="ProductGroupSize"] li');
+        $productVersionVal =  $('input[name="data[ProductGroup][version]"]');
+        $productSizeVal =  $('input[name="data[ProductGroup][size]"]');
+
+        function updateProductInfo(){
+            //version click event
+            $("body").on('click', 'div[rel="ProductGroupVersion"] li', function() {
+                ajaxUpdate($(this).find('span.value').text(), $productSizeVal.val());
+            });
+            //size click event
+            $("body").on('click', 'div[rel="ProductGroupSize"] li', function() {
+                ajaxUpdate($productVersionVal.val(), $(this).find('span.value').text());
+            });
+
+            function ajaxUpdate(version, size){
+                console.log(version);
+                console.log(size);
+                var data = {'data[ProductGroup][version]':version, 'data[ProductGroup][size]':size }
+                var url = webroot + 'product_groups/change_options/' + $('#ProductGroupSlug').val();
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: 'post',
+                    dataType : 'json',
+                    success: function(data) {
+                        for(var p in data){
+                            var elem = $('.prodinfo-' + p);
+                            if(elem.length){
+                                elem.text(data[p]);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        updateProductInfo();
+    }
+
 });
+
+function prettySelect($elem){
+    //console.log($elem);
+    var $hiddenField = $('<input type="hidden"/>').attr('name',$elem.attr('name')).val($elem.val());
+    var $prettSelect = $('<div class="dropdown"><span class="selected">' + $elem.find('option:selected').text() + '</span></div>');
+    $prettSelect.attr('rel',$elem.attr('id'));
+    var $prettyOpts = $('<ul class="options"></ul>');
+    $elem.find('option').each(function(){
+        var prettyItem = $('<li><span class="label">' + $(this).text() + '</span><span class="value">' + $(this).attr('value') + '</span></li>');
+        prettyItem.appendTo($prettyOpts);
+    });
+    $prettyOpts.appendTo($prettSelect);
+    //console.log($hiddenField);
+    $hiddenField.appendTo($prettSelect);
+    $prettSelect.insertAfter($elem);
+    var $input = $prettSelect.find('span.selected');
+    var $options = $prettSelect.find('li');
+    $input.click(function(){
+        var $div = $(this).closest('div.dropdown');
+        $div.toggleClass('open');
+    });
+    $options.click(function(){
+        var $dropdown = $(this).closest('div.dropdown');
+        var val = $(this).find('span.value').text();
+        var label = $(this).find('span.label').text();
+        $dropdown.find('input').val(val);
+        $dropdown.find('span.selected').text(label);
+        $dropdown.removeClass('open');
+    });
+    $elem.remove();
+}

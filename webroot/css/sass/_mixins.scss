@@ -29,7 +29,11 @@
   background: -o-linear-gradient(top, $start 0%,$stop 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, $start 0%,$stop 100%); /* IE10+ */
   background: linear-gradient(to bottom, $start 0%,$stop 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start', endColorstr='$stop',GradientType=0 ); /* IE6-9 */
+  filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='")
++ ie-hex-str($start)
++ unquote("', endColorstr='")
++ ie-hex-str($stop)
++ unquote("',GradientType=0)");
 }
 @mixin linear-grad-lr($start, $stop) {
   background: $start; /* Old browsers */
@@ -39,7 +43,11 @@
   background: -o-linear-gradient(left, $start 0%,$stop 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(left, $start 0%,$stop 100%); /* IE10+ */
   background: linear-gradient(to right, $start 0%,$stop 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start', endColorstr='$stop',GradientType=1 ); /* IE6-9 */
+  filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='")
++ ie-hex-str($start)
++ unquote("', endColorstr='")
++ ie-hex-str($stop)
++ unquote("',GradientType=1)");
 }
 
 @mixin box-shadow($params) {

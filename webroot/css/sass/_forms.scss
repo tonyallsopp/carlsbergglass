@@ -13,6 +13,8 @@
   border:1px solid $bc-border-grey;
 }
 .btn-details, a.submit {
+  font: $title-font-light;
+  font-size: 12px;
   width:148px;
   line-height:28px;
   height:28px;
@@ -21,11 +23,8 @@
   margin-right:30px;
   @extend .btn-base;
   span {
-    font-size: 80%;
     color:$mid-grey;
     padding-left: 4px;
-    position: relative;
-    bottom: 2px;
   }
 }
 
@@ -62,10 +61,14 @@ div.text, div.password, div.select {
   }
 }
 div.input {
-  overflow: hidden;
+  //overflow: hidden;
+  clear:left;
+  height: 30px;
 }
 div.textarea {
   padding:5px 0;
+  overflow:hidden;
+  height:auto;
   label {
     display: block;
   }
@@ -158,6 +161,7 @@ div.error-message {
   }
   div.form-actions {
     padding: 10px 0 10px 0;
+    clear:both;
   }
   .privacy {
     @include float-left;
@@ -181,4 +185,44 @@ div.error-message {
     font-size: 16px;
   }
 
+}
+
+//JS pretty selectors
+div.dropdown {
+  position:relative;
+  @include float-left;
+  .selected {
+    @extend .text-input;
+    background:url('../img/layout/select-bg.png') no-repeat right center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &.open {
+    .options {
+      display: block;
+    }
+  }
+  .options {
+    position: absolute;
+    top:30px;
+    left:4px;
+    z-index: 100;
+    background: white;
+    border:1px solid $input-brdr-grey;
+    min-width:228px;
+    display:none;
+    @include box-shadow(3px 3px 4px $dark-grey);
+    li {
+      list-style: none;
+      padding:2px 5px;
+      &:hover {
+        background: #88BF45;
+        cursor: pointer;
+      }
+      span.value {
+        display: none;
+      }
+    }
+  }
 }

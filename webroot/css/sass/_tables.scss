@@ -27,11 +27,11 @@ th {
   }
 }
 
-th:first-child {
+th:first-child, th.first {
   @include rounded(5px 0 0 0);
   border-left: 1px solid #6F6F6F;
 }
-th:last-child {
+th:last-child, th.last {
   @include rounded(0 5px 0 0);
 }
 th:only-child{
@@ -59,14 +59,15 @@ th:only-child{
 
 td {
   height:38px;
-  border-bottom:1px solid $bc-hover-grey;
+  border:1px solid $bc-hover-grey;
+  border-top:0;
+  border-left:0;
+  padding:15px 20px;
+}
+td.first, td:first-child {
   border-left:1px solid $bc-hover-grey;
-  padding:0 20px;
 }
-td.last {
-  border-right:1px solid $bc-hover-grey;
-}
-tr:nth-child(even) td  { background-color:$tr-hl-grey; }
+tr:nth-child(even) td  { background-color:$alt-cell; }
 td.actions {
   color:$link-green;
   padding:0 15px;

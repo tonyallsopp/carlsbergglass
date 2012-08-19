@@ -1,3 +1,48 @@
+<div class="product-details branded">
+    <header class="page-header">
+        <div class="inner">
+            <div class="col-1 col">
+                <h1>Manage Glassware</h1>
+            </div>
+            <div class="col-2 col">
+            </div>
+        </div>
+    </header>
+    <div id="content-inner">
+        <h2>All Glassware</h2>
+        <p>Upload master product spreadsheet</p>
+
+        <h2>Custom Glassware</h2>
+        <table cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="first">Product</th>
+                <th>Variants</th>
+                <th class="last">Actions</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <?php foreach($groups as $g):?>
+            <tr>
+                <td class="first"><?php echo $g['ProductGroup']['name'];?></td>
+                <td><?php echo count($g['ProductUnit']);?></td>
+                <td class="last"><?php echo $this->Html->link('Upload option sheet',"/admin/product_groups/upload_csv/options/{$g['ProductGroup']['id']}");?></td>
+            </tr>
+            <?php endforeach;?>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<!--
 <div class="productGroups index">
 	<h2><?php echo __('Product Groups'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -52,3 +97,5 @@
 		<li><?php echo $this->Html->link(__('New Product'), array('controller' => 'products', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
+
+-->

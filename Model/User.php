@@ -27,7 +27,26 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+            'unique' => array(
+                'rule' => 'isUnique',
+                'message' => 'An account already exists with this email',
+                'on' => 'create'
+            ),
 		),
+        'confirm_email' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message'=>'Field is required'
+            ),
+            'email' => array(
+                'rule' => array('email'),
+                'message' => 'Invalid email address'
+            ),
+            'match' => array(
+                'rule' => array('compareFields','email','confirm_email'),
+                'message'=>'Email must match'
+            ),
+        ),
         'first_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
@@ -67,10 +86,16 @@ class User extends AppModel {
         ),
 		'confirm_password' => array(
             'match' => array(
-                'rule' => array('comparePasswords'),
+                'rule' => array('compareFields','new_password','confirm_password'),
                 'message'=>'Passwords must match'
             ),
 		),
+        'job_title' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message'=>'Field is required'
+            ),
+        ),
 		'role' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -90,8 +115,8 @@ class User extends AppModel {
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
-    public function comparePasswords($check) {
-        return $this->data['User']['new_password'] == $this->data['User']['confirm_password'];
+    public function compareFields($check, $field1, $field2) {
+        return $this->data['User'][$field1] == $this->data['User'][$field2];
     }
 
     public function beforeSave($options = array()) {
@@ -102,7 +127,7 @@ class User extends AppModel {
         return true;
     }
 
-    public $roles = array(1=>'admin',2=>'logistics admin',3=>'logistics user');
+    public $roles = array(0=>'user',1=>'admin');
 
     public $countries = array(
         'UK'=>'UK',

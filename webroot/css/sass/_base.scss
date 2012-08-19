@@ -5,24 +5,27 @@
 
 // VARIABLES
 
-$mid-green-text : #006600;
+
 $dark-grey : #333;
+$grey-text : #999999;
+$bc-hover-grey : #666666;
+$mid-grey : #BABABA;
+$bc-border-grey : #D7D7D7;
+$border-grey:#E7E7E7;
+$input-brdr-grey: $border-grey;
+$prod-header-bg : #FBFBFB; //light grey
+$alt-cell:$prod-header-bg;
+$prod-header-bdr : #E0E0E0; //mid grey
+$mid-green-text : #006600;
 $dark-green : #074518;
 $dark-green-hl : #346541;
 $dark-green-sh : #043011;
 $menu-green-hl : #286424;
-$mid-grey : #BABABA;
-$bc-border-grey : #D7D7D7;
-$bc-hover-grey : #666666;
-$prod-header-bg : #FBFBFB; //light grey
-$prod-header-bdr : #E0E0E0; //mid grey
-$input-brdr-grey: #E7E7E7;
 $link-green: #88BF45;
 $tr-hl-grey: #F7F7F7;
 $error-red: #A33232;
 $large-input-brdr-green: #76AE3F;
 $large-form-text: $large-input-brdr-green;
-
 // IMPORTS
 @import "tables";
 @import "forms";
@@ -33,6 +36,8 @@ $large-form-text: $large-input-brdr-green;
 body {font: $body-font;}
 body, select, input, textarea, p, label  {color: $dark-grey;}
 h1 { font: $title-font-bold; font-size: 28px; color:$mid-green-text;}
+h2 { font: $title-font-bold; font-size: 20px; color:$bc-hover-grey; }
+h3 { font: $title-font-bold; }
 .admin h1 { color: $dark-grey; }
 h4 { font-size: 14px; font-weight: bold;}
 h5 { font-size:13px;}
@@ -45,8 +50,17 @@ ul li { list-style: disc inside;}
   font-weight: bold;
 }
 a { color:$link-green; }
+.alt-link {
+  text-decoration: none;
+  &:hover { text-decoration: underline;}
+}
+a.back {
+  @extend .alt-link;
+}
 a:hover {text-decoration: none;}
+p { padding-bottom:.6em;}
 .paging p { color:$mid-grey;}
+.sub-heading { font: $title-font-light; font-size: 18px; color:$dark-grey;}
 
 //PAGING
 

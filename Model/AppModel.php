@@ -56,7 +56,7 @@ class AppModel extends Model {
      * @return string
      */
     public function sluggify($string, $seperator = '-'){
-        $slug = strtolower(preg_replace('/[^\w]/', $seperator, trim($string)));
+        $slug = strtolower(preg_replace('/[^\w]/', $seperator, substr(trim($string),0,80) ));
         $slug = str_replace(' ', $seperator, $slug);
         $slug = explode($seperator, $slug);
         $slug = array_filter($slug);

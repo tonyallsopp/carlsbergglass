@@ -81,8 +81,20 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   width:100%;
 }
 #content-inner {
-  width:730px;
+  width:750px;
   padding:30px;
+  &.split {
+    padding:0 30px 0 30px;
+    .col-1 {
+      width:459px;
+      padding:30px 30px 30px 0;
+      border-right: 1px solid $prod-header-bdr;
+    }
+    .col-2 {
+      padding:30px 0 30px 30px;
+      width:230px;
+    }
+  }
 }
 #breadcrumbs {
   width:100%;
@@ -122,13 +134,82 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 }
 
 // PRODUCT LISTINGS
-
+.listing-box {
+  border-right:1px solid $border-grey;
+  border-bottom:1px solid $border-grey;
+  border-left:0;
+}
+.grey-grad-header {
+  border:1px solid $border-grey;
+  @include rounded-corner(top-left, 3px);
+  @include rounded-corner(top-right, 3px);
+  @include box-shadow(inset 0 -1px 0 white);
+  @include linear-grad(white, #F2F3F3);
+}
+.listing {
+  header {
+    @extend .grey-grad-header;
+    overflow: hidden;
+    height:78px;
+    padding:0 30px;
+    h2 {
+      line-height:78px;
+    }
+  }
+}
+$listing-width: 748px;
+$branded-item-width: $listing-width / 4;
 .branded-products {
+  border-left:1px solid $border-grey;
+  overflow:hidden;
   li {
+    @extend .listing-box;
+    @include float-left;
+    width: $branded-item-width - 1px;
     list-style: none;
     color:$mid-green-text;
     font-weight: bold;
+    padding:18px 0;
+    .prod-img, h3, p {
+      width:150px;
+      margin:0 auto;
+    }
+    h3 { padding: 18px 0; height:3.8em; overflow: hidden; }
+    p { font-size: 12px; color:$grey-text; font-weight: normal; padding-bottom:18px; }
+    a.btn-details {
+      padding:0;
+      margin:0 auto;
+    }
+    .prod-img {
+      padding-bottom:18px;
+    }
   }
+}
+.brands {
+  overflow:hidden;
+  li {
+    list-style:none;
+    .logo, h3, .details {
+      @include float-left;
+      height:50px;
+      border-left:1px solid $border-grey;
+      border-bottom:1px solid $border-grey;
+    }
+    .logo { width:94px;}
+    .details {
+      background: url('../img/layout/brand-details.png') no-repeat 0 0;
+      text-indent: -9999px;
+      width:59px;
+      border-right:1px solid $border-grey;
+    }
+    h3 {
+      font:$title-font-light;
+      line-height: 50px;
+      width:553px;
+      padding:0 20px;
+    }
+  }
+
 }
 
 // PRODUCT DETAILS
@@ -147,6 +228,84 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
       border: 1px solid $prod-header-bdr;
     }
   }
+  h1, dl { padding-top:20px;}
+  dl {
+    font:$title-font-light;
+    font-size: 18px;
+    dt { @include float-left; padding-right:.6em; color:$grey-text; }
+    dd { color:$mid-green-text; }
+  }
+}
+div.product-details {
+  #content-inner {
+    overflow:hidden;
+    padding-top:0;
+    .col-1 {
+      width:500px;
+      padding:30px 30px 30px 0;
+      border-right: 1px solid $prod-header-bdr;
+    }
+    .col-2 {
+      width:189px;
+      padding:0 0 30px 30px;
+      a.btn-details {
+        width:auto;
+        margin:0;
+        padding:0;
+      }
+      h2 {
+        @extend .sub-heading;
+        padding-bottom: 20px;
+      }
+      p { padding-bottom:20px; }
+      section {
+        padding:30px 0;
+        border-bottom: 1px solid $prod-header-bdr;
+        &:last-child { border-bottom:0; }
+        &.price {
+          h2 { color:$grey-text; }
+          p { font: $title-font-bold; font-size: 26px; color:$mid-green-text; padding:0; }
+        }
+        &.downloads {
+          ul { padding-bottom: 5px;}
+          li {
+            list-style: none;
+            padding-bottom: 15px;
+            a { @extend .alt-link;}
+          }
+        }
+      }
+    }
+    div.options {
+      width:330px;
+      label { width:90px; color:$grey-text;}
+      padding-bottom: 25px;
+    }
+    p {
+      color:$grey-text;
+      &.options {
+        width:130px;
+        padding:5px 0 30px 40px;
+      }
+    }
+    a.submit { display: none; }
+  }
+}
+.product-info {
+  th {
+    @extend .grey-grad-header;
+    text-shadow: none;
+    color: $bc-hover-grey;
+    font-weight: normal;
+    font: $title-font-light;
+  }
+  td {
+    border-bottom:1px solid $border-grey;
+    border-left:1px solid $border-grey;
+    border-right:0;
+    &.last,&:last-child {  border-right:1px solid $border-grey; }
+  }
+
 }
 
 // LOGGED OUT PAGES (GREEN BACKGROUND)

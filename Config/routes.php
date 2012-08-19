@@ -5,9 +5,12 @@ Router::connect('/admin', array('controller' => 'users', 'action' => 'index','ad
 
 Router::connect('/account', array('controller' => 'users', 'action' => 'account'));
 Router::connect('/contact', array('controller' => 'users', 'action' => 'contact'));
+Router::connect('/support', array('controller' => 'cms_elements', 'action' => 'faqs'));
+Router::connect('/faq/*', array('controller' => 'cms_elements', 'action' => 'faq'));
 
-Router::connect('/branded_glassware/index', array('controller' => 'product_groups', 'action' => 'index','branded'));
+Router::connect('/branded_glassware/index/*', array('controller' => 'product_groups', 'action' => 'index'));
 Router::connect('/branded_glassware/*', array('controller' => 'product_groups', 'action' => 'view'));
+Router::connect('/glassware_brands/*', array('controller' => 'categories', 'action' => 'brands'));
 
 
 

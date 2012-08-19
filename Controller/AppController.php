@@ -12,7 +12,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $helpers = array('Html', 'Form', 'Session', 'Time');
+    public $helpers = array('Html', 'Form', 'Session', 'Time','Email','Site');
     public $components = array('Auth', 'Session', 'Security');
     public $sessionReferer;
     public $requestedURL;
@@ -68,7 +68,7 @@ class AppController extends Controller {
         }
     }
 
-    private $_authAllowed = array('/users/register','/users/forgot_password','/users/register_thanks','/users/password_sent');
+    private $_authAllowed = array('/users/register','/users/forgot_password','/users/register_thanks','/users/password_sent','/users/preview_email');
 
     private function _initAuth() {
         $this->Auth->authenticate = array(
@@ -82,7 +82,7 @@ class AppController extends Controller {
         //allow auth for non-admin
         if (isset($this->request->params['admin'])) {
             $this->Auth->deny('*');
-        } elseif($this->_isAuthorised() || $this->request->is('requested')) {
+        } elseif($this->_isAuthorised() || $this->request->is('requested') || $this->request->is('ajax')) {
             $this->Auth->allow('*');
         } else {
             $this->Auth->deny('*');
@@ -101,7 +101,7 @@ class AppController extends Controller {
 
     private function _isAuthorised(){
         $current = array($this->request->params['controller'],$this->request->params['action']);
-        if(isset($this->request->params['pass'][0])) $current[] = $this->request->params['pass'][0];
+        //if(isset($this->request->params['pass'][0])) $current[] = $this->request->params['pass'][0];
         foreach($this->_authAllowed as $url){
             if($url == '/' . implode('/',$current)){
                 return true;
@@ -250,53 +250,35 @@ class AppController extends Controller {
      * @param array $userData
      * @return boolean
      */
-    public function sendEmail($mailType, array $userData, array $otherData = array()) {
+    public function sendEmail($mailType, $emailTo, array $otherData = array()) {
         App::uses('CakeEmail', 'Network/Email');
         $email = new CakeEmail();
         $email->emailFormat('html')
-            ->to($userData['email'])
-            ->from('noreply@clickcollection.co.uk')
-            ->sender('noreply@clickcollection.co.uk', 'Click Collection');
+            ->to($emailTo)
+            ->from('noreply@posglassware.com')
+            ->sender('noreply@posglassware.com', 'POS Glassware');
         switch ($mailType) {
-            case 'signup' :
-                $email->subject('Your new Click Collection account');
+            case 'account_register' :
+                $email->subject('User registration on POSGlassware.com');
                 $email->template('account_register');
                 break;
-            case 'password_reset' :
-                $email->subject('Click Collection account password reset');
-                $email->template('password_reset');
+            case 'account_approved' :
+                $email->subject('Your POSGlassware.com account has been approved');
+                $email->template('account_approved');
                 break;
-            case 'bag_order' :
-                $email->subject('Your Click Collection bag order');
-                $email->template('bag_order');
-                break;
-            case 'my_shopper' :
-                $email->subject('My Shopper New Listings');
-                $email->template('my_shopper');
-                break;
-            case 'collection_booked' :
-                $email->subject('Your Collection Is Booked');
-                $email->template('collection_booked');
-                break;
-            case 'collection_reminder' :
-                $email->subject('Your Collection Reminder');
-                $email->template('collection_reminder');
-                break;
-            case 'charity_signup' :
-                $email->subject('A charity is interested in signing up');
-                $email->template('charity_signup');
-                break;
-            case 'order_placed' :
-                $email->subject('Your Click Collection Order');
-                $email->template('order_placed');
+            case 'new_password' :
+                $email->subject('New password for POSGlassware.com');
+                $email->template('new_password');
                 break;
         }
         //Set view variables
-        $viewVars = array_merge(array('user' => $userData, 'title' => $email->subject()), $otherData);
+        $viewVars = array_merge(array('title' => $email->subject()), $otherData);
         $email->viewVars($viewVars);
         $email->helpers(array('Html','Email'));
-        if (SERVER_TYPE != 'development') {
+        if (Configure::read('debug') < 2) {
             return $email->send();
+        } else {
+            $this->redirect('/users/preview_email/' . $mailType);
         }
         return true;
     }

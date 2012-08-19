@@ -25,7 +25,7 @@ class CmsElement extends AppModel {
 		'description' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Field is required',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -35,7 +35,7 @@ class CmsElement extends AppModel {
 		'content' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+                'message' => 'Field is required',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -63,4 +63,40 @@ class CmsElement extends AppModel {
 			),
 		),
 	);
+
+    /**
+     * hasMany associations
+     *
+     * @var array
+     */
+    public $hasOne = array(
+        'ChildElement' => array(
+            'className' => 'CmsElement',
+            'foreignKey' => 'parent_id',
+            'dependent' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
+    );
+
+    public $belongsTo = array(
+        'ParentElement' => array(
+            'className' => 'CmsElement',
+            'foreignKey' => 'parent_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
+    );
+
+    public function nextDisplayOrder($parentId){
+        $res = $this->find('first', array('conditions' => array('parent_id'=>$parentId), 'fields'=>'display_order','recursive' => -1));
+        return empty($res) ? 0 : $res['CmsElement']['display_order'] +1;
+    }
 }

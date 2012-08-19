@@ -17,3 +17,692 @@
 #7 C:\wamp\www\cake20\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
 #8 C:\wamp\www\cake20\carlsberg_glass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #9 {main}
+2012-07-26 10:19:27 Error: [MissingActionException] Action UsersController::admin_index() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-26 10:19:53 Error: [MissingActionException] Action UsersController::admin_login() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-26 10:21:40 Error: [MissingLayoutException] Layout file "C:\wamp\www\carlsbergglass\View\Layouts\admin.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(513): View->_getLayoutFileName('admin')
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(483): View->renderLayout('', 'admin')
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render(NULL, NULL)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-07-30 08:38:38 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\Products\index.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName(NULL)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render(NULL, NULL)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductsController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-30 12:30:21 Error: [MissingActionException] Action ProductGroupsController::admin_uploadcsv() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-01 09:11:02 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Category.section' in 'where clause'
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('SELECT `Product...', Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(671): DboSource->execute('SELECT `Product...', Array, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(1082): DboSource->fetchAll('SELECT `Product...', false)
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Model.php(2631): DboSource->read(Object(ProductGroup), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Component\PaginatorComponent.php(173): Model->find('all', Array)
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(1082): PaginatorComponent->paginate('ProductGroup', Array, Array)
+#7 C:\wamp\www\carlsbergglass\Controller\ProductGroupsController.php(16): Controller->paginate('ProductGroup')
+#8 [internal function]: ProductGroupsController->index()
+#9 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(ProductGroupsController), Array)
+#10 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#11 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#12 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2012-08-01 09:36:34 Error: Fatal Error (4): syntax error, unexpected T_ECHO in [C:\wamp\www\carlsbergglass\View\Elements\breadcrumbs.ctp, line 5]
+2012-08-01 09:36:34 Error: [FatalErrorException] syntax error, unexpected T_ECHO
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\car...', 5)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\car...', 5, Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\car...', 5, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-08-01 09:52:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-01 10:47:39 Error: Fatal Error (64): Cannot redeclare ProductGroupsController::admin_view() in [C:\wamp\www\carlsbergglass\Controller\ProductGroupsController.php, line 48]
+2012-08-01 10:47:39 Error: [FatalErrorException] Cannot redeclare ProductGroupsController::admin_view()
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'C:\wamp\www\car...', 48)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'C:\wamp\www\car...', 48, Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'C:\wamp\www\car...', 48, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-08-03 11:34:30 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\ProductGroups\ajax.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName('ajax')
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render('ajax', 'ajax')
+#2 C:\wamp\www\carlsbergglass\Controller\ProductGroupsController.php(63): Controller->render('ajax', 'ajax')
+#3 [internal function]: ProductGroupsController->change_options('carlsberg-tulip...')
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(ProductGroupsController), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2012-08-03 11:36:01 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\ProductGroups\change_options.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName(NULL)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render(NULL, NULL)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-08-03 11:36:52 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\ProductGroups\ajax.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName('ajax')
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render('ajax', 'ajax')
+#2 C:\wamp\www\carlsbergglass\Controller\ProductGroupsController.php(61): Controller->render('ajax', 'ajax')
+#3 [internal function]: ProductGroupsController->change_options('carlsberg-tulip...')
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(ProductGroupsController), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2012-08-03 11:42:37 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\ProductGroups\ajax.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName('ajax')
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render('ajax', 'ajax')
+#2 C:\wamp\www\carlsbergglass\Controller\ProductGroupsController.php(61): Controller->render('ajax', 'ajax')
+#3 [internal function]: ProductGroupsController->change_options('carlsberg-tulip...')
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(ProductGroupsController), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2012-08-03 11:43:11 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\ProductGroups\ajax.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName('ajax')
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render('ajax', 'ajax')
+#2 C:\wamp\www\carlsbergglass\Controller\ProductGroupsController.php(61): Controller->render('ajax', 'ajax')
+#3 [internal function]: ProductGroupsController->change_options('carlsberg-tulip...')
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(ProductGroupsController), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2012-08-07 11:25:15 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\Users\account.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName(NULL)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render(NULL, NULL)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-08-09 08:45:34 Error: [MissingActionException] Action UsersController::admin_new() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-09 10:11:15 Error: [MissingActionException] Action UsersController::login() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-09 11:09:29 Error: [MissingActionException] Action CmsElementsController::welcome_to_title() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\Object.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse), Array)
+#3 C:\wamp\www\carlsbergglass\View\Elements\cms_content.ctp(2): Object->requestAction('/cms_elements/w...')
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(920): include('C:\wamp\www\car...')
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(883): View->_evaluate('C:\wamp\www\car...', Array)
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(424): View->_render('C:\wamp\www\car...', Array)
+#7 C:\wamp\www\carlsbergglass\View\Pages\home.ctp(17): View->element('cms_content', Array)
+#8 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(920): include('C:\wamp\www\car...')
+#9 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(883): View->_evaluate('C:\wamp\www\car...', Array)
+#10 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(475): View->_render('C:\wamp\www\car...')
+#11 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render('home', NULL)
+#12 C:\wamp\www\carlsbergglass\Controller\PagesController.php(71): Controller->render('home')
+#13 [internal function]: PagesController->display('home')
+#14 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#15 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#16 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#17 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#18 {main}
+2012-08-09 11:15:00 Error: [MissingActionException] Action CmsElementsController::admin_index() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-09 11:16:33 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\CmsElements\admin_index.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName(NULL)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render(NULL, NULL)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-08-09 11:27:03 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order' in 'where clause'
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('SELECT `CmsElem...', Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(671): DboSource->execute('SELECT `CmsElem...', Array, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(1082): DboSource->fetchAll('SELECT `CmsElem...', false)
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Model.php(2631): DboSource->read(Object(CmsElement), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Component\PaginatorComponent.php(173): Model->find('all', Array)
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(1082): PaginatorComponent->paginate(Array, Array, Array)
+#7 C:\wamp\www\carlsbergglass\Controller\CmsElementsController.php(32): Controller->paginate(Array)
+#8 [internal function]: CmsElementsController->admin_index()
+#9 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(CmsElementsController), Array)
+#10 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#11 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#12 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2012-08-09 12:49:09 Error: [MissingControllerException] Controller class LogoutController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-09 12:50:02 Error: [MissingControllerException] Controller class LogoutController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-09 12:50:06 Error: [MissingActionException] Action UsersController::logout() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-09 13:10:02 Error: [MissingControllerException] Controller class AccountController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-09 16:37:53 Error: [NotFoundException] Invalid user
+#0 [internal function]: UsersController->account()
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-08-13 08:41:31 Error: [MissingActionException] Action UsersController::contact() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-13 08:53:23 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\CmsElements\get.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName(NULL)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render(NULL, NULL)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-08-13 08:54:47 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\CmsElements\get.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName(NULL)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render(NULL, NULL)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(193): Controller->render()
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-08-13 08:55:00 Error: [MissingActionException] Action UsersController::logout() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-13 12:14:00 Error: [MissingControllerException] Controller class UserController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-13 12:14:09 Error: [MissingControllerException] Controller class UserController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-13 13:14:13 Error: [MissingActionException] Action UsersController::forgot_password() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-14 13:19:09 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\Emails\html\new_password.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName('/Emails/html/ne...')
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render('/Emails/html/ne...', '/Emails/html/de...')
+#2 C:\wamp\www\carlsbergglass\Controller\UsersController.php(122): Controller->render('/Emails/html/ne...', '/Emails/html/de...')
+#3 [internal function]: UsersController->preview_email('new_password')
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2012-08-14 13:20:24 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:20:24 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:20:24 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:22:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:22:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:22:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:26:45 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:26:45 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-14 13:26:45 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:37:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:37:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:37:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:38:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:38:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:38:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:39:35 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:39:35 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:39:35 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:43:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:43:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 10:43:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:07:33 Error: Fatal Error (4): syntax error, unexpected T_VARIABLE in [C:\wamp\www\carlsbergglass\View\Helper\EmailHelper.php, line 27]
+2012-08-15 11:07:33 Error: [FatalErrorException] syntax error, unexpected T_VARIABLE
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\car...', 27)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\car...', 27, Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\car...', 27, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-08-15 11:08:27 Error: Fatal Error (1): Call to undefined function formatLinks() in [C:\wamp\www\carlsbergglass\View\Helper\EmailHelper.php, line 11]
+2012-08-15 11:08:27 Error: [FatalErrorException] Call to undefined function formatLinks()
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\wamp\www\car...', 11)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\wamp\www\car...', 11, Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\wamp\www\car...', 11, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-08-15 11:08:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:08:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:08:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:09:13 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:09:13 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:09:13 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:10:04 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:10:04 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:10:04 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:10:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:10:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:10:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:11:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:11:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:11:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:11:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:11:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:11:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:12:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:12:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:12:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:12:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:12:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:12:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:13:31 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:13:31 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:13:31 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:14:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:14:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:14:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:16:36 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:16:36 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:16:36 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:17:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:17:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:17:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:20:14 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:20:14 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:20:14 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:20:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:20:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:20:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:22:10 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:22:10 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:22:10 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:26:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:26:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:26:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:30:35 Error: [MissingViewException] View file "C:\wamp\www\carlsbergglass\View\Emails\html\account_reigster.ctp" is missing.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\View\View.php(472): View->_getViewFileName('/Emails/html/ac...')
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(957): View->render('/Emails/html/ac...', '/Emails/html/de...')
+#2 C:\wamp\www\carlsbergglass\Controller\UsersController.php(122): Controller->render('/Emails/html/ac...', '/Emails/html/de...')
+#3 [internal function]: UsersController->preview_email('account_reigste...')
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2012-08-15 11:30:48 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:30:48 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:30:48 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:46 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:46 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:46 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:32:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:33:36 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:33:36 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:33:36 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:33:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:33:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:33:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 11:34:23 Error: [NotFoundException] Invalid user
+#0 [internal function]: UsersController->admin_edit()
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-08-15 11:45:47 Error: Fatal Error (4): syntax error, unexpected ';' in [C:\wamp\www\carlsbergglass\View\Elements\user_edit.ctp, line 38]
+2012-08-15 11:45:47 Error: [FatalErrorException] syntax error, unexpected ';'
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\car...', 38)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\car...', 38, Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\car...', 38, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-08-15 11:49:21 Error: Fatal Error (4): syntax error, unexpected ')', expecting ']' in [C:\wamp\www\carlsbergglass\View\Elements\user_edit.ctp, line 39]
+2012-08-15 11:49:21 Error: [FatalErrorException] syntax error, unexpected ')', expecting ']'
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\car...', 39)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\car...', 39, Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\car...', 39, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-08-15 12:20:08 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:20:08 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:20:08 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:21:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:21:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:21:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:35:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:35:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 12:35:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:16:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:16:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:16:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:17:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:17:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:17:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:17:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:17:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:18:17 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:18:17 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:18:31 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:18:31 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:19:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:19:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:19:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:19:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:20:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-15 13:20:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-16 09:42:50 Error: [MissingActionException] Action CmsElementsController::admin_edit_faq() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-16 10:04:38 Error: [MissingControllerException] Controller class FaqIndexController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-16 10:25:03 Error: [MissingActionException] Action CmsElementsController::admin_add_faq() could not be found.
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CmsElementsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-08-16 15:28:24 Error: [MissingControllerException] Controller class FaqController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-16 16:18:25 Error: Fatal Error (1): Call to undefined function iiset() in [C:\wamp\www\carlsbergglass\View\Elements\cms_content.ctp, line 4]
+2012-08-16 16:18:25 Error: [FatalErrorException] Call to undefined function iiset()
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\wamp\www\car...', 4)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\wamp\www\car...', 4, Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\wamp\www\car...', 4, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-08-17 10:15:53 Error: [MissingControllerException] Controller class UploadCsvController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-19 18:20:33 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ProductGroup.section' in 'where clause'
+#0 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('SELECT `Product...', Array)
+#2 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(671): DboSource->execute('SELECT `Product...', Array, Array)
+#3 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Datasource\DboSource.php(1082): DboSource->fetchAll('SELECT `Product...', false)
+#4 C:\wamp\www\carlsbergglass\Lib\Cake\Model\Model.php(2631): DboSource->read(Object(ProductGroup), Array)
+#5 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Component\PaginatorComponent.php(173): Model->find('all', Array)
+#6 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(1082): PaginatorComponent->paginate('ProductGroup', Array, Array)
+#7 C:\wamp\www\carlsbergglass\Controller\ProductGroupsController.php(28): Controller->paginate('ProductGroup')
+#8 [internal function]: ProductGroupsController->brands()
+#9 C:\wamp\www\carlsbergglass\Lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(ProductGroupsController), Array)
+#10 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#11 C:\wamp\www\carlsbergglass\Lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(ProductGroupsController), Object(CakeRequest), Object(CakeResponse))
+#12 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2012-08-19 19:00:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-08-19 19:00:53 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 C:\wamp\www\carlsbergglass\webroot\index.php(97): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
