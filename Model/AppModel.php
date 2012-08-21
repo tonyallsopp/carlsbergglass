@@ -46,6 +46,12 @@ class AppModel extends Model {
                 $this->data[$this->name]['updated_by'] = $this->currentUserId;
             }
         }
+        // slug field
+        if($this->hasField('slug') && $this->hasField('name')){
+            if($this->data[$this->name]['name']){
+                $this->data[$this->name]['slug'] = $this->sluggify($this->data[$this->name]['name'],'_');
+            }
+        }
         return true;
     }
 

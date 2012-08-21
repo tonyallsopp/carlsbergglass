@@ -10,6 +10,11 @@
   display:inline;
 }
 
+@mixin unfloat {
+  display:inherit;
+  float:none;
+}
+
 @mixin rounded-corner($side, $radius: 5px) {
   -moz-border-radius-#{$side}: $radius;
   -webkit-border-#{$side}-radius: $radius;

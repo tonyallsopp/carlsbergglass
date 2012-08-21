@@ -37,6 +37,7 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
     padding:0;
     a {
       @extend .white-shadow;
+      font:$title-font-light;
       height:40px;
       line-height: 40px;
       border-top: 1px solid $dark-green-hl;
@@ -44,9 +45,9 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
       padding:0 20px;
       display: block;
       text-decoration: none;
-    }
-    a:hover {
-      @include linear-grad-lr($menu-green-hl, $dark-green);
+      &:hover {
+        @include linear-grad-lr($menu-green-hl, $dark-green);
+      }
     }
   }
   .admin-home, .my-account, .logout, .back {
@@ -95,6 +96,10 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
       width:230px;
     }
   }
+  section {
+    clear:both;
+    overflow: hidden;
+  }
 }
 #breadcrumbs {
   width:100%;
@@ -133,12 +138,38 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   }
 }
 
-// PRODUCT LISTINGS
-.listing-box {
-  border-right:1px solid $border-grey;
-  border-bottom:1px solid $border-grey;
-  border-left:0;
+//DOWNLOAD LINK
+.page-header section.manual {
+  h1 { padding-bottom: 12px;}
+  p { color: $grey-text;}
+  .col-1 {
+    background: url('../img/layout/manual-cover.png') no-repeat;
+    width: 400px;
+    padding-left:170px;
+  }
+  .col-2 {
+    padding-top:48px;
+  }
 }
+a.download-manual {
+  display: block;
+  background: url('../img/layout/download-pdf.png') no-repeat 0 0;
+  text-decoration: none;
+  font:$title-font-light;
+  font-size: 12px;
+  padding: 10px 0 0 68px;
+  text-transform: uppercase;
+  color:$bc-hover-grey;
+  width:168px - 68px;
+  height:75px - 10px;
+  span {
+    font-size: 11px;
+    color:$mid-grey;
+  }
+}
+
+// PRODUCT LISTINGS
+
 .grey-grad-header {
   border:1px solid $border-grey;
   @include rounded-corner(top-left, 3px);
@@ -158,33 +189,52 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   }
 }
 $listing-width: 748px;
-$branded-item-width: $listing-width / 4;
-.branded-products {
+$item-width: $listing-width / 4;
+.listing-box {
+  border-right:1px solid $border-grey;
+  border-bottom:1px solid $border-grey;
+  border-left:0;
+}
+.listing-item-box {
+  @extend .listing-box;
+  @include float-left;
+  width: $item-width - 1px;
+  list-style: none;
+  color:$mid-green-text;
+  font-weight: bold;
+  padding:18px 0;
+  .prod-img, h3, p {
+    width:150px;
+    margin:0 auto;
+  }
+  h3 { padding: 18px 0; height:3.8em; overflow: hidden; }
+  p { font-size: 12px; color:$grey-text; font-weight: normal; padding-bottom:18px; text-transform: uppercase; }
+  a.btn-details {
+    padding:0;
+    @include unfloat;
+    margin:0 auto;
+    width:150px;
+  }
+  .prod-img {
+    padding-bottom:18px;
+  }
+}
+.listings {
   border-left:1px solid $border-grey;
   overflow:hidden;
   li {
-    @extend .listing-box;
-    @include float-left;
-    width: $branded-item-width - 1px;
-    list-style: none;
-    color:$mid-green-text;
-    font-weight: bold;
-    padding:18px 0;
-    .prod-img, h3, p {
-      width:150px;
-      margin:0 auto;
-    }
-    h3 { padding: 18px 0; height:3.8em; overflow: hidden; }
-    p { font-size: 12px; color:$grey-text; font-weight: normal; padding-bottom:18px; }
-    a.btn-details {
-      padding:0;
-      margin:0 auto;
-    }
-    .prod-img {
-      padding-bottom:18px;
-    }
+    @extend .listing-item-box;
   }
 }
+// branded glass listing
+.branded-products {
+  @extend .listings;
+}
+// unbranded listing
+.unbranded-types {
+  @extend .listings;
+}
+// listing by brands
 .brands {
   overflow:hidden;
   li {
@@ -201,6 +251,9 @@ $branded-item-width: $listing-width / 4;
       text-indent: -9999px;
       width:59px;
       border-right:1px solid $border-grey;
+      &:hover {
+        background-position: 0 -51px;
+      }
     }
     h3 {
       font:$title-font-light;
@@ -209,7 +262,6 @@ $branded-item-width: $listing-width / 4;
       padding:0 20px;
     }
   }
-
 }
 
 // PRODUCT DETAILS
@@ -228,8 +280,8 @@ $branded-item-width: $listing-width / 4;
       border: 1px solid $prod-header-bdr;
     }
   }
-  h1, dl { padding-top:20px;}
   dl {
+    padding-top:20px;
     font:$title-font-light;
     font-size: 18px;
     dt { @include float-left; padding-right:.6em; color:$grey-text; }
@@ -237,6 +289,7 @@ $branded-item-width: $listing-width / 4;
   }
 }
 div.product-details {
+  .page-header h1 { padding-top: 20px; }
   #content-inner {
     overflow:hidden;
     padding-top:0;
@@ -244,6 +297,7 @@ div.product-details {
       width:500px;
       padding:30px 30px 30px 0;
       border-right: 1px solid $prod-header-bdr;
+      a.submit { display: none; }
     }
     .col-2 {
       width:189px;
@@ -252,6 +306,7 @@ div.product-details {
         width:auto;
         margin:0;
         padding:0;
+        @include unfloat;
       }
       h2 {
         @extend .sub-heading;
@@ -278,9 +333,10 @@ div.product-details {
     }
     div.options {
       width:330px;
-      label { width:90px; color:$grey-text;}
+      label { width:80px; }
       padding-bottom: 25px;
     }
+    label { color:$grey-text;}
     p {
       color:$grey-text;
       &.options {
@@ -288,7 +344,6 @@ div.product-details {
         padding:5px 0 30px 40px;
       }
     }
-    a.submit { display: none; }
   }
 }
 .product-info {
@@ -305,7 +360,31 @@ div.product-details {
     border-right:0;
     &.last,&:last-child {  border-right:1px solid $border-grey; }
   }
+}
 
+//CUSTOM GLASSWARE DETAILS
+
+$custom-input-width: 150px;
+$custom-label-width: 180px;
+div.custom {
+  #content-inner {
+    .checkbox label { padding-left:10px;}
+    div.options {
+      width:auto;
+      h2 { @extend .sub-heading; padding-bottom: 15px; }
+      label { width:auto; min-width: 180px; max-width:340px; }
+      .text input { min-width:$custom-input-width; width:$custom-input-width; }
+      .checkbox {
+        input { margin-left:$custom-label-width + 10px; }
+      }
+      select { min-width:$custom-input-width; width:$custom-input-width; }
+      padding-bottom: 25px;
+    }
+    .col-2 {
+      .checkbox input { margin:0;}
+      div.submit { padding-left: 0;}
+    }
+  }
 }
 
 // LOGGED OUT PAGES (GREEN BACKGROUND)

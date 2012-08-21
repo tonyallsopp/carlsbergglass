@@ -88,6 +88,8 @@ class ProductGroup extends AppModel {
         )
     );
 
+    public $colours = array(1=>1, 2=>2, 3=>3, 4=>5, 5=>5, 6=>6);
+
     public function getVersions($productGroup){
         $res = array();
         foreach($productGroup['ProductUnit'] as $p){
@@ -124,6 +126,19 @@ class ProductGroup extends AppModel {
                 }
             }
         }
+    }
+
+    public function getCustomOptions(array &$productGroup){
+        $opts = $this->CustomOption->find('all',array('conditions'=>array('product_group_id'=>$productGroup['ProductGroup']['id']),'recursive'=>-1));
+        $groupOpts = array();
+        $includedOptions = array();
+        foreach($opts as $o){
+            if(!in_array($o['CustomOption']['name'],$includedOptions )){
+                $includedOptions[] = $o['CustomOption']['name'];
+                $groupOpts[] = $o['CustomOption'];
+            }
+        }
+        $productGroup['CustomOption'] = $groupOpts;
     }
 
     // IMPORT FUNCTIONS ==============

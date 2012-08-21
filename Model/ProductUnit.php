@@ -6,6 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Image $Image
  * @property Supplier $Supplier
  * @property Product $Product
+ * @property OrderItem $OrderItem
  */
 class ProductUnit extends AppModel {
 
@@ -127,6 +128,10 @@ class ProductUnit extends AppModel {
 			'order' => ''
 		)
 	);
+
+    public $hasOne = array(
+        'OrderItem'
+    );
 
     public function calcCapacityGroup($capacity){
         $capArray = explode('/',$capacity);

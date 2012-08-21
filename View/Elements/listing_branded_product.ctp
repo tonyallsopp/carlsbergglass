@@ -1,7 +1,7 @@
 <section class="listing">
     <header>
         <div class="col col-1">
-            <h2>blaionasiondns</h2>
+            <h2>Glassware: <?php echo $currentBrand;?></h2>
         </div>
         <div class="col col-2">
 

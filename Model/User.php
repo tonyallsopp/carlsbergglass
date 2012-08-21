@@ -22,7 +22,7 @@ class User extends AppModel {
 			'email' => array(
 				'rule' => array('email'),
 				'message' => 'Invalid email address',
-				//'allowEmpty' => false,
+				'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -50,31 +50,36 @@ class User extends AppModel {
         'first_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-                'message'=>'Field is required'
+                'message'=>'Field is required',
+                'allowEmpty' => false,
             ),
         ),
         'last_name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-                'message'=>'Field is required'
+                'message'=>'Field is required',
+                'allowEmpty' => false,
             ),
         ),
         'telephone' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-                'message'=>'Field is required'
+                'message'=>'Field is required',
+                'allowEmpty' => false,
             ),
         ),
         'company' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-                'message'=>'Field is required'
+                'message'=>'Field is required',
+                'allowEmpty' => false,
             ),
         ),
         'country' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-                'message'=>'Field is required'
+                'message'=>'Field is required',
+                'allowEmpty' => false,
             ),
         ),
         'new_password' => array(
@@ -93,7 +98,8 @@ class User extends AppModel {
         'job_title' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-                'message'=>'Field is required'
+                'message'=>'Field is required',
+                'allowEmpty' => false,
             ),
         ),
 		'role' => array(
@@ -106,10 +112,30 @@ class User extends AppModel {
             'notempty' => array(
                 'rule' => array('notempty'),
                 'message'=>'Field is required',
+                'allowEmpty' => false,
                 'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
-		)
+		),
+        //used for contact form
+        'name' => array(
+            'notempty' => array(
+                'rule' => 'notEmpty',
+                'message'=>'Field is required',
+                'allowEmpty' => false,
+            ),
+        ),
+        'message' => array(
+            'notempty' => array(
+                'rule' => 'notEmpty',
+                'message'=>'Field is required',
+                'allowEmpty' => false,
+            ),
+        )
 	);
+
+    public $hasMany = array(
+        'Order'
+    );
 
     public $virtualFields = array(
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
@@ -121,7 +147,7 @@ class User extends AppModel {
 
     public function beforeSave($options = array()) {
         parent::beforeSave($options);
-        if($this->data['User']['new_password']){
+        if(isset($this->data['User']['new_password']) && $this->data['User']['new_password']){
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['new_password']);
         }
         return true;

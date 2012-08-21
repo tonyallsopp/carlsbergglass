@@ -15,10 +15,11 @@
 .btn-details, a.submit {
   font: $title-font-light;
   font-size: 12px;
-  width:148px;
+  width:auto;
   line-height:28px;
   height:28px;
-  display: block;
+  @include float-left;
+  clear:both;
   padding:0 25px;
   margin-right:30px;
   @extend .btn-base;
@@ -29,6 +30,11 @@
 }
 
 // FORM ELEMENTS
+
+$label-width: 100px;
+$label-padding : 10px;
+$input-width: 228px;
+$input-width-extended: 428px;
 
 label {
   color:$mid-grey;
@@ -43,21 +49,22 @@ label {
   padding:0 5px;
   border:1px solid $input-brdr-grey;
   @include rounded(3px);
-  min-width:228px;
+  width:$input-width;
   @include float-left;
 }
 
-div.text, div.password, div.select {
+div.text, div.password, div.select, div.submit {
   padding:5px 0;
   label {
-    width: 110px;
+    width: $label-width;
+    padding-right: $label-padding;
     @include float-left;
   }
   input, select {
     @extend .text-input;
   }
   .ext {
-    min-width: 428px;
+    width: $input-width-extended;
   }
 }
 div.input {
@@ -70,13 +77,29 @@ div.textarea {
   overflow:hidden;
   height:auto;
   label {
-    display: block;
+    width: $label-width;
+    padding-right: $label-padding;
+    @include float-left;
   }
-  .ext {
-    min-width: 528px;
-    min-height: 198px;
+  textarea {
+    @extend .text-input;
+    height:150px;
+    width: $input-width;
+    &.ext {
+      width: 528px;
+      min-height: 198px;
+    }
   }
 }
+div.file {
+  label {
+    width: $label-width;
+    padding-right: $label-padding;
+    @include float-left;
+  }
+  input { @include float-left;}
+}
+div.submit { padding-left: $label-width + $label-padding;}
 .no-label, .checkbox input { margin-left:110px;}
 div.checkbox {
   padding:5px 0;
@@ -88,6 +111,9 @@ div.checkbox {
     @include float-left;
     line-height:28px;
     height:28px;
+  }
+  div.submit {
+    padding-left:0;
   }
 }
 button {
@@ -104,6 +130,12 @@ div.error-message {
   padding:0 10px;
   @include float-left;
   @extend .error-text;
+}
+//CONTACT FORM
+#UserContactForm {
+  .text input, textarea {
+    width: 347px;
+  }
 }
 
 // LARGE FORMAT FORMS
@@ -210,7 +242,7 @@ div.dropdown {
     z-index: 100;
     background: white;
     border:1px solid $input-brdr-grey;
-    min-width:228px;
+    width:228px;
     display:none;
     @include box-shadow(3px 3px 4px $dark-grey);
     li {

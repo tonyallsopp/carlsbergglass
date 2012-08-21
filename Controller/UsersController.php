@@ -56,6 +56,26 @@ class UsersController extends AppController {
         $this->redirect($this->Auth->logout());
     }
 
+    public function contact(){
+        if ($this->request->is('post')) {
+            $this->User->create();
+            debug('post');
+            $this->User->set($this->request->data);
+            if ($this->User->validates()) {
+                debug('valid');
+            } else {
+                debug($this->User->invalidFields());
+            }
+
+        } else {
+            $this->request->data = $this->User->create();
+            //$this->request->data['User'] = array('name'=>$this->_user['full_name'], 'email'=>$this->_user['email'], 'telephone'=>$this->_user['telephone']);
+            //$this->request->data['User']['name'] = $this->_user['full_name'];
+
+        }
+        debug($this->request->data);
+    }
+
     public function register() {
         $this->layout = 'main';
         $adminEmail = 'paulcrouch@gmail.com';
@@ -116,11 +136,6 @@ class UsersController extends AppController {
         $this->set('admin', false);
     }
 
-    public function contact()
-    {
-
-    }
-
     public function preview_email($template) {
         //$this->sendEmail($template, array('paulcrouch@gmail.com'));
         $this->render('/Emails/html/' . $template, '/Emails/html/default');
@@ -141,6 +156,7 @@ class UsersController extends AppController {
             }
         }
         $this->set('showNav', false);
+        $this->render('login','main');
     }
 
     /**

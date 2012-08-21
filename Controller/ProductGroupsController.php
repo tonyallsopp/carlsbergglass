@@ -18,13 +18,31 @@ class ProductGroupsController extends AppController {
         $opts = array('ProductGroup'=>array('conditions' => $conditions, 'contain' => $contain, 'limit' => 20));
         $this->paginate = $opts;
         $productGroups = $this->paginate('ProductGroup');
+        //debug($productGroups);
         $this->ProductGroup->getBasePrice($productGroups);
-        debug($productGroups);
         $this->set('listings', $productGroups);
+        $this->set('currentBrand', $brand ? $productGroups[0]['Category']['name'] : 'All brands');
+        $this->set('title_for_layout', 'Branded Glassware');
+    }
+
+    public function custom_index($subcat = null){
+        $section = 'unbranded';
+        $conditions = array('Category.section'=>$section);
+        if($subcat){
+            $conditions['Category.slug'] = $subcat;
+        }
+        $contain = array('Category.name','ProductUnit.price');
+        $opts = array('ProductGroup'=>array('conditions' => $conditions, 'contain' => $contain, 'limit' => 20));
+        $this->paginate = $opts;
+        $productGroups = $this->paginate('ProductGroup');
+        $this->ProductGroup->getBasePrice($productGroups);
+        $this->set('listings', $productGroups);
+        $this->set('subCategory', $subcat ? $productGroups[0]['Category']['name'] : 'All');
+        $this->set('title_for_layout', 'Unbranded Glassware');
     }
 
     public function view($slug) {
-        $contain = array('ProductUnit');
+        $contain = array('ProductUnit','Category');
         $product = $this->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$slug), 'contain' => $contain));
         if(empty($product)){
             $this->Session->setFlash('Could not find product');
@@ -45,6 +63,45 @@ class ProductGroupsController extends AppController {
         $this->set('productGroup', $product);
         $referrer = $this->sessionReferer == '/' ? '/branded_glassware/index' : $this->sessionReferer;
         $this->set('referrer', $this->sessionReferer);
+        $this->set('custom',false);
+        $this->set('title_for_layout', $product['ProductGroup']['name']);
+
+    }
+
+    public function view_custom($slug) {
+        $contain = array('ProductUnit','Category');
+        $product = $this->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$slug), 'contain' => $contain));
+        //debug($product);
+        if(empty($product)){
+            $this->Session->setFlash('Could not find product');
+            $this->redirect($this->referer());
+        }
+        //get available custom options for this product group
+        $this->ProductGroup->getCustomOptions($product);
+        // calc price etc based on inputs
+        if ($this->request->is('post')) {
+            debug($this->request->data);
+            //create an order
+            $order = $this->ProductGroup->ProductUnit->OrderItem->Order->initQuote($this->_user, $this->request->data);
+        }
+        $productSizes = $this->ProductGroup->getSizes($product);
+        $productVersions = $this->ProductGroup->getVersions($product);
+        $selectedVariant = isset($this->request->named['vers']) ? $this->request->named['vers']*1 : 0;
+        $selectedSize = isset($this->request->named['size']) ? $this->request->named['size']*1 : 0;
+        $currentProdUnit = $this->ProductGroup->getCurrentUnit($product,array('variant'=>$productVersions[$selectedVariant],'size'=>$productSizes[$selectedSize] ));
+        //debug($product);
+        $this->set('currentUnit', $currentProdUnit);
+        $this->set('selectedSize', $selectedSize);
+        $this->set('selectedVersion', $selectedVariant);
+        $this->set('productSizes', $productSizes);
+        $this->set('colours', $this->ProductGroup->colours);
+        $this->set('productGroup', $product);
+        $referrer = $this->sessionReferer == '/' ? '/branded_glassware/index' : $this->sessionReferer;
+        $this->set('referrer', $this->sessionReferer);
+        $this->set('title_for_layout', $product['ProductGroup']['name']);
+        $this->set('custom',true);
+        $this->render('view');
+
     }
 
     public function change_options($slug){

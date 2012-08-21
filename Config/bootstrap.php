@@ -65,3 +65,5 @@ Inflector::rules('plural', array('irregular' => array('sku' => 'skus')));
 // constants
 
 define('TMP_FILES', TMP . 'files' . DS);
+define('FILES_DIR', WWW_ROOT . 'files' . DS);
+define('MANUAL_DIR', FILES_DIR . 'manual' . DS);

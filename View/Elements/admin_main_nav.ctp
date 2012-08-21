@@ -5,7 +5,8 @@
         </li>
         <li><?php echo $this->Html->link('Manage users','/admin/users');?></li>
         <li><?php echo $this->Html->link('Manage glassware','/admin/product_groups');?></li>
-        <li><?php echo $this->Html->link('Edit site content','/admin/cms_elements');?></li>
-        <li><?php echo $this->Html->link('Edit FAQs','/admin/cms_elements/faq_index');?></li>
+        <li><?php echo $this->Html->link('Manage site content','/admin/cms_elements');?></li>
+        <li><?php echo $this->Html->link('Manage media','/admin/media');?></li>
+        <li><?php echo $this->Html->link('Manage FAQs','/admin/cms_elements/faq_index');?></li>
     </ul>
 </nav>

@@ -295,12 +295,13 @@ class AppController extends Controller {
         return $csv;
     }
 
-    public function uploadFile($tmpFile, $destDir = null){
+    public function uploadFile($tmpFile, $newName = null, $destDir = null){
         if(!$destDir) $destDir = TMP_FILES;
         if($destDir === TMP_FILES && !is_dir($destDir)){
             mkdir($destDir);
         }
-        return move_uploaded_file($tmpFile['tmp_name'], $destDir . $tmpFile['name']);
+        $destName = $newName ? $newName : strtolower($tmpFile['name']);
+        return move_uploaded_file($tmpFile['tmp_name'], $destDir . $destName);
     }
 
 }

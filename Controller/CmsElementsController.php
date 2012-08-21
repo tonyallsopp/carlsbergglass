@@ -14,7 +14,7 @@ class CmsElementsController extends AppController {
  */
 	public function get($name = null) {
         $elem = $this->CmsElement->find('first', array('conditions' => array('name'=>$name), 'recursive' => -1));
-        debug($elem);
+        //debug($elem);
         if (empty($elem)) {
             throw new NotFoundException(__('Invalid cms element'));
         }
@@ -28,12 +28,14 @@ class CmsElementsController extends AppController {
             $sections[$k]['ChildElement'] = $this->CmsElement->find('all', array('conditions' => array('CmsElement.type'=>'q','CmsElement.parent_id'=>$v['CmsElement']['id']), array('order'=>'ChildElement.display_order ASC'), 'recursive' => -1));
         }
         $this->set('sections',$sections);
+        $this->set('title_for_layout', 'Support');
     }
 
     public function faq($slug){
         $cond = array('CmsElement.name'=>$slug,'CmsElement.type'=>'q');
         $faq = $this->CmsElement->find('first', array('conditions' => $cond, 'contain'=>array('ChildElement')));
         $this->set('faq',$faq);
+        $this->set('title_for_layout', $faq['CmsElement']['content']);
     }
 
     /**

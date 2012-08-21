@@ -8,7 +8,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $title_for_layout; ?>
+		<?php echo $title_for_layout; ?> | POS Glassware | Carlsberg Group
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
