@@ -88,7 +88,7 @@ class ProductGroup extends AppModel {
         )
     );
 
-    public $colours = array(1=>1, 2=>2, 3=>3, 4=>5, 5=>5, 6=>6);
+    public $colours = array(0=>0,1=>1, 2=>2, 3=>3, 4=>4, 5=>5, 6=>6);
 
     public function getVersions($productGroup){
         $res = array();
@@ -111,6 +111,21 @@ class ProductGroup extends AppModel {
     public function getCurrentUnit($prodGroup,$options){
         foreach($prodGroup['ProductUnit'] as $p){
             if($p['capacity'] == $options['size'] && $p['variant'] == $options['variant']){
+                return $p;
+            }
+        }
+        return array();
+    }
+
+    public function getCurrentCustomUnit($prodGroup,$options){
+        foreach($prodGroup['ProductUnit'] as $p){
+            if($p['capacity'] == $options['size']){
+                //get the custom options for this product
+                $options = $this->CustomOption->find('all',array('conditions'=>array('CustomOption.product_group_id'=>$p['product_group_id'], 'CustomOption.supplier_id'=>$p['supplier_id']), 'recursive'=>-1));
+                $p['CustomOption'] = $options;
+                //get the colour/price index for this product
+                $colours = $this->ColourPrice->find('all',array('conditions'=>array('ColourPrice.product_group_id'=>$p['product_group_id'], 'ColourPrice.supplier_id'=>$p['supplier_id']), 'recursive'=>-1));
+                $p['ColourPrice'] = $colours;
                 return $p;
             }
         }

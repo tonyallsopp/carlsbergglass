@@ -1,15 +1,15 @@
 <?php if(isset($custom) && $custom):?>
 <section class="price">
     <h2>Estimated Price</h2>
-    <p>&euro;<span class="prodinfo-price"><?php echo h($currentUnit['price']); ?></span> / unit</p>
+    <p>&euro;<span class="prodinfo-price"><?php echo h($estimatePrice); ?></span> / unit</p>
 </section>
 <section class="order-info">
     <h2>What do you want to do next?</h2>
     <?php
-    echo $this->Form->create('Order',array('url'=>'/quote/confirm','type'=>'get'));
-    echo $this->Form->input('quote',array('type'=>'checkbox','label'=>'Order a plain sample'));
-    echo $this->Form->input('sample',array('type'=>'checkbox','label'=>'Request a formal quote'));
-    echo $this->Form->end('Proceed');
+    echo $this->Form->input('sample_requested',array('type'=>'checkbox','label'=>'Order a plain sample'));
+    echo $this->Form->input('quote_requested',array('type'=>'checkbox','label'=>'Request a formal quote'));
+    echo $this->Form->submit('Proceed');
+
     ?>
 </section>
 

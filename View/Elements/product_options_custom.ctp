@@ -4,10 +4,10 @@
         Please specify your parameters. Production information on your selection will be displayed below.
     </p>
     <?php
-    echo $this->Form->create('ProductGroup');
-    echo $this->Form->input('size',array('options'=>$productSizes,'value'=>$selectedSize));
-    echo $this->Form->input('OrderItem.qty',array());
-    echo $this->Form->input('OrderItem.colours',array('options'=>$colours));
+
+    echo $this->Form->input('ProductGroup.size',array('options'=>$productSizes));
+    echo $this->Form->input('OrderItem.0.qty',array());
+    echo $this->Form->input('OrderItem.0.colours',array('options'=>$colours));
     foreach($productGroup['CustomOption'] as $i=>$opt){
         echo $this->Form->hidden("OrderItemOption.{$i}.name",array('value'=>$opt['name']));
 
@@ -22,6 +22,5 @@
 
     }
     echo $this->Form->hidden('slug',array('value'=>$productGroup['ProductGroup']['slug']));
-    echo $this->Form->end('Update');
     ?>
 </div>

@@ -28,6 +28,7 @@ $(function(){
                 $(this).closest("form").submit();
             }
         });
+
         //replace submit element with anchor
         $('form input[type="submit"]').each(function(){
             var $newBtn = '<a href="#" class="submit">' + $(this).val() + '<span>&raquo;</span></a>';

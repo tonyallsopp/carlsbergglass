@@ -267,7 +267,7 @@ label {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/_forms\.scss}line{font-family:\0000345}}
-.text-input, div.text input, div.text select, div.password input, div.password select, div.select input, div.select select, div.submit input, div.submit select, div.textarea textarea, div.dropdown .selected {
+.text-input, div.text input, div.text select, div.password input, div.password select, div.select input, div.select select, div.submit input, div.submit select, div.number input, div.number select, div.textarea textarea, div.dropdown .selected {
   color: #666666;
   height: 28px;
   line-height: 28px;
@@ -282,18 +282,18 @@ label {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/_forms\.scss}line{font-family:\0000356}}
-div.text, div.password, div.select, div.submit {
+div.text, div.password, div.select, div.submit, div.number {
   padding: 5px 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/_forms\.scss}line{font-family:\0000358}}
-div.text label, div.password label, div.select label, div.submit label {
+div.text label, div.password label, div.select label, div.submit label, div.number label {
   width: 100px;
   padding-right: 10px;
   float: left;
   display: inline;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/_forms\.scss}line{font-family:\0000366}}
-div.text .ext, div.password .ext, div.select .ext, div.submit .ext {
+div.text .ext, div.password .ext, div.select .ext, div.submit .ext, div.number .ext {
   width: 428px;
 }
 

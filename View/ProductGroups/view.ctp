@@ -16,6 +16,15 @@
         </div>
     </header>
     <div id="content-inner">
+        <?php
+        if($custom){
+            //we send the data as an Order
+            echo $this->Form->create('Order',array('url'=>"/custom_glassware/view/{$productGroup['ProductGroup']['slug']}"));
+        } else {
+            //we are sending to update options
+            echo $this->Form->create('ProductGroup',array('url'=>"/product_groups/change_options/{$productGroup['ProductGroup']['slug']}"));
+        }
+        ?>
         <div class="col col-1">
             <?php
             if($custom){
@@ -25,7 +34,7 @@
             }
             ?>
 
-            <?php echo $this->element('product_info');?>
+            <?php echo $this->element('product_info',array('unit'=>$currentUnit));?>
         </div>
         <div class="col col-2">
             <?php echo $this->element('product_side_sections');?>
@@ -53,10 +62,9 @@
                     </li>
                 </ul>
             </section>
-
-
-
         </div>
+        <?php  echo $this->Form->end(); ?>
+
     </div>
 </div>
 

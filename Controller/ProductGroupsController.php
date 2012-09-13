@@ -69,7 +69,7 @@ class ProductGroupsController extends AppController {
     }
 
     public function view_custom($slug) {
-        $contain = array('ProductUnit','Category');
+        $contain = array('ProductUnit','Category','CustomOption');
         $product = $this->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$slug), 'contain' => $contain));
         //debug($product);
         if(empty($product)){
@@ -78,21 +78,29 @@ class ProductGroupsController extends AppController {
         }
         //get available custom options for this product group
         $this->ProductGroup->getCustomOptions($product);
+        //get available sizes
+        $productSizes = $this->ProductGroup->getSizes($product);
+        //get the product unit from the selected size
+        $selectedSize = isset($this->request->data['ProductGroup']['size']) ? $this->request->data['ProductGroup']['size']*1 : 0;
+        $currentProdUnit = $this->ProductGroup->getCurrentCustomUnit($product,array('size'=>$productSizes[$selectedSize] ));
+        $estimatePrice = $currentProdUnit['price'];
         // calc price etc based on inputs
         if ($this->request->is('post')) {
             debug($this->request->data);
             //create an order
-            $order = $this->ProductGroup->ProductUnit->OrderItem->Order->initQuote($this->_user, $this->request->data);
+            $order = $this->ProductGroup->ProductUnit->OrderItem->Order->initQuote($this->_user, $this->request->data, $currentProdUnit);
+            //save the order
+            $saved = $this->ProductGroup->ProductUnit->OrderItem->Order->saveAll($order,array('deep'=>true));
+            //get the price
+            $estimatePrice = $order['OrderItem'][0]['unit_price'];
+            if($saved){
+                $orderId = $this->ProductGroup->ProductUnit->OrderItem->Order->id;
+                $this->redirect('/orders/confirm/' . $orderId);
+            }
         }
-        $productSizes = $this->ProductGroup->getSizes($product);
-        $productVersions = $this->ProductGroup->getVersions($product);
-        $selectedVariant = isset($this->request->named['vers']) ? $this->request->named['vers']*1 : 0;
-        $selectedSize = isset($this->request->named['size']) ? $this->request->named['size']*1 : 0;
-        $currentProdUnit = $this->ProductGroup->getCurrentUnit($product,array('variant'=>$productVersions[$selectedVariant],'size'=>$productSizes[$selectedSize] ));
-        //debug($product);
+        $this->set('estimatePrice', $estimatePrice);
         $this->set('currentUnit', $currentProdUnit);
         $this->set('selectedSize', $selectedSize);
-        $this->set('selectedVersion', $selectedVariant);
         $this->set('productSizes', $productSizes);
         $this->set('colours', $this->ProductGroup->colours);
         $this->set('productGroup', $product);
