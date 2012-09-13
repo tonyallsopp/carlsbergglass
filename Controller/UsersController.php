@@ -49,6 +49,7 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('Username and/or password is incorrect'), 'default', array(), 'auth');
             }
         }
+        $this->set('login', true);
         $this->set('showNav', false);
     }
 

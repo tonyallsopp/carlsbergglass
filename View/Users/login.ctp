@@ -1,3 +1,4 @@
+<h1>Log In To POS Glassware</h1>
 <div id="login-form">
     <?php
     echo $this->Session->flash('auth');
@@ -11,7 +12,7 @@
             <label for="UserAgree">By checking this box you are accepting our new privacy policy and our use of cookies.</label>
         </div>
     <?php
-    echo $this->Form->end('>');
+    echo $this->Form->end('Log in');
     ?>
     </div>
     <div class="form-options">

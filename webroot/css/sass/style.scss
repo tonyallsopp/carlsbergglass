@@ -390,10 +390,10 @@ div.custom {
 // LOGGED OUT PAGES (GREEN BACKGROUND)
 
 .main {
-  background: url('../img/layout/main-bg.jpg') no-repeat center top  $dark-green;
+  background: url('../img/layout/main-bg.jpg') no-repeat center top  $dark-green-body-bg;
   h1 {
     font: $title-font-black;
-    font-size: 62px;
+    font-size: 28px;
     color:white;
     text-transform: uppercase;
     line-height: 1em;
@@ -403,15 +403,15 @@ div.custom {
     width:940px;
     margin:0 auto;
     position: relative;
-    min-height: 640px;
+    min-height: 780px;
   }
   #content {
-    width:400px;
-    padding: 94px 0 100px 480px;
+    width:580px;
+    padding: 154px 0 100px 310px;
   }
   #group-logo {
     position: absolute;
-    top:30px;
+    top:140px;
     left:30px;
     width:130px;
     height:73px;

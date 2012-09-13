@@ -10,7 +10,7 @@
             </div>
             <div class="col col-2">
                 <?php
-                $fileSize = filesize(MANUAL_DIR . 'pos_glassware_manual.pdf') / 1024;
+                $fileSize = file_exists(MANUAL_DIR . 'pos_glassware_manual.pdf') ? filesize(MANUAL_DIR . 'pos_glassware_manual.pdf') / 1024 : 0;
                 $suffix = 'kb';
                 if ($fileSize > 100) {
                     $fileSize = $fileSize / 1024;

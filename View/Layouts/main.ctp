@@ -23,11 +23,11 @@
     <?php echo $this->Html->script('ie9');?>
     <![endif]-->
 </head>
-<body class="main">
+<?php $class = isset($login) ? 'login' : ''; ?>
+<body class="main <?php echo $class; ?>">
 <span id="group-logo">Carlsberg Group</span>
 	<div id="container">
         <section id="content">
-            <header><h1>POS Glassware</h1></header>
             <?php echo $this->Session->flash(); ?>
 
             <?php echo $this->fetch('content'); ?>
