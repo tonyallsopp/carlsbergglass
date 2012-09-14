@@ -17,12 +17,12 @@
                 <p>
                     From &euro;<?php echo h($productGroup['ProductGroup']['base_price']); ?> /unit
                 </p>
-                <?php echo $this->Html->link('Details', "/branded_glassware/{$productGroup['ProductGroup']['slug']}",array('class'=>'btn-details')); ?>
+                <?php echo $this->Html->link('Details', "/branded_glassware/{$productGroup['ProductGroup']['slug']}", array('class' => 'btn-details')); ?>
 
             </li>
             <?php endforeach; ?>
     </ul>
-
+    <?php /*
     <div class="paging">
         <p>
             <?php
@@ -36,4 +36,5 @@
         echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
+    */?>
 </section>

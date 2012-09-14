@@ -20,7 +20,7 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 .col { @include float-left; }
 #main-header { @include float-left; }
 #container { overflow: hidden; }
-#content { width:100%; padding-left:200px;}
+#content { @include box-sizing(); width:100%; padding-left:200px; min-width:1009px;}
 
 // MAIN HEADER (LHS green menu)
 #main-header {
@@ -82,7 +82,7 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   width:100%;
 }
 #content-inner {
-  width:750px;
+  width:750px; //fixed width layout
   padding:30px;
   &.split {
     padding:0 30px 0 30px;
@@ -100,6 +100,9 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
     clear:both;
     overflow: hidden;
   }
+}
+#content-inner.catalogue {
+  width:auto; //fluid layout
 }
 #breadcrumbs {
   width:100%;
@@ -146,6 +149,7 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
     background: url('../img/layout/manual-cover.png') no-repeat;
     width: 400px;
     padding-left:170px;
+    padding-right:10px;
   }
   .col-2 {
     padding-top:48px;
@@ -189,7 +193,7 @@ a.download-manual {
   }
 }
 $listing-width: 748px;
-$item-width: $listing-width / 4;
+$item-width: 186px;
 .listing-box {
   border-right:1px solid $border-grey;
   border-bottom:1px solid $border-grey;
@@ -198,7 +202,7 @@ $item-width: $listing-width / 4;
 .listing-item-box {
   @extend .listing-box;
   @include float-left;
-  width: $item-width - 1px;
+  width: $item-width;
   list-style: none;
   color:$mid-green-text;
   font-weight: bold;

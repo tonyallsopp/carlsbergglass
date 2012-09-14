@@ -26,7 +26,7 @@
             </li>
             <?php endforeach; ?>
     </ul>
-
+    <?php /*
     <div class="paging">
         <p>
             <?php
@@ -40,4 +40,5 @@
         echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
+    */ ?>
 </section>

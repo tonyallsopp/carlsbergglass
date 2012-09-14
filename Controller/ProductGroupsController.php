@@ -22,6 +22,7 @@ class ProductGroupsController extends AppController {
         $this->ProductGroup->getBasePrice($productGroups);
         $this->set('listings', $productGroups);
         $this->set('currentBrand', $brand ? $productGroups[0]['Category']['name'] : 'All brands');
+
         $this->set('title_for_layout', 'Branded Glassware');
     }
 
