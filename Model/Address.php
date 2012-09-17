@@ -1,14 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * ProductUnit Model
+ * Address Model
  *
- * @property Image $Image
- * @property Supplier $Supplier
- * @property ProductGroup $ProductGroup
- * @property OrderItem $OrderItem
+ * @property User $User
+ * @property Order $Order
  */
-class ProductUnit extends AppModel {
+class Address extends AppModel {
 
 /**
  * Validation rules
@@ -26,7 +24,7 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'capacity' => array(
+		'telephone' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -36,7 +34,7 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'capacity_group' => array(
+		'address_1' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -46,7 +44,7 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'origin' => array(
+		'address_2' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -56,7 +54,7 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'hs_code' => array(
+		'town' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -66,7 +64,7 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'fs_location' => array(
+		'region' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -76,7 +74,17 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'supplier_id' => array(
+		'postcode' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -86,7 +94,7 @@ class ProductUnit extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'product_id' => array(
+		'order_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -106,33 +114,19 @@ class ProductUnit extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Image' => array(
-			'className' => 'Image',
-			'foreignKey' => 'image_id',
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Supplier' => array(
-			'className' => 'Supplier',
-			'foreignKey' => 'supplier_id',
+		'Order' => array(
+			'className' => 'Order',
+			'foreignKey' => 'order_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-        'ProductGroup'
+		)
 	);
-
-    public $hasOne = array(
-        'OrderItem'
-    );
-
-    public function calcCapacityGroup($capacity){
-        $capArray = explode('/',$capacity);
-        $cap = preg_replace('/[^0-9.]/','',$capArray[0]) *1;
-        if($cap >= 0.44){
-            return 'large';
-        }
-        return 'small';
-    }
 }

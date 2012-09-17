@@ -21,13 +21,22 @@ class OrdersController extends AppController {
             $this->Session->setFlash(__('Invalid order'));
             $this->redirect($this->sessionReferer);
         }
-        $order = $this->Order->find('first', array('conditions' => array('Order.id'=>$id), 'recursive' => 2));
+        $contain = array('OrderItem'=>array('OrderItemOption','ProductUnit'=>'ProductGroup'),'User');
+        $order = $this->Order->find('first', array('conditions' => array('Order.id'=>$id), 'contain' => $contain));
         if (empty($order)) {
             $this->Session->setFlash(__('Invalid order'));
             $this->redirect($this->sessionReferer);
         }
+        //get the product group
+        $contain = array('ProductUnit','Category','CustomOption');
+        $product = $this->Order->OrderItem->ProductUnit->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$order['OrderItem'][0]['ProductUnit']['ProductGroup']['slug']), 'contain' => $contain));
+        //get available sizes
+        $productSizes = $this->Order->OrderItem->ProductUnit->ProductGroup->getSizes($product);
         debug($order);
+        $this->set('productGroup', $product);
+        $this->set('productSizes', $productSizes);
         $this->set('order', $order);
+        $this->set('countries', $this->countries);
     }
 
     /**

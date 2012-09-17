@@ -94,9 +94,11 @@ class OrderItem extends AppModel {
 		)
 	);
 
-    public function quoteItem(array &$order, array $data, $productUnit){
-        //debug($productUnit);
+    public function quoteItem(array &$order, array $data, $productUnit, $productGroup){
+        //debug($productGroup);exit;
         $order['OrderItem'][0]['qty'] = $data['OrderItem'][0]['qty'];
+        $order['OrderItem'][0]['capacity'] = $productUnit['capacity'];
+        $order['OrderItem'][0]['name'] = $productGroup['ProductGroup']['name'];
         $qty = $order['OrderItem'][0]['qty'];
         $order['OrderItem'][0]['colours'] = $data['OrderItem'][0]['colours'];
         //delete any existing options
@@ -119,6 +121,7 @@ class OrderItem extends AppModel {
                         $unitPrice = $cOpt['CustomOption']["{$capacityGroup}_price"];
                         //if we have a multiplier, use it
                         if($cOpt['CustomOption']['multiplier']){
+                            $order['OrderItem'][0]['OrderItemOption'][$i]['multiplier'] = $cOpt['CustomOption']['multiplier'];
                             $unitPrice = $unitPrice * $o['value'];
                         }
                         //if the option counts as an additional colour

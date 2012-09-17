@@ -16,6 +16,15 @@ class AppController extends Controller {
     public $components = array('Auth', 'Session', 'Security');
     public $sessionReferer;
     public $requestedURL;
+    //countries
+    public $countries = array(
+        'Denmark'=>'Denmark',
+        'France'=>'France',
+        'Germany'=>'Germany',
+        'Spain'=>'Spain',
+        'Sweden'=>'Sweden',
+        'United Kingdom'=>'United Kingdom',
+        );
 
     public function beforeFilter() {
         parent::beforeFilter();

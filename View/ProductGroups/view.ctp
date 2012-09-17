@@ -1,21 +1,8 @@
 <?php $class = $custom ? 'custom' : 'branded';?>
-<div class="product-details <?php echo $class;?>">
-    <header class="page-header">
-        <div class="inner">
-            <div class="col-1 col">
-            <?php echo $this->Html->link('&laquo; Back to glassware',$referrer,array('escape'=>false, 'class'=>'back'));?>
-            <h1><?php  echo h($productGroup['ProductGroup']['name']); ?></h1>
-                <dl>
-                    <dt>Sizes Available:</dt>
-                    <dd><?php echo implode(', ', $productSizes)?></dd>
-                </dl>
-            </div>
-            <div class="col-2 col prod-img">
-                <img src="http://placehold.it/220x230">
-            </div>
-        </div>
-    </header>
+<div class="product-view <?php echo $class;?>">
+
     <div id="content-inner">
+
         <?php
         if($custom){
             //we send the data as an Order
@@ -26,6 +13,19 @@
         }
         ?>
         <div class="col col-1">
+
+            <header class="page-header">
+                <div class="inner">
+                    <?php echo $this->Html->link('&laquo; Back to glassware',$referrer,array('escape'=>false, 'class'=>'back'));?>
+                    <h1><?php  echo h($productGroup['ProductGroup']['name']); ?></h1>
+                    <dl>
+                        <dt>Sizes Available:</dt>
+                        <dd><?php echo implode(', ', $productSizes)?></dd>
+                    </dl>
+
+                </div>
+            </header>
+
             <?php
             if($custom){
                 echo $this->element('product_options_custom');
@@ -34,9 +34,13 @@
             }
             ?>
 
-            <?php echo $this->element('product_info',array('unit'=>$currentUnit));?>
+
         </div>
         <div class="col col-2">
+            <div class=" prod-img">
+                <img src="http://placehold.it/190x230">
+            </div>
+
             <?php echo $this->element('product_side_sections');?>
 
             <section class="downloads">

@@ -86,7 +86,11 @@ class Order extends AppModel {
         )
     );
 
-    public function initQuote($user, $data, $productUnit)
+    public $hasOne = array(
+        'Address'
+    );
+
+    public function initQuote($user, $data, $productUnit, $productGroup)
     {
         //find existing order
         $cond = array('Order.user_id' => $user['id'], 'Order.status' => 0);
@@ -104,7 +108,7 @@ class Order extends AppModel {
         $order['Order']['quote_requested'] = $data['Order']['quote_requested'];
         $order['Order']['sample_requested'] = $data['Order']['sample_requested'];
         //add the order item and options (or replace existing)
-        $this->OrderItem->quoteItem($order, $data, $productUnit);
+        $this->OrderItem->quoteItem($order, $data, $productUnit, $productGroup);
         debug($order);
         return $order;
     }

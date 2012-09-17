@@ -136,6 +136,10 @@ class User extends AppModel {
     public $hasMany = array(
         'Order'
     );
+    public $hasOne = array(
+        'Address'
+    );
+
 
     public $virtualFields = array(
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'

@@ -59,7 +59,7 @@ a.back {
   @extend .alt-link;
 }
 a:hover {text-decoration: none;}
-p { padding-bottom:.6em;}
+p { padding-bottom:.6em; line-height: 1.3em;}
 .paging p { color:$mid-grey;}
 .sub-heading { font: $title-font-light; font-size: 18px; color:$dark-grey;}
 

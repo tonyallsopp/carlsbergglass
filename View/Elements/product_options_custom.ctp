@@ -1,4 +1,4 @@
-<div class="options">
+<section class="options">
     <h2>Configure your glassware</h2>
     <p>
         Please specify your parameters. Production information on your selection will be displayed below.
@@ -23,4 +23,6 @@
     }
     echo $this->Form->hidden('slug',array('value'=>$productGroup['ProductGroup']['slug']));
     ?>
-</div>
+
+    <?php echo $this->element('product_info',array('unit'=>$currentUnit));?>
+</section>

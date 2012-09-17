@@ -27,6 +27,13 @@
     color:$mid-grey;
     padding-left: 4px;
   }
+  &:hover {
+    @include box-shadow(1px 1px 1px #999);
+  }
+  &:active {
+    @include box-shadow(0 0 0 #999);
+    @include linear-grad(#F0F0F0, #FEFEFE);
+  }
 }
 
 // FORM ELEMENTS
@@ -111,7 +118,10 @@ div.checkbox {
     @include float-left;
     line-height:28px;
     height:28px;
+    position: relative;
+    bottom:4px;
   }
+  a.submit { bottom:0;}
   div.submit {
     padding-left:0;
   }
@@ -256,6 +266,8 @@ div.dropdown {
     width:228px;
     display:none;
     @include box-shadow(3px 3px 4px $dark-grey);
+    max-height: 110px;
+    overflow-y: scroll;
     li {
       list-style: none;
       padding:2px 5px;

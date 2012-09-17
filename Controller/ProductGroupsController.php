@@ -89,7 +89,7 @@ class ProductGroupsController extends AppController {
         if ($this->request->is('post')) {
             debug($this->request->data);
             //create an order
-            $order = $this->ProductGroup->ProductUnit->OrderItem->Order->initQuote($this->_user, $this->request->data, $currentProdUnit);
+            $order = $this->ProductGroup->ProductUnit->OrderItem->Order->initQuote($this->_user, $this->request->data, $currentProdUnit, $product);
             //save the order
             $saved = $this->ProductGroup->ProductUnit->OrderItem->Order->saveAll($order,array('deep'=>true));
             //get the price

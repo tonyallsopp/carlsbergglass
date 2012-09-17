@@ -30,11 +30,9 @@
         <td>FCA Location</td>
         <td class="prodinfo-fca_location last"><?php echo h($unit['fca_location']); ?></td>
     </tr>
-    <?php if(!$confirm):?>
     <tr>
         <td>FCA Unit Price (1 piece in EUR)</td>
         <td class="prodinfo-price last"><?php echo h($unit['price']); ?></td>
     </tr>
-    <?php endif;?>
     </tbody>
 </table>
