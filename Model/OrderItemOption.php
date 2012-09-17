@@ -26,13 +26,17 @@ class OrderItemOption extends AppModel {
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+        'value' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+            ),
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'message' => 'Must be a numeric value',
+            ),
+        ),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

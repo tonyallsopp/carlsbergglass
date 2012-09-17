@@ -105,12 +105,39 @@ class ProductGroupsController extends AppController {
         $this->set('productSizes', $productSizes);
         $this->set('colours', $this->ProductGroup->colours);
         $this->set('productGroup', $product);
-        $referrer = $this->sessionReferer == '/' ? '/branded_glassware/index' : $this->sessionReferer;
+        $referrer =  '/branded_glassware/' . $product['Category']['slug'];
         $this->set('referrer', $this->sessionReferer);
         $this->set('title_for_layout', $product['ProductGroup']['name']);
         $this->set('custom',true);
         $this->render('view');
+    }
 
+    public function update_custom_price(){
+        // ajax update
+        if ($this->request->is('ajax') && !empty($this->request->data)) {
+            Configure::write('debug', 0);
+            $contain = array('ProductUnit','Category','CustomOption');
+            $product = $this->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$this->request->data['ProductGroup']['slug']), 'contain' => $contain));
+            //get available sizes
+            $productSizes = $this->ProductGroup->getSizes($product);
+            //get the product unit from the selected size
+            $selectedSize = isset($this->request->data['ProductGroup']['size']) ? $this->request->data['ProductGroup']['size']*1 : 0;
+            $currentProdUnit = $this->ProductGroup->getCurrentCustomUnit($product,array('size'=>$productSizes[$selectedSize] ));
+            //create an order
+            $order = $this->ProductGroup->ProductUnit->OrderItem->Order->initQuote($this->_user, $this->request->data, $currentProdUnit, $product);
+            //save the order
+            $saved = $this->ProductGroup->ProductUnit->OrderItem->Order->saveAll($order,array('deep'=>true));
+            if($saved){
+                $orderId = $this->ProductGroup->ProductUnit->OrderItem->Order->id;
+                $order['Order']['id'] = $orderId;
+            }
+            //insert the selected product unit
+            unset($currentProdUnit['ColourPrice'], $currentProdUnit['CustomOption']);
+            $order['ProductUnit'] = $currentProdUnit;
+            //ajax response
+            $this->set('response',json_encode($order));
+            $this->render('/Elements/ajax','ajax');
+        }
     }
 
     public function change_options($slug){

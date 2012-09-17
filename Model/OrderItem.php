@@ -39,7 +39,7 @@ class OrderItem extends AppModel {
 			'numeric' => array(
 				'rule' => array('numeric'),
                 'message' => 'Must be a numeric value',
-				'allowEmpty' => true,
+				//'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -49,10 +49,6 @@ class OrderItem extends AppModel {
 			'numeric' => array(
 				'rule' => array('numeric'),
                 'message' => 'Must be a numeric value',
-				'allowEmpty' => true,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 	);

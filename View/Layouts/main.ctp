@@ -25,8 +25,8 @@
 </head>
 <?php $class = isset($login) ? 'login' : ''; ?>
 <body class="main <?php echo $class; ?>">
-<span id="group-logo">Carlsberg Group</span>
 	<div id="container">
+        <span id="group-logo">Carlsberg Group</span>
         <section id="content">
             <?php echo $this->Session->flash(); ?>
 

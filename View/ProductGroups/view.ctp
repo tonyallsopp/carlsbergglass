@@ -1,5 +1,5 @@
 <?php $class = $custom ? 'custom' : 'branded';?>
-<div class="product-view <?php echo $class;?>">
+<div class="product-view product-details <?php echo $class;?>">
 
     <div id="content-inner">
 
@@ -16,7 +16,7 @@
 
             <header class="page-header">
                 <div class="inner">
-                    <?php echo $this->Html->link('&laquo; Back to glassware',$referrer,array('escape'=>false, 'class'=>'back'));?>
+                    <?php echo $this->Html->link('&laquo; Back to ' . $productGroup['Category']['name'],$referrer,array('escape'=>false, 'class'=>'back'));?>
                     <h1><?php  echo h($productGroup['ProductGroup']['name']); ?></h1>
                     <dl>
                         <dt>Sizes Available:</dt>

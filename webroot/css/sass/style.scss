@@ -100,7 +100,7 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   section {
     clear:both;
     overflow: hidden;
-    padding:30px 30px 0 30px;
+    padding:30px;
   }
 }
 #content-inner.catalogue {
@@ -186,7 +186,7 @@ a.download-manual {
 .listing {
   header {
     @extend .grey-grad-header;
-    overflow: hidden;
+    //overflow: hidden;
     height:78px;
     padding:0 30px;
     h2 {
@@ -264,11 +264,16 @@ $item-width: 186px;
     h3 {
       font:$title-font-light;
       line-height: 50px;
-      width:553px;
+      width:523px;
       padding:0 20px;
+      a {
+        color:$dark-grey;
+        text-decoration: none;;
+      }
     }
   }
 }
+
 
 // PRODUCT DETAILS
 .header-block {
@@ -311,21 +316,21 @@ div.product-view {
     }
     .col-1 {
       width:560px;
-      padding:0 0 30px 0;
+      padding:0;
       border-right: 1px solid $prod-header-bdr;
       a.submit { display: none; }
       //grey block w/buttons at bottom
       .form-actions {
-        border-top: 1px solid $prod-header-bdr;
         @extend .header-block;
         padding:30px 30px 30px 140px;
         a.submit { display: inherit; }
       }
       article {
         padding:30px;
-        &.sample {
-          border-top: 1px solid $prod-header-bdr;
-        }
+        border-bottom: 1px solid $prod-header-bdr;
+      }
+      section {
+        border-bottom: 1px solid $prod-header-bdr;
       }
     }
     .col-2 {
@@ -369,13 +374,13 @@ div.product-view {
     p {
       color:$grey-text;
       &.options {
-        width:130px;
-        padding:5px 0 30px 40px;
+        //width:130px;
+        padding:10px 0
       }
     }
   }
 }
-.product-info {
+table.product-info {
   th {
     @extend .grey-grad-header;
     text-shadow: none;
@@ -417,10 +422,10 @@ $custom-label-width: 180px;
 div.custom {
   #content-inner {
     .checkbox label { padding-left:10px;}
-    div.options {
+    section.options {
       width:auto;
       h2 { @extend .sub-heading; padding-bottom: 15px; }
-      label { width:auto; min-width: 180px; max-width:340px; }
+      label { width:auto; min-width: 180px; max-width:340px;}
       .text input { min-width:$custom-input-width; width:$custom-input-width; }
       .checkbox {
         input { margin-left:$custom-label-width + 10px; }
@@ -440,12 +445,12 @@ div.custom {
 .main {
   background: url('../img/layout/main-bg.jpg') no-repeat center top  $dark-green-body-bg;
   h1 {
-    font: $title-font-black;
-    font-size: 28px;
+    font: $title-font-bold;
+    font-size: 26px;
     color:white;
     text-transform: uppercase;
     line-height: 1em;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
   }
   #container {
     width:940px;
@@ -454,13 +459,14 @@ div.custom {
     min-height: 780px;
   }
   #content {
-    width:580px;
-    padding: 154px 0 100px 310px;
+    width:880px;
+    padding: 100px 0 100px 360px;
+    min-width: 0;
   }
   #group-logo {
     position: absolute;
-    top:140px;
-    left:30px;
+    top:100px;
+    left:60px;
     width:130px;
     height:73px;
     text-indent: -9999px;

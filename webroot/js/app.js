@@ -5,7 +5,6 @@ $(function(){
         $menu = $('#main-header');
         $content = $('#content');
         $container = $('#container');
-        console.log($content.height(), $menu.outerHeight());
         if($menu.length && ($content.outerHeight() > $menu.outerHeight())){
             $menu.height($content.height()+100);
         }
@@ -63,6 +62,19 @@ $(function(){
         }
     })();
 
+    // "jump to" type filters
+    (function jumpToSelectors(){
+        if($('#CategoryBrandsForm').length){
+            $("body").on('click', 'div[rel="CategoryFilterSlug"] li', function() {
+                var url = $('#CategoryFilterUrl').val();
+                var slug = $('div[rel="CategoryFilterSlug"] input').val();
+                if(slug){
+                    window.location = url + slug;
+                }
+            });
+        }
+    })();
+
     //replace select fields
     (function replaceSelect(){
         $('select').each(function(){
@@ -78,43 +90,92 @@ $(function(){
 
     //update product info
     if($('.product-details').length){
-        $productVersionSelect = $('div[rel="ProductGroupVersion"] li');
-        $productSizeSelect = $('div[rel="ProductGroupSize"] li');
-        $productVersionVal =  $('input[name="data[ProductGroup][version]"]');
-        $productSizeVal =  $('input[name="data[ProductGroup][size]"]');
+        //branded products
+        if($('.product-details').hasClass('branded')){
+            $productVersionSelect = $('div[rel="ProductGroupVersion"] li');
+            $productSizeSelect = $('div[rel="ProductGroupSize"] li');
+            $productVersionVal =  $('input[name="data[ProductGroup][version]"]');
+            $productSizeVal =  $('input[name="data[ProductGroup][size]"]');
 
-        function updateProductInfo(){
-            //version click event
-            $("body").on('click', 'div[rel="ProductGroupVersion"] li', function() {
-                ajaxUpdate($(this).find('span.value').text(), $productSizeVal.val());
-            });
-            //size click event
-            $("body").on('click', 'div[rel="ProductGroupSize"] li', function() {
-                ajaxUpdate($productVersionVal.val(), $(this).find('span.value').text());
-            });
+            function updateProductInfo(){
+                //version click event
+                $("body").on('click', 'div[rel="ProductGroupVersion"] li', function() {
+                    ajaxUpdate($(this).find('span.value').text(), $productSizeVal.val());
+                });
+                //size click event
+                $("body").on('click', 'div[rel="ProductGroupSize"] li', function() {
+                    ajaxUpdate($productVersionVal.val(), $(this).find('span.value').text());
+                });
 
-            function ajaxUpdate(version, size){
-                console.log(version);
-                console.log(size);
-                var data = {'data[ProductGroup][version]':version, 'data[ProductGroup][size]':size }
-                var url = webroot + 'product_groups/change_options/' + $('#ProductGroupSlug').val();
-                $.ajax({
-                    url: url,
-                    data: data,
-                    type: 'post',
-                    dataType : 'json',
-                    success: function(data) {
-                        for(var p in data){
-                            var elem = $('.prodinfo-' + p);
-                            if(elem.length){
-                                elem.text(data[p]);
+                function ajaxUpdate(version, size){
+                    console.log(version);
+                    console.log(size);
+                    var data = {'data[ProductGroup][version]':version, 'data[ProductGroup][size]':size }
+                    var url = webroot + 'product_groups/change_options/' + $('#ProductGroupSlug').val();
+                    $.ajax({
+                        url: url,
+                        data: data,
+                        type: 'post',
+                        dataType : 'json',
+                        success: function(data) {
+                            for(var p in data){
+                                var elem = $('.prodinfo-' + p);
+                                if(elem.length){
+                                    elem.text(data[p]);
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
             }
+            updateProductInfo();
         }
-        updateProductInfo();
+        //custom products
+        if($('.product-details').hasClass('custom')){
+//            $productVersionSelect = $('div[rel="ProductGroupVersion"] li');
+//            $productSizeSelect = $('div[rel="ProductGroupSize"] li');
+//            $productVersionVal =  $('input[name="data[ProductGroup][version]"]');
+//            $productSizeVal =  $('input[name="data[ProductGroup][size]"]');
+
+            (function updateCustomProductInfo(){
+                var $form = $('#OrderViewCustomForm');
+                // options change
+                $('#OrderItem0Qty, form .custom_option').change(function(){
+                    ajaxUpdate();
+                });
+                //size change
+                $("body").on('click', 'div[rel="ProductGroupSize"] li', function() {
+                    ajaxUpdate();
+                });
+                //no colours change
+                $("body").on('click', 'div[rel="OrderItem0Colours"] li', function() {
+                    ajaxUpdate();
+                });
+
+                function ajaxUpdate(){
+                    var url = webroot + 'product_groups/update_custom_price/';
+                    var data = $form.serializeArray();
+                    $.ajax({
+                        url: url,
+                        data: data,
+                        type: 'post',
+                        dataType : 'json',
+                        success: function(data) {
+                            console.log(data);
+                            for(var p in data['ProductUnit']){
+                                var elem = $('.prodinfo-' + p);
+                                if(elem.length){
+                                    elem.text(data['ProductUnit'][p]);
+                                }
+                            }
+                            //price
+                            $('.prodinfo-price').text(data['OrderItem'][0]['unit_price']);
+                        }
+                    });
+                }
+            })();
+        }
+
     }
 
 });

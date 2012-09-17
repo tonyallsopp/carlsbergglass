@@ -7,12 +7,26 @@ App::uses('AppController', 'Controller');
  */
 class ProductUnitsController extends AppController {
 
+    /**
+     *  method
+     *
+     * @return void
+     */
+    /*public function admin_slugs() {
+        $prods = $this->ProductUnit->find('all', array('recursive' => -1));
+        foreach($prods as $i=>$p){
+            $prods[$i]['ProductUnit']['slug'] = $this->ProductUnit->sluggify($p['ProductUnit']['name']);
+        }
+        debug($prods);
+        $this->ProductUnit->saveMany($prods);
+    }*/
+
 /**
  * index method
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->ProductUnit->recursive = 0;
 		$this->set('productUnits', $this->paginate());
 	}
@@ -24,7 +38,7 @@ class ProductUnitsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		$this->ProductUnit->id = $id;
 		if (!$this->ProductUnit->exists()) {
 			throw new NotFoundException(__('Invalid product unit'));
@@ -37,7 +51,7 @@ class ProductUnitsController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->ProductUnit->create();
 			if ($this->ProductUnit->save($this->request->data)) {
@@ -60,7 +74,7 @@ class ProductUnitsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		$this->ProductUnit->id = $id;
 		if (!$this->ProductUnit->exists()) {
 			throw new NotFoundException(__('Invalid product unit'));
@@ -89,7 +103,7 @@ class ProductUnitsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}

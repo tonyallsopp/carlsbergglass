@@ -7,7 +7,7 @@
     echo $this->Form->submit('Update');
     ?>
 
-    <p class="col options">
+    <p class="options">
         Choose your options to update the product info below
     </p>
 
