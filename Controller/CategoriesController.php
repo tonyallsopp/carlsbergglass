@@ -19,9 +19,9 @@ class CategoriesController extends AppController {
         foreach($categories as $cat){
             $categoryList[$cat['Category']['slug']] = $cat['Category']['name'];
         }
-        debug($categories);
         $this->set('categoryList', $categoryList);
         $this->set('listings', $categories);
+        $this->set('breadcrumbs', array('Glassware by Brand'=>'/glassware_brands'));
     }
 
     public function custom()
@@ -33,6 +33,7 @@ class CategoriesController extends AppController {
         $categories = $this->paginate('Category');
         debug($categories);
         $this->set('listings', $categories);
+        $this->set('breadcrumbs', array('Glassware Configurator'=>'/custom_glassware'));
     }
 
 

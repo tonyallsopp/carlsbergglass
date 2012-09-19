@@ -26,6 +26,7 @@
   -webkit-border-radius: $radius;
   border-radius: $radius;
 }
+
 @mixin linear-grad($start, $stop) {
   background: $start; /* Old browsers */
   background: -moz-linear-gradient(top, $start 0%, $stop 100%); /* FF3.6+ */
@@ -40,6 +41,7 @@
 + ie-hex-str($stop)
 + unquote("',GradientType=0)");
 }
+// linear left to right
 @mixin linear-grad-lr($start, $stop) {
   background: $start; /* Old browsers */
   background: -moz-linear-gradient(left, $start 0%, $stop 100%); /* FF3.6+ */
@@ -48,6 +50,23 @@
   background: -o-linear-gradient(left, $start 0%,$stop 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(left, $start 0%,$stop 100%); /* IE10+ */
   background: linear-gradient(to right, $start 0%,$stop 100%); /* W3C */
+  filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='")
++ ie-hex-str($start)
++ unquote("', endColorstr='")
++ ie-hex-str($stop)
++ unquote("',GradientType=1)");
+}
+
+@mixin radial-grad($start, $stop, $start-pc, $stop-pc) {
+background: $stop; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: -moz-radial-gradient(left, ellipse cover,  rgba($start,1) $start-pc, rgba($stop,1) $stop-pc); /* FF3.6+ */
+background: -webkit-gradient(radial, left center, 0px, left center, 100%, color-stop($start-pc,rgba($start,1)), color-stop($stop-pc,rgba($stop,1))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(left, ellipse cover,  rgba($start,1) $start-pc,rgba($stop,1) $stop-pc); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(left, ellipse cover,  rgba($start,1) $start-pc,rgba($stop,1) $stop-pc); /* Opera 12+ */
+background: -ms-radial-gradient(left, ellipse cover,  rgba($start,1) $start-pc,rgba($stop,1) $stop-pc); /* IE10+ */
+background: radial-gradient(ellipse at left,  rgba($start,1) $start-pc,rgba($stop,1) $stop-pc); /* W3C */
+/* IE6-8 fallback on horizontal gradient */
   filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='")
 + ie-hex-str($start)
 + unquote("', endColorstr='")

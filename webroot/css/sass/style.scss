@@ -20,24 +20,29 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 .col { @include float-left; }
 #main-header { @include float-left; }
 #container { overflow: hidden; }
-#content { @include box-sizing(); width:100%; padding-left:200px; min-width:1009px;}
+#content {
+  @include box-sizing();
+  width:100%;
+  padding-left:200px;
+  min-width:1009px;
+  padding-top:50px; //allow for breadcrumbs
+}
 
 // MAIN HEADER (LHS green menu)
 #main-header {
   width:200px;
-  background: url(../img/layout/logo.jpg) no-repeat 0 0 $dark-green;
-  position:absolute;
+  @include radial-grad(#025e2f, #002715, 0%, 80%);
+  position:absolute; // IE6
+  position:fixed;
   top:0; bottom:0; left:0;
-  ul {
-    background: url(../img/layout/main-nav-bg-top.jpg) no-repeat 0 0 $dark-green;
-  }
+  min-height:561px;
 
   li {
     list-style: none;
     padding:0;
     a {
       @extend .white-shadow;
-      font:$title-font-light;
+      font:$title-font-bold;
       height:40px;
       line-height: 40px;
       border-top: 1px solid $dark-green-hl;
@@ -60,9 +65,10 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   .my-account span { background-position: 0 -50px;}
   .logout span { background-position: 0 -108px;}
   .back span { background-position: 0 -146px;}
-  h1 {
+  h1 { // carlsberg logo
     height:140px;
     text-indent: -9999px;
+    background: url('../img/layout/group-logo-menu.png') no-repeat 30px 30px;
   }
   .current-user {
     font:$title-font-light;
@@ -74,13 +80,13 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   }
 }
 #main-nav {
-  background: url(../img/layout/main-nav-bg.png) repeat-y 0 0 $dark-green;
   overflow: hidden;
 }
 #admin-nav {
   position: absolute;
   bottom:0;
   width:100%;
+  @include linear-grad-lr(#015D2E, #01321C);
 }
 #content-inner {
   width:780px; //fixed width layout
@@ -106,20 +112,30 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 #content-inner.catalogue {
   width:auto; //fluid layout
 }
+#sub-header {
+  position: absolute; // IE6
+  position: fixed;
+  top:0;
+  left:200px;
+  right:0;
+}
 #breadcrumbs {
   width:100%;
   overflow:hidden;
   background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
   border-bottom: 1px solid $bc-border-grey;
+  ul {
+    height:49px;
+    background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
+  }
   li {
     padding:0;
     height:49px;
     @include float-left;
-    background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
+    background: url(../img/layout/bc-bg.png) no-repeat right top;
     span {
-      background: url(../img/layout/bc-bg.png) no-repeat 0 0;
       @include float-left;
-      padding:0 10px 0 26px;
+      padding:0 26px 0 14px;
       line-height: 49px;
     }
     a {
@@ -128,6 +144,8 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
       color: $mid-grey;
       text-decoration: none;
       text-shadow: 1px 1px 0 white;
+      font:$title-font-light;
+      line-height: 49px;
     }
     a:hover {
       color:$bc-hover-grey;
@@ -135,10 +153,11 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   }
   li.home span {
     background: url(../img/layout/bc-home-bg.png) no-repeat 0 0;
+    padding:0 18px 0 20px;
     a {
-      background: url(../img/layout/home-icon.png) no-repeat 0 17px;
+      background: url(../img/layout/home-icon.png) no-repeat center center;
       text-indent: -9999px;
-      width:15px;
+      width:30px;
     }
   }
 }

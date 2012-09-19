@@ -21,9 +21,10 @@ class ProductGroupsController extends AppController {
         //debug($productGroups);
         $this->ProductGroup->getBasePrice($productGroups);
         $this->set('listings', $productGroups);
-        $this->set('currentBrand', $brand ? $productGroups[0]['Category']['name'] : 'All brands');
-
+        $currentBrand = $brand ? $productGroups[0]['Category']['name'] : 'All brands';
+        $this->set('currentBrand', $currentBrand);
         $this->set('title_for_layout', 'Branded Glassware');
+        $this->set('breadcrumbs', array('Glassware by Brand'=>'/custom_glassware',$currentBrand => "/branded_glassware/index/{$brand}"));
     }
 
     public function custom_index($subcat = null){
@@ -38,8 +39,10 @@ class ProductGroupsController extends AppController {
         $productGroups = $this->paginate('ProductGroup');
         $this->ProductGroup->getBasePrice($productGroups);
         $this->set('listings', $productGroups);
-        $this->set('subCategory', $subcat ? $productGroups[0]['Category']['name'] : 'All');
-        $this->set('title_for_layout', 'Unbranded Glassware');
+        $subCategory = $subcat ? $productGroups[0]['Category']['name'] : 'All';
+        $this->set('subCategory', $subCategory);
+        $this->set('title_for_layout', 'Custom Glassware');
+        $this->set('breadcrumbs', array('Glassware Configurator'=>'/custom_glassware',$subCategory => "/custom_glassware/{$subcat}"));
     }
 
     public function view($slug) {
@@ -66,6 +69,7 @@ class ProductGroupsController extends AppController {
         $this->set('referrer', $this->sessionReferer);
         $this->set('custom',false);
         $this->set('title_for_layout', $product['ProductGroup']['name']);
+        $this->set('breadcrumbs', array('Glassware by Brand'=>'/branded_glassware/index',$product['Category']['name'] => $referrer, $product['ProductGroup']['name']=>"/branded_glassware/{$slug}"));
 
     }
 
@@ -105,10 +109,11 @@ class ProductGroupsController extends AppController {
         $this->set('productSizes', $productSizes);
         $this->set('colours', $this->ProductGroup->colours);
         $this->set('productGroup', $product);
-        $referrer =  '/branded_glassware/' . $product['Category']['slug'];
+        $referrer =  '/custom_glassware/' . $product['Category']['slug'];
         $this->set('referrer', $this->sessionReferer);
         $this->set('title_for_layout', $product['ProductGroup']['name']);
         $this->set('custom',true);
+        $this->set('breadcrumbs', array('Glassware Configurator'=>'/custom_glassware',$product['Category']['name'] => $referrer, $product['ProductGroup']['name']=>"/custom_glassware/view/{$slug}"));
         $this->render('view');
     }
 

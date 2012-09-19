@@ -33,8 +33,11 @@
             <?php if(!$adminLayout)echo $this->Element('admin_subnav');?>
 		</header>
         <section id="content">
-            <header>
-                <?php echo $this->Element('breadcrumbs',array('elements'=>array('Home'=>'/','Something'=>'/product_groups')));?>
+            <header id="sub-header">
+                <?php
+                $bcElements = isset($breadcrumbs) ? $breadcrumbs : array();
+                echo $this->Element('breadcrumbs',array('elements'=>$bcElements,'admin'=>$adminLayout));
+                ?>
             </header>
             <?php echo $this->Session->flash(); ?>
 
