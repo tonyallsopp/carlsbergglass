@@ -32,12 +32,14 @@
 
             <?php echo $this->fetch('content'); ?>
 
+            <?php /*
             <footer id="main-footer">
                 <p>
                     We are making changes to our privacy policy. Our new privacy policy explains how cookies are used on this website.<br/>
                     Click here to view our new <?php echo $this->Html->link('privacy policy','/privacy_policy');?>.
                 </p>
             </footer>
+             */ ?>
         </section>
 
 

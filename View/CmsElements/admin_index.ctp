@@ -1,7 +1,7 @@
 <header class="page-header">
     <div class="inner">
         <div class="col-1 col">
-            <h1>Site Content</h1>
+            <h1>Site <?php echo $section == 'cms' ? 'Content' : 'Configs';?></h1>
         </div>
     </div>
 </header>

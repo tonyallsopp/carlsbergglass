@@ -58,21 +58,17 @@ class UsersController extends AppController {
     }
 
     public function contact(){
-        if ($this->request->is('post')) {
+        if ($this->request->is('post') || $this->request->is('put')) {
             $this->User->create();
             debug('post');
+            debug($this->request->data);
             $this->User->set($this->request->data);
             if ($this->User->validates()) {
                 debug('valid');
-            } else {
-                debug($this->User->invalidFields());
             }
 
         } else {
             $this->request->data = $this->User->create();
-            //$this->request->data['User'] = array('name'=>$this->_user['full_name'], 'email'=>$this->_user['email'], 'telephone'=>$this->_user['telephone']);
-            //$this->request->data['User']['name'] = $this->_user['full_name'];
-
         }
         debug($this->request->data);
     }
@@ -171,23 +167,9 @@ class UsersController extends AppController {
         //$this->paginate = array('limit'=>1);
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());
+        $this->set('breadcrumbs', array('Users'=>'/admin/users'));
     }
 
-    /**
-     * view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function admin_view($id = null)
-    {
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        $this->set('user', $this->User->read(null, $id));
-    }
 
     /**
      * add method
@@ -209,6 +191,8 @@ class UsersController extends AppController {
         }
         $this->set('countries', $this->User->countries);
         $this->set('admin', true);
+        $this->set('roles', $this->User->roles);
+        $this->set('breadcrumbs', array('Users'=>'/admin/users','New User'=>'/admin/users/admin'));
     }
 
     /**
@@ -237,6 +221,7 @@ class UsersController extends AppController {
         $this->set('admin', true);
         $this->set('roles', $this->User->roles);
         $this->set('countries', $this->User->countries);
+        $this->set('breadcrumbs', array('Users'=>'/admin/users','Edit User'=>"/admin/users/edit/{$id}"));
     }
 
     public function admin_approve($id){

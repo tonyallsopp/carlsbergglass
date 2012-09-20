@@ -83,10 +83,12 @@ div.textarea {
   label {
     width: $label-width;
     padding-right: $label-padding;
+    line-height: 1.3em;
     @include float-left;
   }
   textarea {
     @extend .text-input;
+    line-height: 1.3em;
     height:150px;
     width: $input-width;
     &.ext {
@@ -213,8 +215,12 @@ div.filter {
     }
     .form-options {
       color:white;
+      @include float-left;
+      padding-top: 15px;
       a {
         color:white; text-decoration: none;
+        bottom:auto;
+        float:none;
         &:hover { text-decoration: underline; }
       }
     }

@@ -11,16 +11,13 @@
         <?php
         $fieldType = $this->data['CmsElement']['type'] == 'block' ? 'textarea' : 'text';
         echo $this->Form->hidden('id');
-        //echo $this->Form->input('name');
-        //echo $this->Form->input('description');
         echo $this->Form->input('content',array('type'=>$fieldType,'label'=>$this->data['CmsElement']['description'],'class'=>'ext'));
-        //echo $this->Form->input('type');
-        //echo $this->Form->input('display_order');
+        echo $this->Form->hidden('section');
         ?>
     </fieldset>
     <div class="form-actions">
     <?php echo $this->Form->end('Update Content'); ?>
-        <?php echo $this->Html->link('Cancel', '/admin/cms_elements'); ?>
+        <?php echo $this->Html->link('Cancel', '/admin/cms_elements/' . $referrer); ?>
     </div>
 </div>
 

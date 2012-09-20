@@ -5,7 +5,7 @@
 
 // VARIABLES
 
-
+$grey-para : #858585;
 $dark-grey : #333;
 $grey-text : #999999;
 $bc-hover-grey : #666666;
@@ -45,7 +45,7 @@ h4 { font-size: 14px; font-weight: bold;}
 h5 { font-size:13px;}
 h5, h6 { font-weight: bold; padding: .4em 0;}
 li { padding-bottom: .2em;}
-ul li { list-style: disc inside;}
+ul li { list-style: none;}
 .white-shadow {
   color:white;
   text-shadow: 1px 1px 0 #333;
@@ -60,9 +60,10 @@ a.back {
   @extend .alt-link;
 }
 a:hover {text-decoration: none;}
-p { padding-bottom:.6em; line-height: 1.3em;}
+p { padding-bottom:.6em; line-height: 1.3em; color:$grey-para; }
 .paging p { color:$mid-grey;}
 .sub-heading { font: $title-font-light; font-size: 18px; color:$dark-grey;}
+#support-phone {  font: $title-font-bold; color:black; font-size: 22px;}
 
 //PAGING
 

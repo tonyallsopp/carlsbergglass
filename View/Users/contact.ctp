@@ -9,17 +9,12 @@
     <section class="col col-1">
         <h2>Email Support</h2>
         <?php echo $this->Form->create('User');?>
-        <?php echo $this->Form->input('Name');?>
-        <?php echo $this->Form->input('Email');?>
-        <?php echo $this->Form->input('Telephone');?>
-        <?php echo $this->Form->input('Message',array('type'=>'textarea'));?>
+        <?php echo $this->Form->input('name');?>
+        <?php echo $this->Form->input('email');?>
+        <?php echo $this->Form->input('telephone');?>
+        <?php echo $this->Form->input('message',array('type'=>'textarea'));?>
         <?php echo $this->Form->end('Send Message');?>
 
     </section>
-    <aside class="col col-2">
-        <h3>Support Desk</h3>
-        <p><?php //echo $this->element('cms_content',array('name'=>'support_tel','para'=>true));?></p>
-        <h3>Telephone support</h3>
-        <p><?php echo $this->element('cms_content',array('name'=>'support_tel'));?></p>
-    </aside>
+    <?php echo $this->element('support_sidebar');?>
 </div>

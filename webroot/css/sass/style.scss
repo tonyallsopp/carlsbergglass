@@ -90,12 +90,10 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 }
 #content-inner {
   width:780px; //fixed width layout
-  //padding:30px;
   &.split {
-    //padding:0 30px 0 30px;
     .col-1 {
       width:459px;
-      padding:30px 30px 30px 0;
+      padding:30px;
       border-right: 1px solid $prod-header-bdr;
     }
     .col-2 {
@@ -108,6 +106,11 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
     overflow: hidden;
     padding:30px;
   }
+}
+// admin layout content
+.admin #content-inner {
+  width:750px; //fixed width layout
+  padding:30px;
 }
 #content-inner.catalogue {
   width:auto; //fluid layout
@@ -210,6 +213,7 @@ a.download-manual {
     padding:0 30px;
     h2 {
       line-height:78px;
+      padding: 0;
     }
   }
 }
@@ -458,6 +462,31 @@ div.custom {
     }
   }
 }
+
+// FAQ / GENERAL
+h2 {
+  @extend .sub-heading;
+  padding-bottom: 20px;
+}
+.faqs {
+  h2 { padding-top: 20px;}
+  h2.first { padding-top: 0;}
+  ul {
+    padding-bottom: 20px;
+    border-bottom:1px solid $border-grey;
+    li {
+      a {
+        text-decoration: none;
+        &:hover { text-decoration: underline;}
+      }
+
+    }
+  }
+}
+.faq {
+  a.back{ padding-bottom: 20px; display: block;}
+}
+
 
 // LOGGED OUT PAGES (GREEN BACKGROUND)
 

@@ -22,7 +22,7 @@ class OrdersController extends AppController {
             $this->redirect($this->sessionReferer);
         }
         $contain = array('OrderItem'=>array('OrderItemOption','ProductUnit'=>'ProductGroup'),'User');
-        $order = $this->Order->find('first', array('conditions' => array('Order.id'=>$id), 'contain' => $contain));
+        $order = $this->Order->find('first', array('conditions' => array('Order.id'=>$id,'Order.user_id'=>$this->_user['id']), 'contain' => $contain));
         if (empty($order)) {
             $this->Session->setFlash(__('Invalid order'));
             $this->redirect($this->sessionReferer);
@@ -37,6 +37,16 @@ class OrdersController extends AppController {
         $this->set('productSizes', $productSizes);
         $this->set('order', $order);
         $this->set('countries', $this->countries);
+        //debug($product);
+        //breadcrumbs
+        if($product['Category']['section'] == 'branded'){
+           //$bc = array('Glassware by Brand'=>'/branded_glassware/index',$product['Category']['name'] => $referrer, $product['ProductGroup']['name']=>"/branded_glassware/{$slug}");
+            $bc = array();
+        } else {
+            $bc = array('Glassware Configurator'=>'/custom_glassware',$product['Category']['name'] => "/custom_glassware/{$product['Category']['slug']}", $order['OrderItem'][0]['ProductUnit']['ProductGroup']['name']=>"/custom_glassware/view/{$order['OrderItem'][0]['ProductUnit']['ProductGroup']['slug']}");
+        }
+        $bc['Your Order'] = "/order/confirm/{$id}";
+        $this->set('breadcrumbs', $bc);
     }
 
     /**

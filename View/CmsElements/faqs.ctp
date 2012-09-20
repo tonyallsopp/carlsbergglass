@@ -6,9 +6,11 @@
     </div>
 </header>
 <div id="content-inner" class="split">
-    <section class="col col-1">
-        <?php foreach($sections as $section):?>
-            <h3><?php echo h($section['CmsElement']['content']);?></h3>
+    <section class="col col-1 faqs">
+        <?php foreach($sections as $i=>$section):
+        $headerClass = $i == 0 ? 'first' : '';
+        ?>
+            <h2 class="<?php echo $headerClass;?>"><?php echo h($section['CmsElement']['content']);?></h2>
             <ul>
                 <?php foreach($section['ChildElement'] as $faq):?>
                 <li><?php echo $this->Html->link($faq['CmsElement']['content'],"/faq/{$faq['CmsElement']['name']}");?></li>
@@ -16,10 +18,5 @@
             </ul>
         <?php endforeach;?>
     </section>
-    <aside class="col col-2">
-        <h3>Support Desk</h3>
-        <p><?php //echo $this->element('cms_content',array('name'=>'support_tel','para'=>true));?></p>
-        <h3>Telephone support</h3>
-        <p><?php echo $this->element('cms_content',array('name'=>'support_tel'));?></p>
-    </aside>
+    <?php echo $this->element('support_sidebar');?>
 </div>

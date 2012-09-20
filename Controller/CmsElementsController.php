@@ -29,6 +29,7 @@ class CmsElementsController extends AppController {
         }
         $this->set('sections',$sections);
         $this->set('title_for_layout', 'Support');
+        $this->set('breadcrumbs', array('Support'=>'/support'));
     }
 
     public function faq($slug){
@@ -36,6 +37,7 @@ class CmsElementsController extends AppController {
         $faq = $this->CmsElement->find('first', array('conditions' => $cond, 'contain'=>array('ChildElement')));
         $this->set('faq',$faq);
         $this->set('title_for_layout', $faq['CmsElement']['content']);
+        $this->set('breadcrumbs', array('Support'=>'/support',$faq['CmsElement']['content'] => "/support/{$faq['CmsElement']['name']}"));
     }
 
     /**
@@ -47,7 +49,25 @@ class CmsElementsController extends AppController {
     {
         $this->CmsElement->recursive = 0;
         $this->paginate = array('order'=>'CmsElement.display_order ASC, CmsElement.description ASC','conditions'=>array('CmsElement.section'=>'cms'));
+        $this->set('section', 'cms');
+        $this->set('breadcrumbs', array('Site Content'=>'/cms_elements'));
         $this->set('cmsElements', $this->paginate());
+    }
+
+    /**
+     * configs method
+     *
+     * @return void
+     */
+    public function admin_configs()
+    {
+        $this->CmsElement->recursive = 0;
+        $this->paginate = array('order'=>'CmsElement.display_order ASC, CmsElement.description ASC','conditions'=>array('CmsElement.section'=>'cfg'));
+        $this->set('cmsElements', $this->paginate());
+        $this->set('section', 'configs');
+        $this->set('breadcrumbs', array('Site Config'=>'/cms_elements/configs'));
+        $this->render('admin_index');
+
     }
 
     /**
@@ -160,15 +180,18 @@ class CmsElementsController extends AppController {
 			throw new NotFoundException(__('Invalid cms element'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+            $redir = $this->request->data['CmsElement']['section'] == 'cfg' ? 'configs' : 'index';
 			if ($this->CmsElement->save($this->request->data)) {
 				$this->Session->setFlash(__('The cms element has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => $redir));
 			} else {
 				$this->Session->setFlash(__('The cms element could not be saved. Please, try again.'));
 			}
 		} else {
 			$this->request->data = $this->CmsElement->read(null, $id);
+            $redir = $this->request->data['CmsElement']['section'] == 'cfg' ? 'configs' : 'index';
 		}
+        $this->set('referrer',$redir);
 	}
 
 /**

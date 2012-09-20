@@ -6,8 +6,6 @@ App::uses('AppModel', 'Model');
  */
 class User extends AppModel {
 
-    public $userRoles = array('Admin','User');
-
 /**
  * Validation rules
  *

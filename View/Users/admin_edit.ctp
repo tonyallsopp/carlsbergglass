@@ -6,7 +6,7 @@
     </div>
 </header>
 <div id="content-inner">
-<?php echo $this->element('user_edit')?>
+<?php echo $this->element('user_edit',array('roles'=>$roles));?>
 </div>
 
 
