@@ -165,6 +165,39 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
   }
 }
 
+// HOME PAGE
+.home {
+  #content-inner {
+    background: url('../img/layout/hp-main.jpg') no-repeat left bottom;
+    padding-right: 10px;
+    padding-bottom: 448px; //height of large glass image
+    min-height: 230px;
+  }
+  .col-1 {
+    width:390px;
+    header { padding-bottom: 20px;}
+  }
+  .col-2 {width:300px; padding-top: 30px;}
+}
+#hp-links {
+  a {
+    width:314px;
+    height: 82px;
+    @include box-sizing();
+    padding: 16px 60px 0 120px;
+    display: block;
+    background: url('../img/layout/hp-btn-sprite.jpg') no-repeat 0 0;
+    font:$title-font-bold; font-size: 22px;
+    text-decoration: none;
+    color:$bc-hover-grey;
+    margin-bottom: 15px;
+    &:hover { color:$grey-text;}
+    &.branded {
+      background-position: 0 -95px;
+    }
+  }
+}
+
 //DOWNLOAD LINK
 .page-header section.manual {
   h1 { padding-bottom: 12px;}
@@ -312,6 +345,7 @@ $item-width: 186px;
       width:510px;
       padding:0 20px 0 0;
     }
+    .manual { width:880px; }
   }
   dl {
     padding-top:20px;
