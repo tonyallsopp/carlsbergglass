@@ -29,8 +29,9 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 }
 
 // MAIN HEADER (LHS green menu)
+$side-menu-width:200px;
 #main-header {
-  width:200px;
+  width:$side-menu-width;
   @include radial-grad(#025e2f, #002715, 0%, 80%);
   position:absolute; // IE6
   position:fixed;
@@ -71,9 +72,10 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
     background: url('../img/layout/group-logo-menu.png') no-repeat 30px 30px;
   }
   .current-user {
-    font:$title-font-light;
+    font:$title-font-bold;
     padding:20px 20px 0 20px;
     height:64px;
+    line-height: 1.5em;
     border-bottom:1px solid $dark-green-sh;
     color: white;
     font-size: 18px;
@@ -84,8 +86,9 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
 }
 #admin-nav {
   position: absolute;
+  position: fixed;
+  width:$side-menu-width;
   bottom:0;
-  width:100%;
   @include linear-grad-lr(#015D2E, #01321C);
 }
 #content-inner {
@@ -107,11 +110,18 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
     padding:30px;
   }
 }
-// admin layout content
-.admin #content-inner {
-  width:750px; //fixed width layout
-  padding:30px;
+// ADMIN
+.admin {
+  .page-header {
+    .inner .col-1 { width: 500px;}
+  }
+  #content-inner {
+    width:750px; //fixed width layout
+    padding:30px;
+  }
 }
+
+// ====
 #content-inner.catalogue {
   width:auto; //fluid layout
 }
@@ -171,13 +181,14 @@ mark {background-color: #fcd700; color: black; font-style: italic; font-weight: 
     background: url('../img/layout/hp-main.jpg') no-repeat left bottom;
     padding-right: 10px;
     padding-bottom: 448px; //height of large glass image
-    min-height: 230px;
+    overflow: hidden;
+    .col-1 {
+      width:390px;
+      padding-bottom: 10px;
+      header { padding-bottom: 20px;}
+    }
+    .col-2 {width:300px; padding-top: 30px;}
   }
-  .col-1 {
-    width:390px;
-    header { padding-bottom: 20px;}
-  }
-  .col-2 {width:300px; padding-top: 30px;}
 }
 #hp-links {
   a {
@@ -269,8 +280,8 @@ $item-width: 186px;
     width:150px;
     margin:0 auto;
   }
-  h3 { padding: 18px 0; height:3.8em; overflow: hidden; }
-  p { font-size: 12px; color:$grey-text; font-weight: normal; padding-bottom:18px; text-transform: uppercase; }
+  h3 {  height:2.6em; overflow: hidden; }
+  p { font-size: 12px; color:$grey-text; font-weight: normal; padding:18px 0; text-transform: uppercase; }
   a.btn-details {
     padding:0;
     @include unfloat;

@@ -64,13 +64,13 @@ class UsersController extends AppController {
             debug($this->request->data);
             $this->User->set($this->request->data);
             if ($this->User->validates()) {
-                debug('valid');
+                //send email
+                $this->sendEmail('contact_support',$this->_coonfigs['config_support_email'],$this->request->data);
             }
-
         } else {
             $this->request->data = $this->User->create();
         }
-        debug($this->request->data);
+        $this->set('breadcrumbs', array('Contact Support'=>'/contact'));
     }
 
     public function register() {

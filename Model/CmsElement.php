@@ -99,4 +99,8 @@ class CmsElement extends AppModel {
         $res = $this->find('first', array('conditions' => array('parent_id'=>$parentId), 'fields'=>'display_order','recursive' => -1));
         return empty($res) ? 0 : $res['CmsElement']['display_order'] +1;
     }
+
+    public function getSiteConfigs(){
+        return $this->find('list', array('conditions' => array('CmsElement.section'=>'cfg'), 'fields' => array('CmsElement.name','CmsElement.content')));
+    }
 }

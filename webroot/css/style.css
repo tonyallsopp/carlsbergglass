@@ -419,7 +419,7 @@ div.error-message {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/_forms\.scss}line{font-family:\00003145}}
 #UserContactForm .text input, #UserContactForm textarea {
-  width: 347px;
+  width: 337px;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/_forms\.scss}line{font-family:\00003151}}
@@ -720,7 +720,7 @@ a:hover {
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/_base\.scss}line{font-family:\0000363}}
 p {
   padding-bottom: .6em;
-  line-height: 1.3em;
+  line-height: 1.4em;
   color: #858585;
 }
 
@@ -890,7 +890,7 @@ mark {
   padding-top: 50px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000332}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000333}}
 #main-header {
   width: 200px;
   background: #002715;
@@ -917,12 +917,12 @@ mark {
   left: 0;
   min-height: 561px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000340}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000341}}
 #main-header li {
   list-style: none;
   padding: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000343}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000344}}
 #main-header li a {
   font: 14px "CarlsbergSansBold", Arial, Helvetica, Freesans, sans-serif;
   height: 40px;
@@ -933,7 +933,7 @@ mark {
   display: block;
   text-decoration: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000353}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000354}}
 #main-header li a:hover {
   background: #286424;
   /* Old browsers */
@@ -951,50 +951,52 @@ mark {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF286424', endColorstr='#FF074518',GradientType=1);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000359}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000360}}
 #main-header .admin-home span, #main-header .my-account span, #main-header .logout span, #main-header .back span {
   display: block;
   background: url(../img/layout/menu.png) no-repeat 0 10px;
   padding-left: 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000365}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000366}}
 #main-header .my-account span {
   background-position: 0 -50px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000367}}
 #main-header .logout span {
   background-position: 0 -108px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000368}}
 #main-header .back span {
   background-position: 0 -146px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000368}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000369}}
 #main-header h1 {
   height: 140px;
   text-indent: -9999px;
   background: url("../img/layout/group-logo-menu.png") no-repeat 30px 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000373}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000374}}
 #main-header .current-user {
-  font: 14px "CarlsbergSansLight", Arial, Helvetica, Freesans, sans-serif;
+  font: 14px "CarlsbergSansBold", Arial, Helvetica, Freesans, sans-serif;
   padding: 20px 20px 0 20px;
   height: 64px;
+  line-height: 1.5em;
   border-bottom: 1px solid #043011;
   color: white;
   font-size: 18px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000382}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000384}}
 #main-nav {
   overflow: hidden;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000387}}
 #admin-nav {
   position: absolute;
+  position: fixed;
+  width: 200px;
   bottom: 0;
-  width: 100%;
   background: #015d2e;
   /* Old browsers */
   background: -moz-linear-gradient(left, #015d2e 0%, #01321c 100%);
@@ -1012,40 +1014,44 @@ mark {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF015D2E', endColorstr='#FF01321C',GradientType=1);
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000391}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000394}}
 #content-inner {
   width: 780px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000394}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000397}}
 #content-inner.split .col-1 {
   width: 459px;
   padding: 30px;
   border-right: 1px solid #e0e0e0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\0000399}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003102}}
 #content-inner.split .col-2 {
   padding: 30px 0 30px 30px;
   width: 230px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003104}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003107}}
 #content-inner section {
   clear: both;
   overflow: hidden;
   padding: 30px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003111}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003116}}
+.admin .page-header .inner .col-1 {
+  width: 500px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003118}}
 .admin #content-inner {
   width: 750px;
   padding: 30px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003115}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003125}}
 #content-inner.catalogue {
   width: auto;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003118}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003128}}
 #sub-header {
   position: absolute;
   position: fixed;
@@ -1054,19 +1060,19 @@ mark {
   right: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003125}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003135}}
 #breadcrumbs {
   width: 100%;
   overflow: hidden;
   background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
   border-bottom: 1px solid #d7d7d7;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003130}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003140}}
 #breadcrumbs ul {
   height: 49px;
   background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003144}}
 #breadcrumbs li {
   padding: 0;
   height: 49px;
@@ -1074,14 +1080,14 @@ mark {
   display: inline;
   background: url(../img/layout/bc-bg.png) no-repeat right top;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003139}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003149}}
 #breadcrumbs li span {
   float: left;
   display: inline;
   padding: 0 26px 0 14px;
   line-height: 49px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003144}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003154}}
 #breadcrumbs li a {
   float: left;
   display: inline;
@@ -1092,44 +1098,45 @@ mark {
   font: 14px "CarlsbergSansLight", Arial, Helvetica, Freesans, sans-serif;
   line-height: 49px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003153}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003163}}
 #breadcrumbs li a:hover {
   color: #666666;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003157}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003167}}
 #breadcrumbs li.home span {
   background: url(../img/layout/bc-home-bg.png) no-repeat 0 0;
   padding: 0 18px 0 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003160}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003170}}
 #breadcrumbs li.home span a {
   background: url(../img/layout/home-icon.png) no-repeat center center;
   text-indent: -9999px;
   width: 30px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003170}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003180}}
 .home #content-inner {
   background: url("../img/layout/hp-main.jpg") no-repeat left bottom;
   padding-right: 10px;
   padding-bottom: 448px;
-  min-height: 230px;
+  overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003176}}
-.home .col-1 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003185}}
+.home #content-inner .col-1 {
   width: 390px;
+  padding-bottom: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003178}}
-.home .col-1 header {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003188}}
+.home #content-inner .col-1 header {
   padding-bottom: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003180}}
-.home .col-2 {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003190}}
+.home #content-inner .col-2 {
   width: 300px;
   padding-top: 30px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003183}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003194}}
 #hp-links a {
   width: 314px;
   height: 82px;
@@ -1148,36 +1155,36 @@ mark {
   color: #666666;
   margin-bottom: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003194}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003205}}
 #hp-links a:hover {
   color: #999999;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003195}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003206}}
 #hp-links a.branded {
   background-position: 0 -95px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003203}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003214}}
 .page-header section.manual h1 {
   padding-bottom: 12px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003204}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003215}}
 .page-header section.manual p {
   color: #999999;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003205}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003216}}
 .page-header section.manual .col-1 {
   background: url("../img/layout/manual-cover.png") no-repeat;
   width: 400px;
   padding-left: 170px;
   padding-right: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003211}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003222}}
 .page-header section.manual .col-2 {
   padding-top: 48px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003215}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003226}}
 a.download-manual {
   display: block;
   background: url("../img/layout/download-pdf.png") no-repeat 0 0;
@@ -1190,13 +1197,13 @@ a.download-manual {
   width: 100px;
   height: 65px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003226}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003237}}
 a.download-manual span {
   font-size: 11px;
   color: #bababa;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003234}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003245}}
 .grey-grad-header, .listing header, table.product-info th {
   border: 1px solid #e7e7e7;
   -moz-border-radius-top-left: 3px;
@@ -1225,25 +1232,25 @@ a.download-manual span {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFF2F3F3',GradientType=0);
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003242}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003253}}
 .listing header {
   height: 78px;
   padding: 0 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003247}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003258}}
 .listing header h2 {
   line-height: 78px;
   padding: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003255}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003266}}
 .listing-box, .listing-item-box, .listings li, .branded-products li, .unbranded-types li {
   border-right: 1px solid #e7e7e7;
   border-bottom: 1px solid #e7e7e7;
   border-left: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003260}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003271}}
 .listing-item-box, .listings li, .branded-products li, .unbranded-types li {
   float: left;
   display: inline;
@@ -1253,26 +1260,25 @@ a.download-manual span {
   font-weight: bold;
   padding: 18px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003268}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003279}}
 .listing-item-box .prod-img, .listings li .prod-img, .branded-products li .prod-img, .unbranded-types li .prod-img, .listing-item-box h3, .listings li h3, .branded-products li h3, .unbranded-types li h3, .listing-item-box p, .listings li p, .branded-products li p, .unbranded-types li p {
   width: 150px;
   margin: 0 auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003272}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003283}}
 .listing-item-box h3, .listings li h3, .branded-products li h3, .unbranded-types li h3 {
-  padding: 18px 0;
-  height: 3.8em;
+  height: 2.6em;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003273}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003284}}
 .listing-item-box p, .listings li p, .branded-products li p, .unbranded-types li p {
   font-size: 12px;
   color: #999999;
   font-weight: normal;
-  padding-bottom: 18px;
+  padding: 18px 0;
   text-transform: uppercase;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003274}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003285}}
 .listing-item-box a.btn-details, .listings li a.btn-details, .branded-products li a.btn-details, .unbranded-types li a.btn-details {
   padding: 0;
   display: inherit;
@@ -1280,26 +1286,26 @@ a.download-manual span {
   margin: 0 auto;
   width: 150px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003280}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003291}}
 .listing-item-box .prod-img, .listings li .prod-img, .branded-products li .prod-img, .unbranded-types li .prod-img {
   padding-bottom: 18px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003284}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003295}}
 .listings, .branded-products, .unbranded-types {
   border-left: 1px solid #e7e7e7;
   overflow: hidden;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003300}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003311}}
 .brands {
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003302}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003313}}
 .brands li {
   list-style: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003304}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003315}}
 .brands li .logo, .brands li h3, .brands li .details {
   float: left;
   display: inline;
@@ -1307,119 +1313,119 @@ a.download-manual span {
   border-left: 1px solid #e7e7e7;
   border-bottom: 1px solid #e7e7e7;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003310}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003321}}
 .brands li .logo {
   width: 94px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003311}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003322}}
 .brands li .details {
   background: url("../img/layout/brand-details.png") no-repeat 0 0;
   text-indent: -9999px;
   width: 59px;
   border-right: 1px solid #e7e7e7;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003316}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003327}}
 .brands li .details:hover {
   background-position: 0 -51px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003320}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003331}}
 .brands li h3 {
   font: 14px "CarlsbergSansLight", Arial, Helvetica, Freesans, sans-serif;
   line-height: 50px;
   width: 523px;
   padding: 0 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003325}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003336}}
 .brands li h3 a {
   color: #333333;
   text-decoration: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003346}}
 .header-block, .page-header, div.product-view #content-inner .col-1 .form-actions {
   background: #fbfbfb;
   border-bottom: 1px solid #e0e0e0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003341}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003352}}
 .page-header .inner {
   padding: 30px;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003355}}
 .page-header .inner .col-1 {
   width: 510px;
   padding: 0 20px 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003348}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003359}}
 .page-header .inner .manual {
   width: 880px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003350}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003361}}
 .page-header dl {
   padding-top: 20px;
   font: 14px "CarlsbergSansLight", Arial, Helvetica, Freesans, sans-serif;
   font-size: 18px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003365}}
 .page-header dl dt {
   float: left;
   display: inline;
   padding-right: .6em;
   color: #999999;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003355}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003366}}
 .page-header dl dd {
   color: #006600;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003360}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003371}}
 div.product-view .page-header h1 {
   padding-top: 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003378}}
 div.product-view #content-inner {
   overflow: hidden;
   padding-top: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003370}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003381}}
 div.product-view #content-inner h2 {
   padding-bottom: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003374}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003385}}
 div.product-view #content-inner .col-1 {
   width: 560px;
   padding: 0;
   border-right: 1px solid #e0e0e0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003389}}
 div.product-view #content-inner .col-1 a.submit {
   display: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003380}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003391}}
 div.product-view #content-inner .col-1 .form-actions {
   padding: 30px 30px 30px 140px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003383}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003394}}
 div.product-view #content-inner .col-1 .form-actions a.submit {
   display: inherit;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003396}}
 div.product-view #content-inner .col-1 article {
   padding: 30px;
   border-bottom: 1px solid #e0e0e0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003389}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003400}}
 div.product-view #content-inner .col-1 section {
   border-bottom: 1px solid #e0e0e0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003393}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003404}}
 div.product-view #content-inner .col-2 {
   width: 189px;
   padding: 0 0 30px 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003396}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003407}}
 div.product-view #content-inner .col-2 a.btn-details {
   width: auto;
   margin: 0;
@@ -1427,184 +1433,184 @@ div.product-view #content-inner .col-2 a.btn-details {
   display: inherit;
   float: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003402}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003413}}
 div.product-view #content-inner .col-2 p {
   padding-bottom: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003403}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003414}}
 div.product-view #content-inner .col-2 section {
   padding: 30px 0;
   border-bottom: 1px solid #e0e0e0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003406}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003417}}
 div.product-view #content-inner .col-2 section:last-child {
   border-bottom: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003408}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003419}}
 div.product-view #content-inner .col-2 section.price h2 {
   color: #999999;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003409}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003420}}
 div.product-view #content-inner .col-2 section.price p {
   font: 14px "CarlsbergSansBold", Arial, Helvetica, Freesans, sans-serif;
   font-size: 26px;
   color: #006600;
   padding: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003412}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003423}}
 div.product-view #content-inner .col-2 section.downloads ul {
   padding-bottom: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003413}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003424}}
 div.product-view #content-inner .col-2 section.downloads li {
   list-style: none;
   padding-bottom: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003420}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003431}}
 div.product-view #content-inner .col-2 .prod-img {
   margin-top: 30px;
   border: 1px solid #e0e0e0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003425}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003436}}
 div.product-view #content-inner div.options {
   width: 330px;
   padding-bottom: 25px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003427}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003438}}
 div.product-view #content-inner div.options label {
   width: 80px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003430}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003441}}
 div.product-view #content-inner label {
   color: #999999;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003431}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003442}}
 div.product-view #content-inner p {
   color: #999999;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003433}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003444}}
 div.product-view #content-inner p.options {
   padding: 10px 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003441}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003452}}
 table.product-info th {
   text-shadow: none;
   color: #666666;
   font-weight: normal;
   font: 14px "CarlsbergSansLight", Arial, Helvetica, Freesans, sans-serif;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003448}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003459}}
 table.product-info td {
   border-bottom: 1px solid #e7e7e7;
   border-left: 1px solid #e7e7e7;
   border-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003452}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003463}}
 table.product-info td.last, table.product-info td:last-child {
   border-right: 1px solid #e7e7e7;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003457}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003468}}
 div.checkout #content-inner .col-1 {
   padding-bottom: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003463}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003474}}
 ul.item-info {
   font: 14px "CarlsbergSansLight", Arial, Helvetica, Freesans, sans-serif;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003465}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003476}}
 ul.item-info li {
   padding-bottom: .5em;
   list-style: none;
   color: #006600;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003469}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003480}}
 ul.item-info li span {
   color: #999999;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003481}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003492}}
 div.custom #content-inner .checkbox label {
   padding-left: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003482}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003493}}
 div.custom #content-inner section.options {
   width: auto;
   padding-bottom: 25px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003484}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003495}}
 div.custom #content-inner section.options h2 {
   padding-bottom: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003485}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003496}}
 div.custom #content-inner section.options label {
   width: auto;
   min-width: 180px;
   max-width: 340px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003486}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003497}}
 div.custom #content-inner section.options .text input {
   min-width: 150px;
   width: 150px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003488}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003499}}
 div.custom #content-inner section.options .checkbox input {
   margin-left: 190px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003490}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003501}}
 div.custom #content-inner section.options select {
   min-width: 150px;
   width: 150px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003494}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003505}}
 div.custom #content-inner .col-2 .checkbox input {
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003495}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003506}}
 div.custom #content-inner .col-2 div.submit {
   padding-left: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003501}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003512}}
 h2 {
   padding-bottom: 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003506}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003517}}
 .faqs h2 {
   padding-top: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003507}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003518}}
 .faqs h2.first {
   padding-top: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003508}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003519}}
 .faqs ul {
   padding-bottom: 20px;
   border-bottom: 1px solid #e7e7e7;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003512}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003523}}
 .faqs ul li a {
   text-decoration: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003514}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003525}}
 .faqs ul li a:hover {
   text-decoration: underline;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003521}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003532}}
 .faq a.back {
   padding-bottom: 20px;
   display: block;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003527}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003538}}
 .main {
   background: url("../img/layout/main-bg.jpg") no-repeat center top #002715;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003529}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003540}}
 .main h1 {
   font: 14px "CarlsbergSansBold", Arial, Helvetica, Freesans, sans-serif;
   font-size: 26px;
@@ -1613,20 +1619,20 @@ h2 {
   line-height: 1em;
   padding-bottom: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003537}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003548}}
 .main #container {
   width: 940px;
   margin: 0 auto;
   position: relative;
   min-height: 780px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003543}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003554}}
 .main #content {
   width: 880px;
   padding: 100px 0 100px 360px;
   min-width: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003548}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003559}}
 .main #group-logo {
   position: absolute;
   top: 100px;
@@ -1636,7 +1642,7 @@ h2 {
   text-indent: -9999px;
   background: url("../img/layout/group-logo.png") no-repeat;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003557}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003568}}
 .main #main-footer {
   position: absolute;
   bottom: 10px;
@@ -1645,26 +1651,26 @@ h2 {
   width: 940px;
   text-align: center;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003564}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003575}}
 .main #main-footer p {
   color: #76ae3f;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003565}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003576}}
 .main #main-footer a {
   color: white;
   text-decoration: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003569}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003580}}
 .main #main-footer a:hover {
   text-decoration: underline;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003571}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003582}}
 .main div.confirm {
   padding: 20px;
   border: 1px solid #76ae3f;
   background: rgba(7, 69, 24, 0.2);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003575}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003586}}
 .main div.confirm h2 {
   font: 14px "CarlsbergSansLight", Arial, Helvetica, Freesans, sans-serif;
   font-size: 26px;
@@ -1672,7 +1678,7 @@ h2 {
   text-transform: uppercase;
   padding-bottom: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003582}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003593}}
 .main div.confirm p {
   color: white;
 }

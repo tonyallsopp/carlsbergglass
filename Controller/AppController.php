@@ -60,6 +60,9 @@ class AppController extends Controller {
 
         //init sessionReferer
         $this->getSessionReferer();
+
+        //load site configs into session
+        if(!$this->request->is('requested')) $this->getConfigs();
     }
 
     public function forceSSL($error) {
@@ -122,6 +125,17 @@ class AppController extends Controller {
     public function beforeRender() {
         parent::beforeRender();
         $this->set('sessionReferer', $this->sessionReferer);
+    }
+
+    public function getConfigs(){
+        if(!$this->Session->read('configs')){
+            $this->loadModel('CmsElement');
+            $cfg = $this->CmsElement->getSiteConfigs();
+            $this->Session->write('configs',$cfg);
+        } else {
+            $cfg = $this->Session->read('configs');
+        }
+        $this->_configs = $cfg;
     }
 
 
@@ -278,6 +292,10 @@ class AppController extends Controller {
             case 'new_password' :
                 $email->subject('New password for POSGlassware.com');
                 $email->template('new_password');
+                break;
+            case 'contact_support' :
+                $email->subject('Support email from POSGlassware.com');
+                $email->template('contact_support');
                 break;
         }
         //Set view variables
