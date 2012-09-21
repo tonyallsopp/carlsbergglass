@@ -65,12 +65,22 @@ class UsersController extends AppController {
             $this->User->set($this->request->data);
             if ($this->User->validates()) {
                 //send email
-                $this->sendEmail('contact_support',$this->_coonfigs['config_support_email'],$this->request->data);
+                if($this->sendEmail('contact_support',$this->_configs['config_support_email'],$this->request->data)){
+                    $this->redirect('/contact_thanks');
+                } else {
+                    $this->Session->setFlash('Error sending your message, please try again');
+                }
             }
         } else {
             $this->request->data = $this->User->create();
         }
         $this->set('breadcrumbs', array('Contact Support'=>'/contact'));
+    }
+
+    public function contact_thanks(){
+        $this->set('breadcrumbs', array('Contact Support'=>'/contact'));
+        $this->set('mailSent', true);
+        $this->render('contact');
     }
 
     public function register() {

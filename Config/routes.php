@@ -5,6 +5,7 @@ Router::connect('/admin', array('controller' => 'users', 'action' => 'index','ad
 
 Router::connect('/account', array('controller' => 'users', 'action' => 'account'));
 Router::connect('/contact', array('controller' => 'users', 'action' => 'contact'));
+Router::connect('/contact_thanks', array('controller' => 'users', 'action' => 'contact_thanks'));
 Router::connect('/support', array('controller' => 'cms_elements', 'action' => 'faqs'));
 Router::connect('/faq/*', array('controller' => 'cms_elements', 'action' => 'faq'));
 
