@@ -7,6 +7,8 @@ App::uses('AppController', 'Controller');
  */
 class MediaController extends AppController {
 
+    public $helpers = array('Uploadify');
+
     /**
      * index method
      *
@@ -62,8 +64,47 @@ class MediaController extends AppController {
      */
     public function admin_images()
     {
+        $this->paginate = array('conditions'=>array('Media.type'=>'prod_img'));
         $this->Media->recursive = 0;
         $this->set('media', $this->paginate());
+    }
+
+    /**
+     * images method
+     *
+     * @return void
+     */
+    public function admin_upload_images()
+    {
+
+    }
+
+    public function admin_ajax_image_upload() {
+        if(!empty($_FILES)){
+            //$fName = $this->Media->unique_filename($_FILES['Filedata']['name']);
+            $fName = $this->Media->safeFilename($_FILES['Filedata']['name']);
+            $res = $this->Media->handleImageUpload($_FILES['Filedata'], $fName);
+            $res['saved'] = 0;
+            $res['id'] = '';
+            if($res['success']){
+                //uploaded OK, save the record
+                //1st delete existing records with same name
+                $this->Media->deleteAll(array('Media.type' => 'prod_img','Media.filename'=>$fName));
+                //save new
+                $rec = $this->Media->create();
+                $rec['Media']['filename'] = $fName;
+                $rec['Media']['name'] = $_FILES['Filedata']['name'];
+                $rec['Media']['type'] = 'prod_img';
+                if($this->Media->save($rec)){
+                    $res['saved'] = 1;
+                    $res['id'] = $this->Media->id;
+                }
+            }
+        } else {
+            $res = array();
+        }
+        $this->set('response',  json_encode($res));
+        $this->render('/Elements/ajax','ajax');
     }
 
     /**
@@ -135,18 +176,25 @@ class MediaController extends AppController {
      */
     public function admin_delete($id = null)
     {
-        if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
+        $res = array('success'=>0);
+        $media = $this->Media->find('first', array('conditions' => array('id'=>$id), 'recursive' => -1));
+
+        if($this->request->is('ajax') ){
+            if ($this->Media->delete($id)) {
+                $this->Media->deleteFiles($media['Media']['filename'], $media['Media']['type']);
+                $res['success'] = 1;
+            }
+            $this->set('response',  json_encode($res));
+            $this->render('/Elements/ajax','ajax');
+        } else{
+            if ($this->Media->delete($id)) {
+                $this->Media->deleteFiles($media['Media']['filename'], $media['Media']['type']);
+                $this->Session->setFlash(__('Media deleted'));
+                $this->redirect($this->sessionReferer);
+            }
+            $this->Session->setFlash(__('Media was not deleted'));
+            $this->redirect($this->sessionReferer);
         }
-        $this->Media->id = $id;
-        if (!$this->Media->exists()) {
-            throw new NotFoundException(__('Invalid media'));
-        }
-        if ($this->Media->delete()) {
-            $this->Session->setFlash(__('Media deleted'));
-            $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(__('Media was not deleted'));
-        $this->redirect(array('action' => 'index'));
+
     }
 }

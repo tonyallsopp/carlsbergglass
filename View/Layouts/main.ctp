@@ -23,7 +23,10 @@
     <?php echo $this->Html->script('ie9');?>
     <![endif]-->
 </head>
-<?php $class = isset($login) ? 'login' : ''; ?>
+<?php
+$class = isset($login) ? 'login' : '';
+$class .= isset($altBackground) ? ' alt-bg' : '';
+?>
 <body class="main <?php echo $class; ?>">
 	<div id="container">
         <span id="group-logo">Carlsberg Group</span>

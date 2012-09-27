@@ -178,6 +178,19 @@ $(function(){
 
     }
 
+    //ajax delete image
+    $("ul#product_images").delegate("span.action a", "click", function() {
+        var $obj = $(this);
+        ajaxAction($obj.attr('href'), function(response){
+            var res = jQuery.parseJSON(response);
+            if(res.success){
+                $obj.closest('li').remove();
+            } else if(res.error) {
+                alert(res.error);
+            }
+        });
+        return false;
+    });
 });
 
 function prettySelect($elem){
@@ -209,4 +222,27 @@ function prettySelect($elem){
         $dropdown.removeClass('open');
     });
     $elem.remove();
+}
+
+function ajaxAction(url, callback){
+    if(typeof callback != 'function') callback = function(){};
+    $.ajax({
+        url: url,
+        success: function(response) {
+            callback(response);
+        }
+    });
+}
+
+
+function addUploadedImage(fileName, id){
+    fileName = (fileName.substr(0, fileName.lastIndexOf('.')) || fileName) ;
+    var fullFileName = fileName + '.jpg'
+    var noFields = $('#product_images ul li').length;
+
+    var imgList = '<li><span class="image"><img alt="" src="' + webroot + 'files/product_images/' + fileName + '_s.jpg"></span>';
+    imgList += '<span class="name">' + fullFileName + '</span>';
+    imgList += '<span class="action"><a title="Delete image" href="' + webroot + 'admin/media/delete/' + id + '"><img alt="" src="' + webroot + 'img/layout/cancel.png"></a></span>';
+    imgList += '</li>';
+    $('#product_images').append(imgList);
 }

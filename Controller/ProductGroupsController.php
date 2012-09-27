@@ -33,10 +33,11 @@ class ProductGroupsController extends AppController {
         if($subcat){
             $conditions['Category.slug'] = $subcat;
         }
-        $contain = array('Category.name','ProductUnit.price');
+        $contain = array('Category.name','ProductUnit'=>array('fields'=>array('ProductUnit.price')));
         $opts = array('ProductGroup'=>array('conditions' => $conditions, 'contain' => $contain, 'limit' => 20));
         $this->paginate = $opts;
         $productGroups = $this->paginate('ProductGroup');
+        debug($productGroups);
         $this->ProductGroup->getBasePrice($productGroups);
         $this->set('listings', $productGroups);
         $subCategory = $subcat ? $productGroups[0]['Category']['name'] : 'All';

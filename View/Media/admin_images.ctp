@@ -5,7 +5,7 @@
         </div>
         <div class="col-2 col">
             <div class="col-1 col">
-                <?php //echo $this->Html->link('New User', array('action' => 'add'),array('class'=>'btn-details')); ?>
+                <?php echo $this->Html->link('Upload Images', array('action' => 'upload_images'),array('class'=>'btn-details')); ?>
             </div>
             <div class="col-2 col">
 
@@ -17,12 +17,10 @@
     <table cellpadding="0" cellspacing="0" class="sortable">
         <thead>
         <tr>
-            <th><?php echo $this->Paginator->sort('id'); ?></th>
-            <th><?php echo $this->Paginator->sort('created'); ?></th>
-            <th><?php echo $this->Paginator->sort('updated'); ?></th>
+            <th>Image</th>
             <th><?php echo $this->Paginator->sort('name'); ?></th>
             <th><?php echo $this->Paginator->sort('filename'); ?></th>
-            <th><?php echo $this->Paginator->sort('type'); ?></th>
+            <th><?php echo $this->Paginator->sort('updated'); ?></th>
             <th class="actions">Action</th>
         </tr>
         </thead>
@@ -30,15 +28,12 @@
         <?php
         foreach ($media as $media): ?>
         <tr>
-            <td><?php echo h($media['Media']['id']); ?>&nbsp;</td>
-            <td><?php echo h($media['Media']['created']); ?>&nbsp;</td>
-            <td><?php echo h($media['Media']['updated']); ?>&nbsp;</td>
-            <td><?php echo h($media['Media']['name']); ?>&nbsp;</td>
-            <td><?php echo h($media['Media']['filename']); ?>&nbsp;</td>
-            <td><?php echo h($media['Media']['type']); ?>&nbsp;</td>
+            <td class="thumb"><?php echo $this->Site->productImageThumb($media['Media']['filename'], '/files/product_images/' . $media['Media']['filename']); ?></td>
+            <td><?php echo h($media['Media']['name']); ?></td>
+            <td><?php echo h($media['Media']['filename']); ?></td>
+            <td><?php echo $this->Time->format('d/m/Y',$media['Media']['updated']); ?></td>
             <td class="actions last">
-                <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $media['Media']['id']),array('title'=>"Edit {$media['Media']['name']}")); ?> |
-                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $media['Media']['id']), array('title'=>"Delete {$media['Media']['name']}"), __('Are you sure you want to permanently delete %s?', $media['Media']['name'])); ?>
+                <?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $media['Media']['id']), array('title'=>"Delete {$media['Media']['filename']}"), 'Are you sure you want to permanently delete this image?'); ?>
             </td>
         </tr>
             <?php endforeach; ?>

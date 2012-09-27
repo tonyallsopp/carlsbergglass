@@ -11,11 +11,8 @@
         <?php
         foreach ($listings as $productGroup):?>
             <li>
-                <div class="prod-img">
-                    <a href="<?php echo $this->Html->url("/custom_glassware/view/{$productGroup['ProductGroup']['slug']}");?>">
-                    <img src="http://placehold.it/150x180">
-                    </a>
-                </div>
+                <?php echo $this->Site->productImage($productGroup['ProductGroup']['image'],'s',"/custom_glassware/view/{$productGroup['ProductGroup']['slug']}");?>
+
                 <h3><?php echo h($productGroup['ProductGroup']['name']); ?>&nbsp;</h3>
 
                 <p>

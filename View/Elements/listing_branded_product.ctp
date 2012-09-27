@@ -11,7 +11,7 @@
         <?php
         foreach ($listings as $productGroup):?>
             <li>
-                <div class="prod-img"><img src="http://placehold.it/150x180"></div>
+                <?php echo $this->Site->productImage($productGroup['ProductGroup']['image'],'s',"/branded_glassware/{$productGroup['ProductGroup']['slug']}");?>
                 <h3><?php echo h($productGroup['ProductGroup']['name']); ?>&nbsp;</h3>
 
                 <p>

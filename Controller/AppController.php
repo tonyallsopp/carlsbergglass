@@ -45,7 +45,7 @@ class AppController extends Controller {
         }*/
 
         //this is needed by uploadify
-        if ($this->request['controller'] == 'images' && $this->request['action'] == 'admin_ajax_upload' && isset($_REQUEST["session_id"])) {
+        if ($this->request['controller'] == 'media' && $this->request['action'] == 'admin_ajax_image_upload' && isset($_REQUEST["session_id"])) {
             $session_id = $_REQUEST["session_id"];
             $this->Session->id($session_id);
         }

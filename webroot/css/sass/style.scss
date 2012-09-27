@@ -118,6 +118,9 @@ $side-menu-width:200px;
   #content-inner {
     width:750px; //fixed width layout
     padding:30px;
+    section {
+      padding:0 0 30px 0;
+    }
   }
 }
 
@@ -340,6 +343,16 @@ $item-width: 186px;
     }
   }
 }
+
+// PRODUCT IMAGES
+div.prod-img {
+  overflow: hidden;
+}
+.listing .prod-img {
+  width: 150px;
+  height:190px;
+}
+
 
 
 // PRODUCT DETAILS
@@ -593,3 +606,4 @@ h2 {
     p { color:white;}
   }
 }
+// .alt-bg { background-position: center 200px;  }

@@ -32,6 +32,7 @@ class UsersController extends AppController {
         }
         $this->set('admin', false);
         $this->set('countries', $this->User->countries);
+        $this->set('title_for_layout', 'My Account');
     }
 
     /**
@@ -51,6 +52,7 @@ class UsersController extends AppController {
         }
         $this->set('login', true);
         $this->set('showNav', false);
+        $this->set('title_for_layout', 'Log In');
     }
 
     public function logout() {
@@ -75,12 +77,14 @@ class UsersController extends AppController {
             $this->request->data = $this->User->create();
         }
         $this->set('breadcrumbs', array('Contact Support'=>'/contact'));
+        $this->set('title_for_layout', 'Contact');
     }
 
     public function contact_thanks(){
         $this->set('breadcrumbs', array('Contact Support'=>'/contact'));
         $this->set('mailSent', true);
         $this->render('contact');
+        $this->set('title_for_layout', 'Contact');
     }
 
     public function register() {
@@ -105,11 +109,14 @@ class UsersController extends AppController {
         }
         $this->set('countries', $this->User->countries);
         $this->set('admin', false);
+        $this->set('altBackground', true);
+        $this->set('title_for_layout', 'Register');
     }
 
     public function register_thanks() {
         $this->layout = 'main';
         $this->set('admin', false);
+        $this->set('title_for_layout', 'Register');
     }
 
     public function forgot_password() {
@@ -136,6 +143,7 @@ class UsersController extends AppController {
             }
         }
         $this->set('admin', false);
+        $this->set('title_for_layout', 'Forgot Password');
     }
 
     public function password_sent() {
@@ -173,7 +181,7 @@ class UsersController extends AppController {
      */
     public function admin_index()
     {
-        $this->set('userRoles', $this->User->userRoles);
+        $this->set('userRoles', $this->User->roles);
         //$this->paginate = array('limit'=>1);
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());

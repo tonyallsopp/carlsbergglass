@@ -47,7 +47,10 @@
 
 
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
-    <?php echo $this->Html->script(array('jquery-1.7.2.min','jquery.validate.min','app'));?>
+	<?php
+    echo $this->element('sql_dump');
+    echo $this->Html->script(array('jquery-1.7.2.min','jquery.validate.min','app'));
+    echo $this->fetch('script');
+    ?>
 </body>
 </html>

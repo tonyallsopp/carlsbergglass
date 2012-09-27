@@ -160,25 +160,28 @@ div.filter {
 }
 .js-on div.filter { display: block;}
 
-// LARGE FORMAT FORMS
+// LARGE FORMAT (GREEN BG) FORMS
 
+$large-input-height : 38px;
 .large-input {
-  height:38px;
-  line-height: 38px;
+  height:$large-input-height;
+  line-height: $large-input-height;
   color:white;
   width:208px;
   @include rounded(0px);
   border:1px solid $large-input-brdr-green;
-  background: rgba($dark-green, 0.2);
+  background-color: rgba($dark-green, 0.2);
   padding:0 20px;
+  display: block;
+  float:none;
 }
 .large-submit {
   border:1px solid $large-input-brdr-green;
   color:white;
   text-shadow: none;
   background:$green-btn-bg ;
-  height:38px;
-  line-height: 38px;
+  height:$large-input-height;
+  line-height: $large-input-height;
   margin:0;
   @include box-shadow(none);
   @include rounded(0px);
@@ -186,14 +189,30 @@ div.filter {
   width:auto;
   span { display: none;}
 }
+.large-select {
+  @extend .large-input;
+}
 .main {
+  div.input {
+    @include float-left;
+    clear: none;
+    padding: 0 20px 20px 0;
+    height:$large-input-height;
+  }
+  div.error {
+    height:$large-input-height + 20px;
+  }
+  div.alt {
+    padding: 0 0 20px 0;
+  }
   .text input, .password input, .select select {
     @extend .large-input;
   }
   #login-form {
     .text {
-      padding-right:20px;
+      padding:0 20px 0 0;
     }
+    div.password {padding: 0;}
     .text,.password {
       clear:none;
       @include float-left;
@@ -234,6 +253,14 @@ div.filter {
   div.form-actions {
     padding: 10px 0 10px 0;
     clear:both;
+  }
+  .register {
+    div.form-actions {
+      padding: 0;
+      div.submit {
+        padding:0;
+      }
+    }
   }
   .privacy {
     @include float-left;
@@ -303,6 +330,37 @@ div.dropdown {
       }
       span.value {
         display: none;
+      }
+    }
+  }
+}
+//  LARGE FORMAT SELECT
+.main {
+  div.dropdown {
+    position:relative;
+    @include float-left;
+    .selected {
+      background:url('../img/layout/select-bg-green.png') no-repeat right center rgba($dark-green, 0.2);
+      @extend .large-input;
+    }
+    .options {
+      top:$large-input-height;
+      left:4px;
+      background: #0A9243;
+      border:1px solid $large-input-brdr-green;
+      width:228px;
+      max-height: 110px;
+      li {
+        list-style: none;
+        padding:2px 5px;
+        color:white;
+        &:hover {
+          background: $dark-green-body-bg;
+          cursor: pointer;
+        }
+        span.value {
+          display: none;
+        }
       }
     }
   }

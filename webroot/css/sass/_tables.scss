@@ -3,6 +3,7 @@ table {
   border-spacing: 0;
   border-collapse: inherit;
 }
+.admin table { width: 100%;}
 .ie6, .ie7 {
   table { border-collapse: collapse; }
 }
@@ -72,4 +73,9 @@ td.actions {
   color:$link-green;
   padding:0 15px;
   a { margin:0 5px; }
+}
+td.thumb { padding:5px; text-align: center;}
+td img {
+  max-width: 50px;
+  max-height: 50px;
 }

@@ -6,5 +6,7 @@
     </div>
 </header>
 <div id="content-inner">
+    <section>
     <?php echo $this->element('user_edit')?>
+    </section>
 </div>
