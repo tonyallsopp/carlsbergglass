@@ -21,6 +21,7 @@
 			<th><?php echo $this->Paginator->sort('email','Email Address'); ?></th>
 			<th><?php echo $this->Paginator->sort('country'); ?></th>
 			<th><?php echo $this->Paginator->sort('role','User Level'); ?></th>
+            <th><?php echo $this->Paginator->sort('last_login'); ?></th>
 			<th class="actions">Action</th>
 	</tr>
         </thead>
@@ -32,6 +33,7 @@
 		<td><a href="mailto:<?php echo h($user['User']['email']); ?>" title="Send email to <?php echo h($user['User']['email']); ?>"><?php echo h($user['User']['email']); ?></a></td>
 		<td><?php echo h($user['User']['country']); ?></td>
 		<td><?php echo $userRoles[$user['User']['role']]; ?></td>
+        <td><?php echo $this->Time->format('d/m/Y H:i',$user['User']['last_login']); ?></td>
 		<td class="actions last">
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id']),array('title'=>"Edit {$user['User']['full_name']}")); ?> |
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array('title'=>"Delete {$user['User']['full_name']}"), __('Are you sure you want to permanently delete %s?', $user['User']['full_name'])); ?>

@@ -155,6 +155,12 @@ class User extends AppModel {
         return true;
     }
 
+    public function updateLastLogin($user){
+        $now = date('Y-m-d H:i:s');
+        $this->id = $user['id'];
+        $this->saveField('last_login', $now);
+    }
+
     public $roles = array(0=>'user',1=>'admin');
 
     public $countries = array(

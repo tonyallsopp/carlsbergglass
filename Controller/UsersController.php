@@ -45,6 +45,7 @@ class UsersController extends AppController {
         $this->layout = 'main';
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                $this->User->updateLastLogin($this->Auth->user());
                 return $this->redirect($this->Auth->redirect());
             } else {
                 $this->Session->setFlash(__('Username and/or password is incorrect'), 'default', array(), 'auth');
@@ -165,6 +166,7 @@ class UsersController extends AppController {
     {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                $this->User->updateLastLogin($this->Auth->user());
                 return $this->redirect($this->Auth->redirect());
             } else {
                 $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');

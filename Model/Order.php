@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property User $User
  * @property OrderItem $OrderItem
+ * @property Address $Address
  */
 class Order extends AppModel {
 

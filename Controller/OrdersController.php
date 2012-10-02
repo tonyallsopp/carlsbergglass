@@ -33,6 +33,25 @@ class OrdersController extends AppController {
         //get available sizes
         $productSizes = $this->Order->OrderItem->ProductUnit->ProductGroup->getSizes($product);
         debug($order);
+
+        if($this->request->is('post') || $this->request->is('put') ){
+            //save address and send emails
+            debug($this->request->data);
+            $this->request->data['Address']['order_id'] = $order['Order']['id'];
+            if($this->Order->Address->save($this->request->data['Address'])){
+                //send mails
+                if ($this->sendEmail('order', $this->_configs['config_order_email'],array('user'=>$this->_user['User'],'order'=>$order,'address'=>$this->request->data['Address']))) {
+                    if ($this->sendEmail('order_thanks', $this->_user['email'],array('user'=>$this->_user,'order'=>$order,'address'=>$this->request->data['Address']))) {
+
+                    }
+                    $this->redirect(array('action'=>'thanks'));
+                } else {
+                    $this->Session->setFlash('Error processing order');
+                }
+
+            }
+        }
+
         $this->set('productGroup', $product);
         $this->set('productSizes', $productSizes);
         $this->set('order', $order);
@@ -47,6 +66,10 @@ class OrdersController extends AppController {
         }
         $bc['Your Order'] = "/order/confirm/{$id}";
         $this->set('breadcrumbs', $bc);
+    }
+
+    public function thanks(){
+
     }
 
     /**

@@ -82,6 +82,7 @@ class ProductGroupsController extends AppController {
             $this->Session->setFlash('Could not find product');
             $this->redirect($this->referer());
         }
+        debug($product);
         //get available custom options for this product group
         $this->ProductGroup->getCustomOptions($product);
         //get available sizes

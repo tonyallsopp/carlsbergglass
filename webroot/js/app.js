@@ -191,6 +191,9 @@ $(function(){
         });
         return false;
     });
+
+    //lightbox
+    $('.prod-img a.lightbox').simpleModal();
 });
 
 function prettySelect($elem){

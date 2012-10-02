@@ -298,6 +298,8 @@ div.dropdown {
   position:relative;
   @include float-left;
   .selected {
+    position: relative;
+    z-index: 0;
     @extend .text-input;
     background:url('../img/layout/select-bg.png') no-repeat right center white;
     &:hover {
@@ -313,7 +315,7 @@ div.dropdown {
     position: absolute;
     top:30px;
     left:4px;
-    z-index: 100;
+    z-index: 5;
     background: white;
     border:1px solid $input-brdr-grey;
     width:228px;

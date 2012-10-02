@@ -9,29 +9,39 @@
         </div>
     </header>
     <div id="content-inner">
-        <h2>All Glassware</h2>
-        <p>Upload master product spreadsheet</p>
+        <section>
+            <h2>All Glassware</h2>
+            <p>Upload the master product spreadsheet</p>
+            <?php echo $this->Html->link('Upload Master Spreadsheet','/admin/product_groups/upload_csv',array('class'=>'btn-details'));?>
+        </section>
+        <section>
+            <h2>Custom Glassware</h2>
+            <p>Upload the custom glassware option sheet</p>
+            <?php echo $this->Html->link('Upload Master Spreadsheet','/admin/product_groups/upload_csv',array('class'=>'btn-details'));?>
+        </section>
+        <section>
+            <h2>Custom Glassware</h2>
+            <table cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="first">Product</th>
+                    <th>Variants</th>
+                    <th class="last">Actions</th>
+                </tr>
 
-        <h2>Custom Glassware</h2>
-        <table cellpadding="0" cellspacing="0">
-            <thead>
-            <tr>
-                <th class="first">Product</th>
-                <th>Variants</th>
-                <th class="last">Actions</th>
-            </tr>
+                </thead>
+                <tbody>
+                <?php foreach($groups as $g):?>
+                <tr>
+                    <td class="first"><?php echo $g['ProductGroup']['name'];?></td>
+                    <td><?php echo count($g['ProductUnit']);?></td>
+                    <td class="last"><?php echo $this->Html->link('Upload option sheet',"/admin/product_groups/upload_csv/options/{$g['ProductGroup']['id']}");?></td>
+                </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+        </section>
 
-            </thead>
-            <tbody>
-            <?php foreach($groups as $g):?>
-            <tr>
-                <td class="first"><?php echo $g['ProductGroup']['name'];?></td>
-                <td><?php echo count($g['ProductUnit']);?></td>
-                <td class="last"><?php echo $this->Html->link('Upload option sheet',"/admin/product_groups/upload_csv/options/{$g['ProductGroup']['id']}");?></td>
-            </tr>
-            <?php endforeach;?>
-            </tbody>
-        </table>
 
     </div>
 </div>

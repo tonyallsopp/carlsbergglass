@@ -5,9 +5,7 @@
             <header>
                 <h1><?php echo $this->element('cms_content', array('name' => 'welcome_to_title'));?></h1>
             </header>
-            <p>
-                <?php echo $this->element('cms_content', array('name' => 'welcome_to_intro'));?>
-            </p>
+            <?php echo $this->element('cms_content', array('name' => 'welcome_to_intro','para'=>true));?>
         </section>
         <aside class="col col-2" id="hp-links">
             <?php echo $this->Html->link('Glassware Configurator','/custom_glassware');?>

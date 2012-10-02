@@ -53,7 +53,7 @@ class Media extends AppModel {
     );
     public $imageSizes = array(
         'small' => array('w'=>150,'h'=>180,'suffix'=>'_s'),
-        'medium' => array('w'=>190,'h'=>228,'suffix'=>'_m'),
+        'medium' => array('w'=>190,'h'=>230,'suffix'=>'_m'),
         //'large' => array('w'=>1024,'h'=>768,'suffix'=>'_l'),
     );
     public $imageDir = '';

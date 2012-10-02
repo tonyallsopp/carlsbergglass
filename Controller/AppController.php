@@ -297,6 +297,14 @@ class AppController extends Controller {
                 $email->subject('Support email from POSGlassware.com');
                 $email->template('contact_support');
                 break;
+            case 'order' :
+                $email->subject('Quote/sample request from POSGlassware.com');
+                $email->template('order');
+                break;
+            case 'order_thanks' :
+                $email->subject('Your POS Glassware Request');
+                $email->template('order_thanks');
+                break;
         }
         //Set view variables
         $viewVars = array_merge(array('title' => $email->subject()), $otherData);

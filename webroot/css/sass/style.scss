@@ -140,6 +140,8 @@ $side-menu-width:200px;
   overflow:hidden;
   background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
   border-bottom: 1px solid $bc-border-grey;
+  z-index: 3;
+  position: relative;
   ul {
     height:49px;
     background: url(../img/layout/bc-bg-grad.png) repeat-x 0 0;
@@ -430,7 +432,8 @@ div.product-view {
         &:last-child { border-bottom:0; }
         &.price {
           h2 { color:$grey-text; }
-          p { font: $title-font-bold; font-size: 26px; color:$mid-green-text; padding:0; }
+          p { padding:20px 0 0 0; }
+          p.price { font: $title-font-bold; font-size: 26px; color:$mid-green-text; padding:0; }
         }
         &.downloads {
           ul { padding-bottom: 5px;}
@@ -444,6 +447,7 @@ div.product-view {
       .prod-img {
         margin-top: 30px;
         border: 1px solid $prod-header-bdr;
+        height:230px;
       }
     }
     div.options {
@@ -606,4 +610,46 @@ h2 {
     p { color:white;}
   }
 }
-// .alt-bg { background-position: center 200px;  }
+
+/**** Lightbox ****/
+
+#xsimple-modal-overlay {
+  position: absolute;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  z-index: 1000;
+  display:none;
+  background: #666666 url(../img/layout/trans-bg.png) 50% 50% repeat;
+  opacity: .40;
+  filter:Alpha(Opacity=40);
+}
+#xsimple-modal-wrap {
+  width:540px;
+  top:20px;
+  left:50%;
+  margin-left:-270px;
+  position: absolute;
+  z-index: 1001;
+  display:none;
+}
+#xsimple-modal-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  background: transparent url('../img/layout/modal_close.png') ;
+  cursor: pointer;
+  z-index: 1002;
+}
+#xsimple-modal-outer {
+  overflow: hidden;
+}
+#xsimple-modal-content img {
+  max-width: 100%;
+  max-height: 100%;
+}

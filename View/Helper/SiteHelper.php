@@ -14,11 +14,12 @@ class SiteHelper extends AppHelper {
         return "<p>{$content}</p>";
     }
 
-    public function productImage($filename, $size = 's', $link = null,$lightbox = false){
+    public function productImage($filename, $size = 's', $link = null, $lightbox = false){
         $fName = $size ? str_replace('.jpg', "_{$size}.jpg",$filename) : $filename;
         $html = '<div class="prod-img">';
         if($link){
-            $html .= '<a style="display:block;width:100%;height:100%;background:url(' . $this->Html->url('/files/product_images/' . $fName) . ') center center no-repeat" href="' . $this->Html->url($link) . '"></a>';
+            $class = $lightbox ? 'lightbox' : '';
+            $html .= '<a style="display:block;width:100%;height:100%;background:url(' . $this->Html->url('/files/product_images/' . $fName) . ') center center no-repeat" href="' . $this->Html->url($link) . '" class="' . $class . '"></a>';
         } else {
             $html .= '<div style="width:100%;height:100%;background:url(' . $this->Html->url('/files/product_images/' . $fName) . ') center center no-repeat"></div>';
         }

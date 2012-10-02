@@ -9,21 +9,41 @@
         </div>
     </header>
     <div id="content-inner">
-        <?php if($sheetType == 'Options'):?>
+        <?php if ($sheetType == 'Options'): ?>
         <h2>Options sheet for <?php echo $group['ProductGroup']['name'];?></h2>
-        <?php else:?>
+        <?php else: ?>
         <h2>Master product sheet</h2>
         <?php endif;?>
 
         <?php
-        echo $this->Form->create('ProductGroup', array('type' => 'file'));
-        if($groupId)  echo $this->Form->hidden('id',array('value'=>$groupId));
-        echo $this->Form->file('csv');
-        echo $this->Form->end('Upload');
-        ?>
-        <p>
-            <?php if($filename) echo $this->Html->link("Import sheet","/admin/product_groups/import_csv/{$sheetType}/{$filename}/{$groupId}");?>
-        </p>
+        if (!$filename):
+            echo $this->Form->create('ProductGroup', array('type' => 'file'));
+            if ($groupId) echo $this->Form->hidden('id', array('value' => $groupId));
+            echo $this->Form->file('csv');?>
+            <div class="form-actions">
+                <?php  echo $this->Form->end('Upload');?>
+            </div>
+            <?php endif;?>
+        <?php if ($filename): ?>
+        <h3>Import report for <?php echo $filename;?></h3>
+        <ul class="import-report">
+            <?php foreach ($importMessages as $m): ?>
+            <li><?php echo $m;?></li>
+            <?php endforeach;?>
+        </ul>
+        <?php if (!empty($importErrors)): ?>
+            <h3>Import errors</h3>
+            <ul class="import-report error">
+                <?php foreach ($importErrors as $e): ?>
+                <li><?php echo $e;?></li>
+                <?php endforeach;?>
+            </ul>
+            <?php endif; ?>
+
+        <?php endif;?>
+
+        <?php if (empty($importErrors)) echo $this->Html->link("Import data", "/admin/product_groups/import_csv/{$sheetType}/{$filename}");?>
+
 
     </div>
 </div>

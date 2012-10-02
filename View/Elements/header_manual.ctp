@@ -2,11 +2,9 @@
     <div class="inner">
         <section class="manual">
             <div class="col col-1">
-                <h1>POS Glassware Manual</h1>
+                <h1><?php echo $this->element('cms_content', array('name' => 'manual_title'));?></h1>
 
-                <p>Please download and read Carlsberg Group POS Glassware Manual before getting started. POSG Manual
-                    has been created to help you ensuring the choice of right POS Glassware for Carlsberg Group
-                    products, both in the On- and Off-trade.</p>
+                <?php echo $this->element('cms_content', array('name' => 'manual_text','para'=>true));?>
             </div>
             <div class="col col-2">
                 <?php

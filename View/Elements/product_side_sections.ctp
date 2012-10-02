@@ -1,7 +1,8 @@
 <?php if(isset($custom) && $custom):?>
 <section class="price">
-    <h2>Estimated Price</h2>
-    <p>&euro;<span class="prodinfo-price"><?php echo h($estimatePrice); ?></span> / unit</p>
+    <h2><?php echo $this->element('cms_content', array('name' => 'prod_price_title'));?></h2>
+    <p class="price">&euro;<span class="prodinfo-price"><?php echo h($estimatePrice); ?></span> / unit</p>
+    <?php echo $this->element('cms_content', array('name' => 'prod_price_text','para'=>true));?>
 </section>
 <section class="order-info">
     <h2>What do you want to do next?</h2>
@@ -16,8 +17,9 @@
 <?php else:?>
 
 <section class="price">
-    <h2>Price</h2>
-    <p>&euro;<span class="prodinfo-price"><?php echo h($currentUnit['price']); ?></span> / unit</p>
+    <h2><?php echo $this->element('cms_content', array('name' => 'prod_price_title'));?></h2>
+    <p class="price">&euro;<span class="prodinfo-price"><?php echo h($currentUnit['price']); ?></span> / unit</p>
+    <?php echo $this->element('cms_content', array('name' => 'prod_price_text','para'=>true));?>
 </section>
 <section class="order-info">
     <h2>To order this product</h2>

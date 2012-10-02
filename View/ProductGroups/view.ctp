@@ -37,9 +37,7 @@
 
         </div>
         <div class="col col-2">
-            <div class=" prod-img">
-                <img src="http://placehold.it/190x230">
-            </div>
+            <?php echo $this->Site->productImage($productGroup['ProductGroup']['image'],'m',"/files/product_images/{$productGroup['ProductGroup']['image']}", true);?>
 
             <?php echo $this->element('product_side_sections');?>
 
