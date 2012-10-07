@@ -280,6 +280,7 @@ class ProductGroupsController extends AppController {
                     $uploaded = $this->uploadFile($this->request->data['ProductGroup']['csv']);
                     if($uploaded){
                         $csvData = $this->parseCSVFile(TMP_FILES . $this->request->data['ProductGroup']['csv']['name']);
+                        debug($csvData);
                         if($sheetType == 'product'){
                             $this->ProductGroup->importProductCSV($csvData, true);
                         } else {
@@ -304,16 +305,17 @@ class ProductGroupsController extends AppController {
         $this->set('filename', $importFileName);
     }
 
-    public function admin_import_csv($type, $filename = null, $groupId = null) {
-        $type = $type == 'product' ? 'product' : 'options';
+    public function admin_import_csv($type, $filename = null) {
+        $type = strtolower($type) == 'product' ? 'product' : 'options';
+        $imported = false;
         if($filename){
             if(file_exists(TMP_FILES . $filename)){
                 $csvData = $this->parseCSVFile(TMP_FILES . $filename);
                 //import the file to DB
                 if($type == 'product'){
-                    $this->ProductGroup->importProductCSV($csvData);
-                } elseif($type == 'options' && $groupId) {
-                    $this->ProductGroup->importOptionCSV($csvData, $groupId);
+                    $imported = $this->ProductGroup->importProductCSV($csvData);
+                } elseif($type == 'options') {
+                    $imported = $this->ProductGroup->importOptionCSV($csvData);
                 } else {
                     $this->Session->setFlash('Cannot find specified file, parameters missing');
                 }
@@ -326,7 +328,10 @@ class ProductGroupsController extends AppController {
         } else {
             $this->Session->setFlash('Invalid file name');
         }
-        //$this->redirect($this->referer());
+        if($imported){
+            $this->Session->setFlash("{$filename} imported successfully");
+        }
+        $this->redirect('/admin/product_groups');
     }
 
 }

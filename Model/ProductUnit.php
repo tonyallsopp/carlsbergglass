@@ -106,13 +106,6 @@ class ProductUnit extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Image' => array(
-			'className' => 'Image',
-			'foreignKey' => 'image_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Supplier' => array(
 			'className' => 'Supplier',
 			'foreignKey' => 'supplier_id',
@@ -134,5 +127,21 @@ class ProductUnit extends AppModel {
             return 'large';
         }
         return 'small';
+    }
+
+    public function updateForeignKeys(){
+        $recs = $this->find('list', array('fields' => array('id','product_group_slug')));
+        $updateIds = array();
+        foreach($recs as $id => $slug){
+            $updateIds[$slug][] =  $id;
+        }
+        if(!empty($updateIds)){
+            foreach($updateIds as $slug => $ids){
+                $group = $this->ProductGroup->find('first', array('conditions' => array('slug'=>$slug), 'recursive' => -1));
+                if(!empty($group)){
+                    $this->updateAll(array('ProductUnit.product_group_id'=>$group['ProductGroup']['id']), array('ProductUnit.id'=>$ids));
+                }
+            }
+        }
     }
 }

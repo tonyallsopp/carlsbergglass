@@ -19,9 +19,10 @@
         if (!$filename):
             echo $this->Form->create('ProductGroup', array('type' => 'file'));
             if ($groupId) echo $this->Form->hidden('id', array('value' => $groupId));
-            echo $this->Form->file('csv');?>
+            echo $this->Form->input('csv',array('div'=>'input file', 'type'=>'file', 'label'=>'CSV file'));?>
             <div class="form-actions">
-                <?php  echo $this->Form->end('Upload');?>
+                <?php  echo $this->Form->end('Upload');
+                echo  $this->Html->link('Cancel','/admin/product_groups');?>
             </div>
             <?php endif;?>
         <?php if ($filename): ?>
@@ -42,7 +43,15 @@
 
         <?php endif;?>
 
-        <?php if (empty($importErrors)) echo $this->Html->link("Import data", "/admin/product_groups/import_csv/{$sheetType}/{$filename}");?>
+
+        <?php  if (empty($importErrors) && $filename && !empty($importMessages)): ?>
+        <div class="form-actions">
+            <?php
+            echo $this->Html->link("Import data", "/admin/product_groups/import_csv/{$sheetType}/{$filename}",array('class'=>'btn-details'),'Are you sure you want to import the data?\nAll current product records will be overwritten.');
+            echo  $this->Html->link('Cancel','/admin/product_groups');
+            ?>
+        </div>
+        <?php endif;?>
 
 
     </div>
