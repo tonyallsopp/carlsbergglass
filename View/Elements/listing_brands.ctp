@@ -17,7 +17,7 @@
         foreach ($listings as $cat):?>
             <li>
                 <div class="logo">
-                    <?php echo $this->Html->image('http://placehold.it/94x50',array('url'=>"/branded_glassware/index/{$cat['Category']['slug']}"));?>
+                    <?php echo $this->Site->imageThumb("{$cat['Category']['slug']}.jpg",'logo', "/branded_glassware/index/{$cat['Category']['slug']}"); ?>
                 </div>
                 <h3><?php echo $this->Html->link($cat['Category']['name'], "/branded_glassware/index/{$cat['Category']['slug']}");?></h3>
                 <?php echo $this->Html->link('Details', "/branded_glassware/index/{$cat['Category']['slug']}",array('class'=>'details','title'=>"View {$cat['Category']['name']} glassware")); ?>

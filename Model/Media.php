@@ -51,17 +51,37 @@ class Media extends AppModel {
         'size' => 10485760, // 10meg
         'type' => 'jpg,jpeg,pjpeg,x-png,png,gif'
     );
-    public $imageSizes = array(
-        'small' => array('w'=>150,'h'=>180,'suffix'=>'_s'),
-        'medium' => array('w'=>190,'h'=>230,'suffix'=>'_m'),
-        //'large' => array('w'=>1024,'h'=>768,'suffix'=>'_l'),
-    );
     public $imageDir = '';
+
+    public $mediaTypes = array(
+        'manual'=>array('name'=>'Manual','plural'=>'Manuals','dir'=>'manual','type'=>'manual'),
+        'prod_img'=>array('name'=>'Product Image','plural'=>'Product Images','dir'=>'product_images','type'=>'prod_img',
+            'sizes'=> array(
+                'small' => array('w'=>150,'h'=>180,'suffix'=>'_s'),
+                'medium' => array('w'=>190,'h'=>230,'suffix'=>'_m'),
+            )
+        ),
+        'logo'=>array('name'=>'Logo','plural'=>'Logos','dir'=>'logo_images','type'=>'logo',
+            'sizes'=>array(
+                'small' => array('w'=>94,'h'=>50,'suffix'=>'_s'),
+            )
+        ),
+        'cat_img'=>array('name'=>'Category Image','plural'=>'Category Images','dir'=>'category_images','type'=>'cat_img',
+            'sizes'=> array(
+                'small' => array('w'=>150,'h'=>180,'suffix'=>'_s'),
+                'medium' => array('w'=>190,'h'=>230,'suffix'=>'_m'),
+            )
+        ),
+    );
 
     public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
         //default image dir
-        $this->imageDir = PROD_IMG_DIR;
+        $this->setImageDir(PROD_IMG_DIR);
+    }
+
+    private function setImageDir($dir){
+        $this->imageDir = $dir;
         //create the dir if not exist
         if(!is_dir($this->imageDir)){
             mkdir($this->imageDir);
@@ -90,12 +110,14 @@ class Media extends AppModel {
         return false;
     }
 
-
-
-
-
-
-    public function handleImageUpload($fileData, $fileName, $resize = true) {
+    public function handleImageUpload($fileData, $fileName, $mediaType = 'prod_img', $resize = true) {
+        if($mediaType == 'logo'){
+            $this->setImageDir(LOGO_IMG_DIR);
+        } elseif($mediaType == 'cat_img') {
+            $this->setImageDir(CAT_IMG_DIR);
+        } else {
+            $this->setImageDir(PROD_IMG_DIR);
+        }
         $imgDir = $this->imageDir;
         $res = array('success'=>1,'filename'=>$fileName);
         //Get file type
@@ -125,7 +147,8 @@ class Media extends AppModel {
                         } else {
                             //generate smaller images?
                             if($resize){
-                                foreach($this->imageSizes as $k=>$v){
+                                $sizeArray = $this->mediaTypes[$mediaType]['sizes'];
+                                foreach($sizeArray as $k=>$v){
                                     $newName = $preName . $v['suffix'] . '.jpg';
                                     if(!$this->resize($imgDir . $fileName, $imgDir . $newName, $v['w'], $v['h'])){
                                         $res = array('success'=>0,'error'=>'Error resizing file: ' . $newName);
@@ -154,11 +177,16 @@ class Media extends AppModel {
      */
     public function deleteFiles($filename, $fileType){
         $fileParts = explode('.', $filename);
-        if($fileType == 'prod_img'){
-            $this->deleteFile($this->imageDir . $filename);
-            foreach($this->imageSizes as $k=>$v){
-                $this->deleteFile($this->imageDir . $fileParts[0] . $v['suffix'] . '.' . $fileParts[1]);
-            }
+        if($fileType == 'logo'){
+            $this->setImageDir(LOGO_IMG_DIR);
+            $sizesArray = $this->logoImageSizes;
+        } else {
+            $this->setImageDir(PROD_IMG_DIR);
+            $sizesArray = $this->productImageSizes;
+        }
+        $this->deleteFile($this->imageDir . $filename);
+        foreach($sizesArray as $k=>$v){
+            $this->deleteFile($this->imageDir . $fileParts[0] . $v['suffix'] . '.' . $fileParts[1]);
         }
     }
 
@@ -178,6 +206,10 @@ class Media extends AppModel {
     }
 
     public function safeFilename($fileName) {
+        $fileName = trim($fileName);
+        if(!$fileName){
+            return '';
+        }
         //remove spaces etc from file name
         $fileParts = explode('.', strtolower($fileName));
         $fileExt = array_pop($fileParts);

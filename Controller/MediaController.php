@@ -62,41 +62,45 @@ class MediaController extends AppController {
      *
      * @return void
      */
-    public function admin_images()
+    public function admin_images($mediaType = 'prod_img')
     {
-        $this->paginate = array('conditions'=>array('Media.type'=>'prod_img'));
+        $this->paginate = array('conditions'=>array('Media.type'=>$mediaType));
         $this->Media->recursive = 0;
         $this->set('media', $this->paginate());
+        $this->set('mediaType',$this->Media->mediaTypes[$mediaType]);
     }
 
     /**
-     * images method
+     * admin_upload_images method
      *
      * @return void
      */
-    public function admin_upload_images()
+    public function admin_upload_images($mediaType = 'prod_img')
     {
-
+        $this->set('mediaType',$this->Media->mediaTypes[$mediaType]);
+        $this->set('backLink','/admin/media/images/' . $this->Media->mediaTypes[$mediaType]['type']);
     }
 
-    public function admin_ajax_image_upload() {
+    public function admin_ajax_image_upload($mediaType = 'prod_img') {
         if(!empty($_FILES)){
             //$fName = $this->Media->unique_filename($_FILES['Filedata']['name']);
             $fName = $this->Media->safeFilename($_FILES['Filedata']['name']);
-            $res = $this->Media->handleImageUpload($_FILES['Filedata'], $fName);
+            $res = $this->Media->handleImageUpload($_FILES['Filedata'], $fName, $mediaType);
             $res['saved'] = 0;
             $res['id'] = '';
             if($res['success']){
                 //uploaded OK, save the record
                 //1st delete existing records with same name
-                $this->Media->deleteAll(array('Media.type' => 'prod_img','Media.filename'=>$fName));
+                $this->Media->deleteAll(array('Media.type' => $mediaType,'Media.filename'=>$fName));
                 //save new
                 $rec = $this->Media->create();
                 $rec['Media']['filename'] = $fName;
                 $rec['Media']['name'] = $_FILES['Filedata']['name'];
-                $rec['Media']['type'] = 'prod_img';
+                $rec['Media']['type'] = $mediaType;
                 if($this->Media->save($rec)){
                     $res['saved'] = 1;
+                    $res['type'] = $mediaType;
+                    $res['dir'] = $this->Media->mediaTypes[$mediaType]['dir'];
                     $res['id'] = $this->Media->id;
                 }
             }

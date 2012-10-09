@@ -31,7 +31,7 @@ class CategoriesController extends AppController {
         $opts = array('Category' => array('conditions' => $conditions, 'contain' => $contain, 'limit' => 20, 'order' => 'Category.name ASC'));
         $this->paginate = $opts;
         $categories = $this->paginate('Category');
-        debug($categories);
+        //debug($categories);
         $this->set('listings', $categories);
         $this->set('breadcrumbs', array('Glassware Configurator'=>'/custom_glassware'));
     }

@@ -1411,6 +1411,7 @@ a.download-manual span {
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003326}}
 .brands li .logo {
   width: 94px;
+  overflow: hidden;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/wamp\/www\/carlsbergglass\/webroot\/css\/sass\/style\.scss}line{font-family:\00003327}}
 .brands li .details {

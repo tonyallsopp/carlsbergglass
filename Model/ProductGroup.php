@@ -47,7 +47,7 @@ class ProductGroup extends AppModel {
         $file = array_values($inputData);
         $file = $file[0];
         if(!isset($file['size'])) return false;
-        $validType = $file['type'] == 'text/csv' || $file['type'] == 'text/comma-separated-values';
+        $validType = $file['type'] == 'text/csv' || $file['type'] == 'text/comma-separated-values' || $file['type'] == 'application/vnd.ms-excel';
         return ( stripos($file['name'], '.csv') !== false && $validType );
     }
 
@@ -176,31 +176,207 @@ class ProductGroup extends AppModel {
     private $productCsvFields = array(
         array('name'=>'category', 'type'=>'str','value'=>array('branded','unbranded')),
         array('name'=>'group', 'type'=>'str'),
-        array('name'=>'name', 'type'=>'str'),
-        array('name'=>'capacity', 'type'=>'str'),
-        array('name'=>'variant', 'type'=>'str'),
-        array('name'=>'image', 'type'=>'str'),
-        array('name'=>'technical drawing', 'type'=>'str'),
-        array('name'=>'cutter guide', 'type'=>'str'),
-        array('name'=>'origin', 'type'=>'str'),
-        array('name'=>'primary packaging', 'type'=>'str'),
-        array('name'=>'pallet unit', 'type'=>'str'),
-        array('name'=>'trailer load', 'type'=>'str'),
-        array('name'=>'hs code', 'type'=>'str'),
-        array('name'=>'fca location', 'type'=>'str'),
-        array('name'=>'price', 'type'=>'dec'),
+        array('name'=>'name','field'=>'name', 'type'=>'str'),
+        array('name'=>'capacity','field'=>'capacity', 'type'=>'str'),
+        array('name'=>'variant','field'=>'variant', 'type'=>'str'),
+        array('name'=>'image','field'=>'image_file', 'type'=>'str'),
+        array('name'=>'technical drawing','field'=>'drawing_file', 'type'=>'str'),
+        array('name'=>'cutter guide','field'=>'cutter_guide_file', 'type'=>'str'),
+        array('name'=>'origin','field'=>'origin', 'type'=>'str'),
+        array('name'=>'primary packaging','field'=>'packaging', 'type'=>'str'),
+        array('name'=>'pallet unit','field'=>'pallet_unit', 'type'=>'str'),
+        array('name'=>'trailer load','field'=>'trailer_load', 'type'=>'str'),
+        array('name'=>'hs code','field'=>'hs_code', 'type'=>'str'),
+        array('name'=>'fca location','field'=>'fca_location', 'type'=>'str'),
+        array('name'=>'price','field'=>'price', 'type'=>'dec'),
         array('name'=>'supplier', 'type'=>'str'),
-        array('name'=>'description', 'type'=>'str'),
-        array('name'=>'classification', 'type'=>'str'),
-        array('name'=>'height', 'type'=>'int'),
-        array('name'=>'max diameter', 'type'=>'int'),
-        array('name'=>'misc 1 label', 'type'=>'str'),
-        array('name'=>'misc 1 value', 'type'=>'str'),
-        array('name'=>'misc 2 label', 'type'=>'str'),
-        array('name'=>'misc 2 value', 'type'=>'str'),
-        array('name'=>'misc 3 label', 'type'=>'str'),
-        array('name'=>'misc 3 value', 'type'=>'str'),
+        array('name'=>'description','field'=>'description', 'type'=>'str'),
+        array('name'=>'classification','field'=>'classification', 'type'=>'str'),
+        array('name'=>'height','field'=>'height', 'type'=>'int'),
+        array('name'=>'max diameter','field'=>'max_diameter', 'type'=>'int'),
+        array('name'=>'misc 1 label','field'=>'misc_1_label', 'type'=>'str'),
+        array('name'=>'misc 1 value','field'=>'misc_1_value', 'type'=>'str'),
+        array('name'=>'misc 2 label','field'=>'misc_2_label', 'type'=>'str'),
+        array('name'=>'misc 2 value','field'=>'misc_2_value', 'type'=>'str'),
+        array('name'=>'misc 3 label','field'=>'misc_3_label', 'type'=>'str'),
+        array('name'=>'misc 3 value','field'=>'misc_3_value', 'type'=>'str'),
     );
+
+    public function importProductCSV($csvData, $parseOnly = false){
+        //load the Media mdel for use later
+        App::uses('Media', 'Model');
+        $media = new Media();
+        $this->importErrors = array();
+        $this->importMessages = array();
+        $fields = $this->productCsvFields;
+        // if we are importing the data (NOT parsing only), delete current records
+        if(!$parseOnly){
+            $this->deleteAll(array('ProductGroup.id >'=>0));
+            $this->Category->deleteAll(array('Category.id >'=>0));
+            $this->ProductUnit->deleteAll(array('ProductUnit.id >'=>0));
+        }
+
+        $categories = array_flip($this->Category->find('list'));
+        $suppliers = array_flip($this->ProductUnit->Supplier->find('list'));
+
+        foreach($csvData as $lineNo => $line){
+            $currentSection = 'branded'; //default to branded
+            $currentCatId = 0;
+            $unit = array();
+            $newUnit = array();
+            $newGroup = array();
+            $headers = false;
+            $currentGroupName = '';
+            $currentGroupSlug = '';
+            $currentSupplierId = 0;
+            if(!isset($lastColumn)) $lastColumn = count($line) -1;
+            debug($lastColumn);
+            //debug($line);
+            foreach($line as $col =>$val){
+                $val = trim($val);
+                if($lineNo == 0 && $val == $fields[$col]['name']){
+                    //this line is column headers
+                    if(!$headers){
+                        $this->importMessages[] = "Column headers found on line {$lineNo}";
+                        $headers = true;
+                    }
+                    break;
+                } else { // some basic validation
+                    if(isset($fields[$col]['value']) && !in_array($val,$fields[$col]['value'])){
+                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col}";
+                    }
+                    if($val && isset($fields[$col]['type']) && $fields[$col]['type'] == 'int' && !ctype_digit($val)){
+                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expected an integer (whole number)";
+                    }
+                    if($val && isset($fields[$col]['type']) && $fields[$col]['type'] == 'dec' && !is_numeric($val)){
+                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expected a number (decimal)";
+                    }
+                }
+                if(!empty($this->importErrors)) return false;
+
+                if($col === 0){ //section
+                    if($val == 'unbranded'){
+                        $currentSection = 'unbranded';
+                    } else {
+                        $currentSection = 'branded';
+                    }
+                } elseif($col === 1){ //category
+                    //does the cat exist
+                    if(array_key_exists($val, $categories)){
+                        $msg = "Category record: {$val} will be replaced";
+                        $currentCatId = $categories[$val];
+                    } else {
+                        $msg = "New product category record: {$val}";
+                        if(!$parseOnly){
+                            //new category to add
+                            $this->Category->create();
+                            $newCat = array('Category'=>array('name'=>$val,'section'=>$currentSection));
+                            $this->Category->save($newCat);
+                            $categories[$val] = $this->Category->id;
+                        } else {
+                            $categories[$val] = 0;
+                        }
+                        $currentCatId = $categories[$val];
+                    }
+                    if(!in_array($msg,$this->importMessages )){
+                        $this->importMessages[] = $msg;
+                    }
+
+                } elseif($col === 2){ //name = ProductGroup
+                    $currentGroupName = $val;
+                    //does the group exist?
+                    $savedGroup = $this->find('first', array('conditions' => array('slug'=>$this->sluggify($val)), 'recursive' => -1));
+                    if(empty($savedGroup)){
+                        //doesnt exist, create it
+                        $newGroup = array('name'=>$val, 'category_id'=>$currentCatId);
+                        $currentGroupSlug = $this->sluggify($val);
+                    } else {
+                        $currentGroupSlug = $savedGroup['ProductGroup']['slug'];
+                    }
+                    $msg = "New product group record: {$val}";
+                    if(!in_array($msg,$this->importMessages )){
+                        $this->importMessages[] = $msg;
+                    }
+                } elseif($col === 3){ //capacity
+                    $unit['capacity'] = $val;
+                    $unit['capacity_group'] = $this->ProductUnit->calcCapacityGroup($val);
+                } elseif($col === 4){ //variant
+                    if(!empty($unit)) $unit['variant'] = $val;
+                    //the ProductUnit name is made from name + capacity + variant
+                    $unit['name'] = $currentGroupName . ' ' . $unit['capacity'];
+                    if($val){
+                        $unit['name'] .= ' - ' . $val;
+                    }
+
+                    //check product doesnt exist
+                    $savedProd = $this->ProductUnit->find('first', array('conditions' => array('product_group_slug'=>$currentGroupSlug, 'name'=>$unit['name']), 'recursive' => -1));
+                    if(empty($savedProd)){
+                        //doesnt exist
+                        $newUnit = $this->ProductUnit->create();
+                        $newUnit['ProductUnit'] = $unit;
+                        $newUnit['ProductUnit']['slug'] = $this->sluggify($unit['name']);
+                        $newUnit['ProductUnit']['product_group_slug'] = $currentGroupSlug;
+                    } else {
+                        $this->importMessages[] = "Product unit: {$unit['name']} will be replaced";
+                    }
+                } elseif($col >= 5 && $col <= 7){ //media files
+                    if(!empty($newUnit)) $newUnit['ProductUnit'][$fields[$col]['field']] = $media->safeFilename($val);
+                } elseif( ($col >= 8 && $col <= 14) || ($col >= 16 && $col <= 25)){
+                    if(!empty($newUnit)) $newUnit['ProductUnit'][$fields[$col]['field']] = $val;
+                } elseif($col === 15){ // supplier
+                    if(!array_key_exists($val, $suppliers)){
+                        //new supplier to add
+                        $newSupplier = array('Supplier'=>array('name'=>$val));
+                        $this->ProductUnit->Supplier->create();
+                        if(!$parseOnly){
+                            $this->ProductUnit->Supplier->save($newSupplier);
+                            $suppliers[$val] = $this->ProductUnit->Supplier->id;
+                        }
+                        $msg = "New supplier record: {$val}";
+                        if(!in_array($msg,$this->importMessages)){
+                            $this->importMessages[] = $msg;
+                        }
+                    }
+                    $currentSupplierId = $suppliers[$val];
+                }
+                // if no more columns save the data
+                if($col === $lastColumn){ // last column
+                    //new group?
+                    if(!empty($newGroup)){
+                        $this->create();
+                        if(!$parseOnly){
+                            $newGroup['image'] = $newUnit['ProductUnit']['image_file'];
+                            $newGroup['guide'] = $newUnit['ProductUnit']['cutter_guide_file'];
+                            $newGroup['drawing'] = $newUnit['ProductUnit']['drawing_file'];
+                            if(!$this->save(array('ProductGroup'=>$newGroup))){
+                                $this->importErrors[] = "Error importing new Product group: '{$val}'";
+                                return false;
+                            }
+                        }
+                    }
+                    //new unit?
+                    if(!empty($newUnit)){
+                        $newUnit['ProductUnit']['supplier_id'] = $currentSupplierId;
+                        //last field to import, if we have a record to save, save it
+                        $msg =   "New product unit record: {$newUnit['ProductUnit']['name']}";
+                        $this->ProductUnit->create();
+                        if(!$parseOnly){
+                            $saved = $this->ProductUnit->save($newUnit);
+                            if(!$saved){
+                                $this->importErrors[] = "Error importing new Product Unit '{$newUnit['ProductUnit']['name']}'";
+                                return false;
+                            }
+                        }
+                        $this->importMessages[] = $msg;
+
+                    }
+                }
+            }
+        }
+        //update the foreign keys in the units table
+        if(!$parseOnly) $this->ProductUnit->updateForeignKeys();
+        return true;
+    }
 
     private $optionCsvFields = array(
         array('name'=>'name', 'type'=>'str'),
@@ -222,197 +398,12 @@ class ProductGroup extends AppModel {
         array('name'=>'multiplier', 'type'=>'str'),
     );
 
-    public function importProductCSV($csvData, $parseOnly = false){
-        //load the Media mdel for use later
-        App::uses('Media', 'Model');
-        $media = new Media();
+
+    public function importOptionCSV($csvData, $parseOnly = false, $replaceAll = true){
         $this->importErrors = array();
         $this->importMessages = array();
-        $fields = $this->productCsvFields;
-        $categories = array_flip($this->Category->find('list'));
-        $suppliers = array_flip($this->ProductUnit->Supplier->find('list'));
-        // if we are importing the data (NOT parsing only), delete current records
-        if(!$parseOnly){
-            $this->deleteAll(array('ProductGroup.id >'=>0));
-            $this->ProductUnit->deleteAll(array('ProductUnit.id >'=>0));
-        }
-
-        foreach($csvData as $lineNo => $line){
-            $currentSection = 'branded'; //default to branded
-            $currentCatId = 0;
-            $unit = array();
-            $newUnit = array();
-            $newGroup = array();
-            $headers = false;
-            //debug($line);
-            foreach($line as $col =>$val){
-                $val = trim($val);
-                if($lineNo == 0 && $val == $fields[$col]['name']){
-                    //this line is column headers
-                    if(!$headers){
-                        $this->importMessages[] = "Column headers found on line {$lineNo}";
-                        $headers = true;
-                    }
-                    break;
-                } else {
-                    if(isset($fields[$col]['value']) && !in_array($val,$fields[$col]['value'])){
-                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col}";
-                    }
-                    if($val && isset($fields[$col]['type']) && $fields[$col]['type'] == 'int' && !ctype_digit($val)){
-                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expected an integer (whole number)";
-                    }
-                }
-                if(!empty($this->importErrors)) return false;
-
-                switch($col){
-                    case 0 : //section
-                        if($val == 'unbranded'){
-                            $currentSection = 'unbranded';
-                        } else {
-                            $currentSection = 'branded';
-                        }
-                        break;
-                    case 1 : //category
-                        if(!array_key_exists($val, $categories)){
-                            //new category to add
-                            $newCat = array('Category'=>array('name'=>$val,'section'=>$currentSection));
-                            $this->Category->create();
-                            if(!$parseOnly){
-                                $this->Category->save($newCat);
-                                $categories[$val] = $this->Category->id;
-                            }
-                            $this->importMessages[] = "New product category record: {$val}";
-                        }
-                        $currentCatId = $categories[$val];
-                        break;
-                    case 2 : //name = ProductGroup
-                        $currentGroupName = $val;
-                        //does the group exist?
-                        $savedGroup = $this->find('first', array('conditions' => array('category_id'=>$currentCatId, 'name'=>$val), 'recursive' => -1));
-                        if(empty($savedGroup)){
-                            //doesnt exist, create it
-                            $newGroup = array('name'=>$val, 'category_id'=>$currentCatId);
-                            $currentGroupSlug = $this->sluggify($val);
-                        } else {
-                            $currentGroupSlug = $savedGroup['ProductGroup']['slug'];
-                        }
-                        $msg = "New product group record: {$val}";
-                        if(!in_array($msg,$this->importMessages )){
-                            $this->importMessages[] = $msg;
-                        }
-                        break;
-                    case 3 : //capacity
-                        $unit['capacity'] = $val;
-                        $unit['capacity_group'] = $this->ProductUnit->calcCapacityGroup($val);
-                        break;
-                    case 4 :  //variant
-                        if(!empty($unit)) $unit['variant'] = $val;
-                        //the ProductUnit name is made from name + capacity + variant
-                        $unit['name'] = $currentGroupName . ' ' . $unit['capacity'];
-                        if($val){
-                            $unit['name'] .= ' - ' . $val;
-                        }
-
-                        //check product doesnt exist
-                        $savedProd = $this->ProductUnit->find('first', array('conditions' => array('product_group_slug'=>$currentGroupSlug, 'name'=>$unit['name']), 'recursive' => -1));
-                        if(empty($savedProd)){
-                            //doesnt exist
-                            $newUnit = $this->ProductUnit->create();
-                            $newUnit['ProductUnit'] = $unit;
-                            $newUnit['ProductUnit']['slug'] = $this->sluggify($unit['name']);
-                            $newUnit['ProductUnit']['product_group_slug'] = $currentGroupSlug;
-                        } else {
-                            $this->importMessages[] = "Product unit: {$unit['name']} will be replaced";
-                        }
-                        break;
-                    case 5 : //image
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['image_file'] = $media->safeFilename($val);
-                        break;
-                    case 6 : //drawing
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['drawing_file'] = $media->safeFilename($val);
-                        break;
-                    case 7 : //cutter guide
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['cutter_file'] = $media->safeFilename($val);
-                        break;
-                    case 8 :
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['origin'] = $val;
-                        break;
-                    case 9 :
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['packaging'] = $val;
-                        break;
-                    case 10 :
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['pallet_unit'] = $val;
-                        break;
-                    case 11 :
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['trailer_load'] = $val;
-                        break;
-                    case 12 :
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['hs_code'] = $val;
-                        break;
-                    case 13 :
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['fca_location'] = $val;
-                        break;
-                    case 14 :
-                        if(!empty($newUnit)) $newUnit['ProductUnit']['price'] = $val;
-                        break;
-                    case 15 : // supplier
-                        if(!array_key_exists($val, $suppliers)){
-                            //new supplier to add
-                            $newSupplier = array('Supplier'=>array('name'=>$val));
-                            $this->ProductUnit->Supplier->create();
-                            if(!$parseOnly){
-                                $this->ProductUnit->Supplier->save($newSupplier);
-                                $suppliers[$val] = $this->ProductUnit->Supplier->id;
-                            }
-                            $this->importMessages[] = "New supplier record: {$val}";
-                        }
-                        //new group?
-                        if(!empty($newGroup)){
-                            $this->create();
-                            if(!$parseOnly){
-                                $newGroup['image'] = $newUnit['ProductUnit']['image_file'];
-                                $newGroup['guide'] = $newUnit['ProductUnit']['cutter_file'];
-                                $newGroup['drawing'] = $newUnit['ProductUnit']['drawing_file'];
-                                if(!$this->save(array('ProductGroup'=>$newGroup))){
-                                    $this->importErrors[] = "Error importing new Product group: '{$val}'";
-                                    return false;
-                                }
-                            }
-                        }
-                        //new unit?
-                        if(!empty($newUnit)){
-                            $newUnit['ProductUnit']['supplier_id'] = $suppliers[$val];
-                            //last field to import, if we have a record to save, save it
-                            $msg =   "New product unit record: {$newUnit['ProductUnit']['name']}";
-                            $this->ProductUnit->create();
-                            if(!$parseOnly){
-                                $saved = $this->ProductUnit->save($newUnit);
-                                if(!$saved){
-                                    $this->importErrors[] = "Error importing new Product Unit '{$newUnit['ProductUnit']['name']}'";
-                                    return false;
-                                }
-                            }
-                            $this->importMessages[] = $msg;
-
-                        }
-                        break;
-                }
-            }
-        }
-        //update the foreign keys in the units table
-        if(!$parseOnly) $this->ProductUnit->updateForeignKeys();
-        return true;
-    }
-
-
-    public function importOptionCSV($csvData, $parseOnly = false){
-        $this->importErrors = array();
-        $this->importMessages = array();
-        //find the correct product group
-        $group = $this->find('first', array('conditions' => array('ProductGroup.id'=>$groupId), 'recursive' => -1));
-        if(empty($group)){
-            $this->importErrors[] = 'Product group does not exist';
-            if(!$parseOnly) return false;
+        if($replaceAll){
+            $this->importMessages[] = 'ALL OPTIONS RECORDS WILL BE CLEARED AND REPLACED!';
         }
         $fields = $this->optionCsvFields;
         $suppliers = array_flip($this->ProductUnit->Supplier->find('list'));
@@ -421,6 +412,8 @@ class ProductGroup extends AppModel {
         $currentQty = 0;
         $lastSupplierId = 0;
         $newRecords = array('colours'=>array(),'option'=>array());
+        $groupSlug = 'xxxxx';
+        $groupIds = array();
         foreach($csvData as $lineNo=>$line){
             //check for column headers
             if($line[0] == $fields[0]['name']){
@@ -428,12 +421,44 @@ class ProductGroup extends AppModel {
                 $this->importMessages[] = "Column headers found on line {$lineNo}";
                 continue;
             }
+            //get the record type
+            $recordType = $line[2];
+            //get the product group slug string
+            $newGroupSlug = $this->sluggify($line[0]);
+            // if changed product group
+            if($groupSlug != $newGroupSlug){
+                $currentQty = 0;
+            }
+            //find the correct product group
+            $groupSlug = $newGroupSlug;
+            //retrieve the group
+            $group = $this->find('first', array('conditions' => array('ProductGroup.slug'=>$groupSlug), 'recursive' => -1));
+            if(empty($group)){
+                $this->importErrors[] = 'Product group does not exist';
+                if(!$parseOnly) return false;
+            } else {
+                $msg = "Product: {$group['ProductGroup']['name']} options will be updated";
+                if(!in_array($msg,$this->importMessages)){
+                    $this->importMessages[] = $msg;
+                }
+            }
+            $groupId = $group['ProductGroup']['id'];
+            //save the id for later
+            if(!in_array($groupId,$groupIds)){
+                $groupIds[] = $groupId;
+            }
+
+            $msg = "New {$recordType} records for product: {$line[0]}";
+            if(!in_array($msg,$this->importMessages)){
+                $this->importMessages[] = $msg;
+            }
             //get record type
             if(!in_array($line[2],$fields[2]['value'])){
                 $this->importErrors[] = "Incorrect record type: {$line[2]}";
                 if(!$parseOnly) return false;
             }
-            $recordType = $line[2];
+
+
             $record = array();
             //debug($line);
             foreach($line as $col =>$val){
@@ -464,6 +489,7 @@ class ProductGroup extends AppModel {
                     }
                 }
                 //debug($col . ' => ' . $val);
+
                 switch($col){
                     case 0 : //name of group, must match id
                         if($group['ProductGroup']['name'] != $val){
@@ -475,7 +501,7 @@ class ProductGroup extends AppModel {
                     case 1 : //supplier
                         if(!array_key_exists($val, $suppliers)){
                             //no supplier found
-                            $this->importErrors[] = "Supplier: \"{$val}\" could not be found in database";
+                            $this->importErrors[] = "Supplier: \"{$val}\" does not exist";
                             if(!$parseOnly) return false;
                         }
                         $supplierId = $suppliers[$val];
@@ -563,23 +589,35 @@ class ProductGroup extends AppModel {
         }
         if(empty($this->importErrors) && !empty($newRecords)){
             $this->saveErrors = array();
-            //first remove existing records for this product group
-            $this->CustomOption->deleteAll(array('CustomOption.product_group_id'=>$groupId));
-            $this->ColourPrice->deleteAll(array('ColourPrice.product_group_id'=>$groupId));
-            //save the new records
-            foreach($newRecords['colours'] as $c){
-                $this->ColourPrice->create();
-                if(!$this->ColourPrice->save(array('ColourPrice'=>$c))){
-                    $this->saveErrors[] = 'Error saving colour pricing records';
+            if(!$parseOnly){
+                if($replaceAll){
+                    //first remove all existing records
+                    $this->CustomOption->deleteAll(array('CustomOption.id >'=>0));
+                    $this->ColourPrice->deleteAll(array('ColourPrice.id >'=>0));
+                } else {
+                    //first remove existing records for this product group
+                    $this->CustomOption->deleteAll(array('CustomOption.product_group_id'=>$groupIds));
+                    $this->ColourPrice->deleteAll(array('ColourPrice.product_group_id'=>$groupIds));
+                }
+                //save the new records
+                foreach($newRecords['colours'] as $c){
+                    $this->ColourPrice->create();
+                    if(!$this->ColourPrice->save(array('ColourPrice'=>$c))){
+                        $this->saveErrors[] = 'Error saving colour pricing records';
+                        return false;
+                    }
+                }
+                foreach($newRecords['option'] as $o){
+                    $this->CustomOption->create();
+                    if(!$this->CustomOption->save(array('CustomOption'=>$o))){
+                        $this->saveErrors[] = 'Error saving custom options records';
+                        return false;
+                    }
                 }
             }
-            foreach($newRecords['option'] as $o){
-                $this->CustomOption->create();
-                if(!$this->CustomOption->save(array('CustomOption'=>$o))){
-                    $this->saveErrors[] = 'Error saving custom options records';
-                }
-            }
+
         }
+        return true;
     }
 
 }

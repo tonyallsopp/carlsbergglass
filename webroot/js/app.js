@@ -238,12 +238,12 @@ function ajaxAction(url, callback){
 }
 
 
-function addUploadedImage(fileName, id){
+function addUploadedImage(fileName, id, mediaType, mediaDir){
     fileName = (fileName.substr(0, fileName.lastIndexOf('.')) || fileName) ;
     var fullFileName = fileName + '.jpg'
     var noFields = $('#product_images ul li').length;
-
-    var imgList = '<li><span class="image"><img alt="" src="' + webroot + 'files/product_images/' + fileName + '_s.jpg"></span>';
+    var imgDir = 'files/' + mediaDir + '/';
+    var imgList = '<li><span class="image"><img alt="" src="' + webroot + imgDir + fileName + '_s.jpg"></span>';
     imgList += '<span class="name">' + fullFileName + '</span>';
     imgList += '<span class="action"><a title="Delete image" href="' + webroot + 'admin/media/delete/' + id + '"><img alt="" src="' + webroot + 'img/layout/cancel.png"></a></span>';
     imgList += '</li>';

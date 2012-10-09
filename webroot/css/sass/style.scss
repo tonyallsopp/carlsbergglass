@@ -323,7 +323,7 @@ $item-width: 186px;
       border-left:1px solid $border-grey;
       border-bottom:1px solid $border-grey;
     }
-    .logo { width:94px;}
+    .logo { width:94px; overflow: hidden;}
     .details {
       background: url('../img/layout/brand-details.png') no-repeat 0 0;
       text-indent: -9999px;

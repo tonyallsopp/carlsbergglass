@@ -15,9 +15,19 @@
 </header>
 <div id="content-inner" class="media">
     <section>
-        <h2>Images</h2>
+        <h2>Product Images</h2>
         <p>Manage glassware images.</p>
         <?php echo $this->Html->link('Manage Images','/admin/media/images',array('class'=>'btn-details'));?>
+    </section>
+    <section>
+        <h2>Category Images</h2>
+        <p>Manage custom glassware category images.</p>
+        <?php echo $this->Html->link('Manage Images','/admin/media/images/cat_img',array('class'=>'btn-details'));?>
+    </section>
+    <section>
+        <h2>Brand Logos</h2>
+        <p>Manage glassware brand logo images.</p>
+        <?php echo $this->Html->link('Manage Logos','/admin/media/images/logo',array('class'=>'btn-details'));?>
     </section>
     <section>
         <h2>POS Glassware Manual</h2>

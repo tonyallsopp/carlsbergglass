@@ -11,11 +11,8 @@
         <?php
         foreach ($listings as $cat):?>
             <li>
-                <div class="prod-img">
-                    <a href="<?php echo $this->Html->url("/custom_glassware/{$cat['Category']['slug']}");?>">
-                    <img src="http://placehold.it/150x180">
-                    </a>
-                </div>
+                <?php echo $this->Site->productImage("{$cat['Category']['slug']}.jpg",'s',"/custom_glassware/{$cat['Category']['slug']}",false,'category_images');?>
+
                 <?php echo $this->Html->link($cat['Category']['name'], "/custom_glassware/{$cat['Category']['slug']}",array('class'=>'btn-details')); ?>
 
             </li>

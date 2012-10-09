@@ -10,7 +10,10 @@
     </header>
     <div id="content-inner">
         <?php if ($sheetType == 'Options'): ?>
-        <h2>Options sheet for <?php echo $group['ProductGroup']['name'];?></h2>
+        <h2>Options sheet</h2>
+            <p>
+                To clear and replace ALL product options, check the "Replace all options sets" box OR to replace only the options for the products in the CSV file, leave it clear.
+            </p>
         <?php else: ?>
         <h2>Master product sheet</h2>
         <?php endif;?>
@@ -18,8 +21,9 @@
         <?php
         if (!$filename):
             echo $this->Form->create('ProductGroup', array('type' => 'file'));
-            if ($groupId) echo $this->Form->hidden('id', array('value' => $groupId));
-            echo $this->Form->input('csv',array('div'=>'input file', 'type'=>'file', 'label'=>'CSV file'));?>
+            echo $this->Form->input('csv',array('div'=>'input file', 'type'=>'file', 'label'=>'CSV file'));
+            if($sheetType == 'Options') echo $this->Form->input('replace',array( 'type'=>'checkbox', 'label'=>'Replace all option sets'));
+            ?>
             <div class="form-actions">
                 <?php  echo $this->Form->end('Upload');
                 echo  $this->Html->link('Cancel','/admin/product_groups');?>
@@ -47,7 +51,11 @@
         <?php  if (empty($importErrors) && $filename && !empty($importMessages)): ?>
         <div class="form-actions">
             <?php
-            echo $this->Html->link("Import data", "/admin/product_groups/import_csv/{$sheetType}/{$filename}",array('class'=>'btn-details'),'Are you sure you want to import the data?\nAll current product records will be overwritten.');
+            $confirmMsg = 'Are you sure you want to import the product data?\n\nAll current product records will be overwritten.';
+            if($sheetType == 'Options'){
+                $confirmMsg = 'Are you sure you want to import the options data?';
+            }
+            echo $this->Html->link("Import data", "/admin/product_groups/import_csv/{$sheetType}/{$filename}/{$replaceAll}",array('class'=>'btn-details'),$confirmMsg);
             echo  $this->Html->link('Cancel','/admin/product_groups');
             ?>
         </div>

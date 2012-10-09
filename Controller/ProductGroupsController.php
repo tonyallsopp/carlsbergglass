@@ -37,7 +37,7 @@ class ProductGroupsController extends AppController {
         $opts = array('ProductGroup'=>array('conditions' => $conditions, 'contain' => $contain, 'limit' => 20));
         $this->paginate = $opts;
         $productGroups = $this->paginate('ProductGroup');
-        debug($productGroups);
+        //debug($productGroups);
         $this->ProductGroup->getBasePrice($productGroups);
         $this->set('listings', $productGroups);
         $subCategory = $subcat ? $productGroups[0]['Category']['name'] : 'All';
@@ -82,7 +82,7 @@ class ProductGroupsController extends AppController {
             $this->Session->setFlash('Could not find product');
             $this->redirect($this->referer());
         }
-        debug($product);
+        //debug($product);
         //get available custom options for this product group
         $this->ProductGroup->getCustomOptions($product);
         //get available sizes
@@ -93,7 +93,7 @@ class ProductGroupsController extends AppController {
         $estimatePrice = $currentProdUnit['price'];
         // calc price etc based on inputs
         if ($this->request->is('post')) {
-            debug($this->request->data);
+            //debug($this->request->data);
             //create an order
             $order = $this->ProductGroup->ProductUnit->OrderItem->Order->initQuote($this->_user, $this->request->data, $currentProdUnit, $product);
             //save the order
@@ -264,48 +264,42 @@ class ProductGroupsController extends AppController {
 
 
 
-    public function admin_upload_csv($sheetType = 'product', $groupId = null) {
+    public function admin_upload_csv($sheetType = 'product') {
         $sheetType = $sheetType == 'product' ? 'product' : 'options';
         $importFileName = null;
+        $replaceAll = false;
         if ($this->request->is('post')) {
             $importFileName = $this->request->data['ProductGroup']['csv']['name'];
             $this->ProductGroup->set($this->request->data);
-            if($sheetType == 'options' && !$groupId){
-                //if options sheet, a group id must be given
-                $this->Session->setFlash('Error uploading file, invalid product group');
-            } else {
-                //validate
-                if ($this->ProductGroup->validates()) {
-                    // it validated logic
-                    $uploaded = $this->uploadFile($this->request->data['ProductGroup']['csv']);
-                    if($uploaded){
-                        $csvData = $this->parseCSVFile(TMP_FILES . $this->request->data['ProductGroup']['csv']['name']);
-                        debug($csvData);
-                        if($sheetType == 'product'){
-                            $this->ProductGroup->importProductCSV($csvData, true);
-                        } else {
-                            $this->ProductGroup->importOptionCSV($csvData, $groupId, true);
-                        }
+            //debug($this->request->data);
+            //validate
+            if ($this->ProductGroup->validates()) {
+                // it validated logic
+                $uploaded = $this->uploadFile($this->request->data['ProductGroup']['csv']);
+                if($uploaded){
+                    $csvData = $this->parseCSVFile(TMP_FILES . $this->request->data['ProductGroup']['csv']['name']);
+                    //debug($csvData);
+                    if($sheetType == 'product'){
+                        $this->ProductGroup->importProductCSV($csvData, true);
                     } else {
-                        $this->Session->setFlash('Error uploading file');
+                        $replaceAll = $this->request->data['ProductGroup']['replace'];
+                        $this->ProductGroup->importOptionCSV($csvData, true, $replaceAll);
                     }
                 } else {
-                    debug($this->ProductGroup->invalidFields());
+                    $this->Session->setFlash('Error uploading file');
                 }
+            } else {
+                debug($this->ProductGroup->invalidFields());
             }
-        }
-        if($sheetType == 'options'){
-            $group = $this->ProductGroup->find('first', array('conditions' => array('ProductGroup.id'=>$groupId), 'recursive' => -1));
-            $this->set('group', $group);
         }
         $this->set('importErrors',$this->ProductGroup->importErrors);
         $this->set('importMessages',$this->ProductGroup->importMessages);
         $this->set('sheetType', ucfirst($sheetType));
-        $this->set('groupId', $groupId);
         $this->set('filename', $importFileName);
+        $this->set('replaceAll', $replaceAll);
     }
 
-    public function admin_import_csv($type, $filename = null) {
+    public function admin_import_csv($type, $filename = null, $replaceAll = false) {
         $type = strtolower($type) == 'product' ? 'product' : 'options';
         $imported = false;
         if($filename){
@@ -315,7 +309,7 @@ class ProductGroupsController extends AppController {
                 if($type == 'product'){
                     $imported = $this->ProductGroup->importProductCSV($csvData);
                 } elseif($type == 'options') {
-                    $imported = $this->ProductGroup->importOptionCSV($csvData);
+                    $imported = $this->ProductGroup->importOptionCSV($csvData, false, $replaceAll);
                 } else {
                     $this->Session->setFlash('Cannot find specified file, parameters missing');
                 }
@@ -330,6 +324,8 @@ class ProductGroupsController extends AppController {
         }
         if($imported){
             $this->Session->setFlash("{$filename} imported successfully");
+        } else {
+            $this->Session->setFlash("Error importing {$filename}: " . explode(' ,',$this->ProductGroup->saveErrors));
         }
         $this->redirect('/admin/product_groups');
     }
