@@ -106,7 +106,7 @@ $side-menu-width:200px;
   }
   section {
     clear:both;
-    overflow: hidden;
+    //overflow: hidden;
     padding:30px;
   }
 }
@@ -120,6 +120,7 @@ $side-menu-width:200px;
     padding:30px;
     section {
       padding:0 0 30px 0;
+      overflow: hidden;
     }
   }
 }
@@ -373,12 +374,13 @@ div.prod-img {
     }
     .manual { width:880px; }
   }
+  p { padding:10px 0 0 0;}
   dl {
     padding-top:20px;
     font:$title-font-light;
     font-size: 18px;
     dt { @include float-left; padding-right:.6em; color:$grey-text; }
-    dd { color:$mid-green-text; }
+    dd { color:$mid-green-text; padding-bottom: 8px; }
   }
 }
 // standard product page layout
@@ -427,6 +429,7 @@ div.product-view {
       }
       p { padding-bottom:20px; }
       section {
+        overflow: hidden;
         padding:30px 0;
         border-bottom: 1px solid $prod-header-bdr;
         &:last-child { border-bottom:0; }
@@ -550,6 +553,14 @@ h2 {
 }
 
 //FILE IMPORT
+
+#content-inner.media section {
+  @include float-left;
+  width:300px;
+  padding-right:10px;
+  min-height: 120px;
+  clear:none;
+}
 
 .import-report {
   li {

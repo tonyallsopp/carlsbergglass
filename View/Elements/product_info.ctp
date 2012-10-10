@@ -10,6 +10,12 @@
         <td>Product Description</td>
         <td class="prodinfo-name last"><?php echo h($unit['name']); ?></td>
     </tr>
+    <?php if($unit['classification']):?>
+    <tr>
+        <td>Classification</td>
+        <td class="prodinfo-classification last"><?php echo h($unit['classification']); ?></td>
+    </tr>
+    <?php endif;?>
     <tr>
         <td>Country of Origin</td>
         <td class="prodinfo-origin last"><?php echo h($unit['origin']); ?></td>
@@ -34,5 +40,35 @@
         <td>FCA Unit Price (1 piece in EUR)</td>
         <td class="prodinfo-price last"><?php echo h($unit['price']); ?></td>
     </tr>
+    <?php if($unit['height']):?>
+    <tr>
+        <td>Hieght</td>
+        <td class="prodinfo-height last"><?php echo h($unit['height']); ?>mm</td>
+    </tr>
+    <?php endif;?>
+    <?php if($unit['max_diameter']):?>
+    <tr>
+        <td>Maximum Diameter</td>
+        <td class="prodinfo-max_diameter last"><?php echo h($unit['max_diameter']); ?>mm</td>
+    </tr>
+        <?php endif;?>
+    <?php if($unit['misc_1_label'] && $unit['misc_1_value']):?>
+    <tr>
+        <td class="prodinfo-misc_1_label"><?php echo h($unit['misc_1_label']); ?></td>
+        <td class="prodinfo-misc_1_value last"><?php echo h($unit['misc_1_value']); ?></td>
+    </tr>
+        <?php endif;?>
+    <?php if($unit['misc_2_label'] && $unit['misc_2_value']):?>
+    <tr>
+        <td class="prodinfo-misc_2_label"><?php echo h($unit['misc_2_label']); ?></td>
+        <td class="prodinfo-misc_2_value last"><?php echo h($unit['misc_2_value']); ?></td>
+    </tr>
+        <?php endif;?>
+    <?php if($unit['misc_3_label'] && $unit['misc_3_value']):?>
+    <tr>
+        <td class="prodinfo-misc_3_label"><?php echo h($unit['misc_3_label']); ?></td>
+        <td class="prodinfo-misc_3_value last"><?php echo h($unit['misc_3_value']); ?></td>
+    </tr>
+        <?php endif;?>
     </tbody>
 </table>

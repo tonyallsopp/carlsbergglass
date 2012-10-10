@@ -174,7 +174,7 @@ class ProductGroupsController extends AppController {
      */
     public function admin_index() {
         $groups = $this->ProductGroup->find('all', array('conditions' => array('Category.section'=>'unbranded'), 'order'=>'ProductGroup.name ASC'));
-        debug($groups);
+        //debug($groups);
         $this->set('groups',$groups);
     }
 

@@ -46,6 +46,8 @@ class Media extends AppModel {
         ),
 	);
 
+    public $imageExtensions = array('jpg','jpeg','png','gif','bmp');
+
     public $validateFile = array(
         //'size' => 4194304, // 4meg
         'size' => 10485760, // 10meg
@@ -54,7 +56,12 @@ class Media extends AppModel {
     public $imageDir = '';
 
     public $mediaTypes = array(
-        'manual'=>array('name'=>'Manual','plural'=>'Manuals','dir'=>'manual','type'=>'manual'),
+        'manual'=>array('name'=>'Manual','plural'=>'Manuals','dir'=>'manual','type'=>'manual','filetypes'=>array('pdf')),
+        'tech'=>array('name'=>'Technical Document','plural'=>'Technical Documents','dir'=>'technical','type'=>'tech','filetypes'=>array('pdf','jpg','jpeg','png'),
+            'sizes'=> array(
+                'small' => array('w'=>150,'h'=>180,'suffix'=>'_s'),
+            )
+        ),
         'prod_img'=>array('name'=>'Product Image','plural'=>'Product Images','dir'=>'product_images','type'=>'prod_img',
             'sizes'=> array(
                 'small' => array('w'=>150,'h'=>180,'suffix'=>'_s'),
@@ -115,6 +122,8 @@ class Media extends AppModel {
             $this->setImageDir(LOGO_IMG_DIR);
         } elseif($mediaType == 'cat_img') {
             $this->setImageDir(CAT_IMG_DIR);
+        }  elseif($mediaType == 'tech') {
+            $this->setImageDir(TECH_DOC_DIR);
         } else {
             $this->setImageDir(PROD_IMG_DIR);
         }
@@ -147,7 +156,7 @@ class Media extends AppModel {
                         } else {
                             //generate smaller images?
                             if($resize){
-                                $sizeArray = $this->mediaTypes[$mediaType]['sizes'];
+                                $sizeArray = isset($this->mediaTypes[$mediaType]['sizes']) ? $this->mediaTypes[$mediaType]['sizes'] : array();
                                 foreach($sizeArray as $k=>$v){
                                     $newName = $preName . $v['suffix'] . '.jpg';
                                     if(!$this->resize($imgDir . $fileName, $imgDir . $newName, $v['w'], $v['h'])){

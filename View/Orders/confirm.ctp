@@ -51,9 +51,7 @@
         </section>
 
         <aside class="col col-2">
-            <div class="prod-img">
-                <img src="http://placehold.it/190x230">
-            </div>
+            <?php echo $this->Site->productImage($productGroup['ProductGroup']['image'],'m',"/files/product_images/{$productGroup['ProductGroup']['image']}", true);?>
             <section class="order-info">
                 <?php echo $this->element('order_item_info', array('item' => $order['OrderItem'][0]));?>
             </section>

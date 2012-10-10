@@ -41,6 +41,9 @@ class SiteHelper extends AppHelper {
             case 'logo':
                 $dir = '/files/logo_images/';
                 break;
+            case 'tech':
+                $dir = '/files/technical/';
+                break;
         }
         $html .= $this->Html->image($dir . $fName);
         $html .= '</a>';

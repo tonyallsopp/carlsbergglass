@@ -1,11 +1,11 @@
 <header class="page-header">
     <div class="inner">
         <div class="col-1 col">
-            <h1><?php echo $mediaType['plural'];?></h1>
+            <h1>Technical Files</h1>
         </div>
         <div class="col-2 col">
             <div class="col-1 col">
-                <?php echo $this->Html->link("Upload {$mediaType['plural']}", array('action' => 'upload_files',$mediaType['type']),array('class'=>'btn-details')); ?>
+                <?php echo $this->Html->link("Upload Files", array('action' => 'upload_files',$mediaType['type']),array('class'=>'btn-details')); ?>
             </div>
             <div class="col-2 col">
 
@@ -28,7 +28,12 @@
         <?php
         foreach ($media as $media): ?>
         <tr>
+            <?php if(stripos($media['Media']['filename'],'pdf')):?>
+            <td class="thumb"><?php echo $this->Html->image('icon_pdf.png',array('url'=>$this->Html->url("/files/{$mediaType['dir']}/"  . $media['Media']['filename'],true))); ?></td>
+            <?php else:?>
             <td class="thumb"><?php echo $this->Site->imageThumb($media['Media']['filename'],$media['Media']['type'], "/files/{$mediaType['dir']}/"  . $media['Media']['filename']); ?></td>
+            <?php endif;?>
+
             <td><?php echo h($media['Media']['name']); ?></td>
             <td><?php echo h($media['Media']['filename']); ?></td>
             <td><?php echo $this->Time->format('d/m/Y',$media['Media']['updated']); ?></td>

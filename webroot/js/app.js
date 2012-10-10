@@ -122,6 +122,13 @@ $(function(){
                                 var elem = $('.prodinfo-' + p);
                                 if(elem.length){
                                     elem.text(data[p]);
+                                    //if blank, hide the row
+                                    if(!data[p]){
+                                        elem.closest('tr').hide();
+                                    } else {
+                                        elem.closest('tr').show();
+                                    }
+
                                 }
                             }
                         }

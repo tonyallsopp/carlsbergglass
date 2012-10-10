@@ -331,12 +331,18 @@ class AppController extends Controller {
     }
 
     public function uploadFile($tmpFile, $newName = null, $destDir = null){
+        $res = array('success'=>false);
         if(!$destDir) $destDir = TMP_FILES;
-        if($destDir === TMP_FILES && !is_dir($destDir)){
+        if(!is_dir($destDir)){
             mkdir($destDir);
         }
         $destName = $newName ? $newName : strtolower($tmpFile['name']);
-        return move_uploaded_file($tmpFile['tmp_name'], $destDir . $destName);
+        if(move_uploaded_file($tmpFile['tmp_name'], $destDir . $destName)){
+            $res['success'] = true;
+        } else {
+            $res['error'] = 'Could not upload file';
+        }
+        return $res;
     }
 
 }

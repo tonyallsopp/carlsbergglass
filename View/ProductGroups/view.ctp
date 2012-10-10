@@ -18,9 +18,24 @@
                 <div class="inner">
                     <?php echo $this->Html->link('&laquo; Back to ' . $productGroup['Category']['name'],$referrer,array('escape'=>false, 'class'=>'back'));?>
                     <h1><?php  echo h($productGroup['ProductGroup']['name']); ?></h1>
+                    <?php if($currentUnit['description']){
+                        echo $this->Site->textBlock($currentUnit['description']);
+                    } ?>
                     <dl>
                         <dt>Sizes Available:</dt>
                         <dd><?php echo implode(', ', $productSizes)?></dd>
+
+                        <?php if($productGroup['Category']['section'] == 'branded'):?>
+                        <dt>Brand:</dt>
+                        <?php else:?>
+                        <dt>Category:</dt>
+                        <?php endif;?>
+                        <dd><?php echo $productGroup['Category']['name'];?></dd>
+
+                        <?php if($currentUnit['classification']):?>
+                        <dt>Classification:</dt>
+                        <dd><?php echo $currentUnit['classification'];?></dd>
+                        <?php endif;?>
                     </dl>
 
                 </div>
@@ -46,17 +61,17 @@
                 <ul>
                     <?php if($productGroup['ProductGroup']['drawing']):?>
                     <li>
-                        <?php echo $this->Html->link('Download technical drawing',"/files/drawings/{$productGroup['ProductGroup']['drawing']}",array('target'=>'_blank'));?>
+                        <?php echo $this->Html->link('Download technical drawing',"/files/technical/{$productGroup['ProductGroup']['drawing']}",array('target'=>'_blank'));?>
                     </li>
                     <?php endif;?>
                     <?php if($productGroup['ProductGroup']['image']):?>
                     <li>
-                        <?php echo $this->Html->link('Download hi-res image',"/files/images/{$productGroup['ProductGroup']['drawing']}",array('target'=>'_blank'));?>
+                        <?php echo $this->Html->link('Download hi-res image',"/files/product_images/{$productGroup['ProductGroup']['image']}",array('target'=>'_blank'));?>
                     </li>
                     <?php endif;?>
                     <?php if($productGroup['ProductGroup']['guide']):?>
                     <li>
-                        <?php echo $this->Html->link('Download cutter guide',"/files/guides/{$productGroup['ProductGroup']['guide']}",array('target'=>'_blank'));?>
+                        <?php echo $this->Html->link('Download cutter guide',"/files/technical/{$productGroup['ProductGroup']['guide']}",array('target'=>'_blank'));?>
                     </li>
                     <?php endif;?>
                     <li>

@@ -71,21 +71,45 @@ class MediaController extends AppController {
     }
 
     /**
-     * admin_upload_images method
+     * files method
      *
      * @return void
      */
-    public function admin_upload_images($mediaType = 'prod_img')
+    public function admin_files()
     {
+        // mediaType should be drawing or guide
+        $mediaType = 'tech';
+        $this->paginate = array('conditions'=>array('Media.type'=>$mediaType));
+        $this->Media->recursive = 0;
+        $this->set('media', $this->paginate());
         $this->set('mediaType',$this->Media->mediaTypes[$mediaType]);
-        $this->set('backLink','/admin/media/images/' . $this->Media->mediaTypes[$mediaType]['type']);
+    }
+
+    /**
+     * admin_upload_files method
+     *
+     * @return void
+     */
+    public function admin_upload_files($mediaType = 'prod_img')
+    {
+        $backLink = $mediaType == 'tech' ? '/admin/media/files' : '/admin/media/images/' . $this->Media->mediaTypes[$mediaType]['type'];
+        $this->set('backLink',$backLink);
+        $this->set('mediaType',$this->Media->mediaTypes[$mediaType]);
     }
 
     public function admin_ajax_image_upload($mediaType = 'prod_img') {
         if(!empty($_FILES)){
-            //$fName = $this->Media->unique_filename($_FILES['Filedata']['name']);
             $fName = $this->Media->safeFilename($_FILES['Filedata']['name']);
-            $res = $this->Media->handleImageUpload($_FILES['Filedata'], $fName, $mediaType);
+            $ext = array_pop(explode('.',$fName));
+            if(!in_array($ext,$this->Media->imageExtensions)){
+                //file is NOT an image
+                $res = $this->uploadFile($_FILES['Filedata'],$fName, TECH_DOC_DIR);
+            } else {
+                // IS image
+                $res = $this->Media->handleImageUpload($_FILES['Filedata'], $fName, $mediaType);
+            }
+            $res['name'] = $fName;
+
             $res['saved'] = 0;
             $res['id'] = '';
             if($res['success']){

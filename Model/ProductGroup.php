@@ -374,7 +374,14 @@ class ProductGroup extends AppModel {
             }
         }
         //update the foreign keys in the units table
-        if(!$parseOnly) $this->ProductUnit->updateForeignKeys();
+        if(!$parseOnly){
+            //update the product unit foreign keys
+            $this->ProductUnit->updateForeignKeys();
+            //update the ColourPrice foreign keys
+            $this->ColourPrice->updateForeignKeys();
+            //update the CustomOption foreign keys
+            $this->CustomOption->updateForeignKeys();
+        }
         return true;
     }
 
@@ -585,6 +592,9 @@ class ProductGroup extends AppModel {
                         break;
                 }
             }
+            //add the group slug
+            $record['product_group_slug'] = $groupSlug;
+            //add to new records
             $newRecords[$recordType][] = $record;
         }
         if(empty($this->importErrors) && !empty($newRecords)){

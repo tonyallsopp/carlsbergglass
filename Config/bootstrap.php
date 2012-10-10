@@ -43,6 +43,7 @@ define('FILES_DIR', WWW_ROOT . 'files' . DS);
 define('PROD_IMG_DIR', FILES_DIR . 'product_images' . DS);
 define('LOGO_IMG_DIR', FILES_DIR . 'logo_images' . DS);
 define('CAT_IMG_DIR', FILES_DIR . 'category_images' . DS);
+define('TECH_DOC_DIR', FILES_DIR . 'technical' . DS);
 define('MANUAL_DIR', FILES_DIR . 'manual' . DS);
 
 

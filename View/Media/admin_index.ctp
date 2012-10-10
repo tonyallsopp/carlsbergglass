@@ -30,6 +30,11 @@
         <?php echo $this->Html->link('Manage Logos','/admin/media/images/logo',array('class'=>'btn-details'));?>
     </section>
     <section>
+        <h2>Drawings and Cutter Guides</h2>
+        <p>Manage technical drawings and cutter guides.</p>
+        <?php echo $this->Html->link('Manage Files','/admin/media/files',array('class'=>'btn-details'));?>
+    </section>
+    <section>
         <h2>POS Glassware Manual</h2>
         <p>Upload POS Glassware Manual. Last changed: <?php echo $this->Time->format('d M Y @H:i',$manual['Media']['updated'])?>.
             <?php if (!empty($manual) && $manual['Media']['filename']) echo $this->Html->link('View Manual',"/files/manual/{$manual['Media']['filename']}",array('target'=>'_blank'));?></p>

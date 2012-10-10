@@ -22,8 +22,8 @@ class UploadifyHelper extends AppHelper {
                 "queueID"   : "file_upload_queue",
                 "removeCompleted": true,
                 "multi"          : true,
-                "fileExt"        : "*.jpg;*.gif;*.png",
-                "fileDesc"       : "Image Files (.JPG, .GIF, .PNG)",
+                "fileExt"        : "%s",
+                "fileDesc"       : "%s",
                 onComplete  : function(event, queueID, fileObj, response, data) {
                     var res = $.parseJSON(response);
                     if(res.success){
@@ -56,17 +56,25 @@ class UploadifyHelper extends AppHelper {
      * @param type $options
      * @return type 
      */
-    public function file($fieldName, $fieldId, $uploadUrl, $options = array()) {
+    public function file($fieldName, $fieldId, $uploadUrl, $mediaType = 'prod_img') {
+
         $options['id'] = $fieldId;
-        $baseOpts = array('name'=>'');
-        $options = array_replace($baseOpts, $options);
+
+        $fileExt = "*.jpg;*.gif;*.png";
+        $fileDesc = "Image Files (.JPG, .GIF, .PNG)";
+        if($mediaType == 'tech'){
+            $fileExt = "*.*";
+            $fileDesc = "Image/PDF Files (.JPG, .GIF, .PNG, .PDF)";
+        }
 
         echo $this->Html->scriptBlock(
                 sprintf(
                     $this->template,
                     $fieldId,
                     $this->Js->object(array('session_id' => session_id())),
-                    $this->Html->url($uploadUrl)
+                    $this->Html->url($uploadUrl),
+                    $fileExt,
+                    $fileDesc
                 ), array("inline" => false));
         return $this->Form->file($fieldName, $options) . '<div id="file_upload_queue"></div>';
     }
