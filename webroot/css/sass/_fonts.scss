@@ -29,7 +29,8 @@
   font-style: normal;
 }
 
-$body-font: 14px Arial, Helvetica, Freesans, sans-serif;
-$title-font-light: 14px 'CarlsbergSansLight', Arial, Helvetica, Freesans, sans-serif;
+
+$title-font-light: 14px/1.3em 'CarlsbergSansLight', Arial, Helvetica, Freesans, sans-serif;
 $title-font-black: 14px 'CarlsbergSansBlack', Arial, Helvetica, Freesans, sans-serif;
 $title-font-bold: 14px 'CarlsbergSansBold', Arial, Helvetica, Freesans, sans-serif;
+$body-font: $title-font-light;

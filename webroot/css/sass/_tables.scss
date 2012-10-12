@@ -59,14 +59,13 @@ th:only-child{
 }
 
 td {
-  height:38px;
-  border:1px solid $bc-hover-grey;
+  border:$table-border;
   border-top:0;
   border-left:0;
   padding:15px 20px;
 }
 td.first, td:first-child {
-  border-left:1px solid $bc-hover-grey;
+  border-left:$table-border;
 }
 tr:nth-child(even) td  { background-color:$alt-cell; }
 td.actions {
@@ -78,4 +77,20 @@ td.thumb { padding:5px; text-align: center;}
 td img {
   max-width: 50px;
   max-height: 50px;
+}
+
+table.product-info {
+  th {
+    @extend .grey-grad-header;
+    text-shadow: none;
+    color: $bc-hover-grey;
+    font-weight: normal;
+    font: $title-font-light;
+  }
+  td {
+    border-bottom:$table-border;
+    border-left:$table-border;
+    border-right:0;
+    &.last,&:last-child {  border-right:$table-border; }
+  }
 }

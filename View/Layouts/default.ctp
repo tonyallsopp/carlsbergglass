@@ -30,7 +30,7 @@
             <p class="current-user">Welcome<br/><?php echo $_user['full_name']?></p>
             <?php if(!$adminLayout) echo $this->Element('main_nav');?>
             <?php if($adminLayout) echo $this->Element('admin_main_nav');?>
-            <?php if(!$adminLayout)echo $this->Element('admin_subnav');?>
+            <?php echo $this->Element('admin_subnav');?>
 		</header>
         <section id="content">
             <header id="sub-header">
@@ -48,7 +48,7 @@
 
 	</div>
 	<?php
-    echo $this->element('sql_dump');
+    if(Configure::read('debug') > 1) echo $this->element('sql_dump');
     echo $this->Html->script(array('jquery-1.7.2.min','jquery.validate.min','jquery.simplemodal','app'));
     echo $this->fetch('script');
     ?>

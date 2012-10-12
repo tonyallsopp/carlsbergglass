@@ -4,10 +4,9 @@
         Please specify your parameters. Production information on your selection will be displayed below.
     </p>
     <?php
-
     echo $this->Form->input('ProductGroup.size',array('options'=>$productSizes));
-    echo $this->Form->input('OrderItem.0.qty',array('empty'=>'1'));
-    echo $this->Form->input('OrderItem.0.colours',array('options'=>$colours, 'label'=>'Number of colours', 'empty'=>'-- Select --'));
+    echo $this->Form->input('OrderItem.0.qty',array('default'=>$currentUnit['pallet_unit']));
+    echo $this->Form->input('OrderItem.0.colours',array('options'=>$colours, 'label'=>'Number of colours'));
     foreach($productGroup['CustomOption'] as $i=>$opt){
         echo $this->Form->hidden("OrderItemOption.{$i}.name",array('value'=>$opt['name']));
 

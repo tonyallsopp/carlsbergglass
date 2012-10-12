@@ -47,7 +47,7 @@ $class .= isset($altBackground) ? ' alt-bg' : '';
 
 
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php if(Configure::read('debug') > 1) echo $this->element('sql_dump'); ?>
     <?php echo $this->Html->script(array('jquery-1.7.2.min','jquery.validate.min','app'));?>
 </body>
 </html>

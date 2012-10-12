@@ -55,6 +55,9 @@ $side-menu-width:200px;
         @include linear-grad-lr($menu-green-hl, $dark-green);
       }
     }
+    &.current {
+      a { @include linear-grad-lr($menu-green-hl, $dark-green); }
+    }
   }
   .admin-home, .my-account, .logout, .back {
     span {
@@ -374,7 +377,7 @@ div.prod-img {
     }
     .manual { width:880px; }
   }
-  p { padding:10px 0 0 0;}
+  p { padding:0;}
   dl {
     padding-top:20px;
     font:$title-font-light;
@@ -447,6 +450,15 @@ div.product-view {
           }
         }
       }
+      section.order-info {
+        div.input {
+          height:auto;
+          padding:0;
+        }
+        div.submit {
+          padding-top: 20px;
+        }
+      }
       .prod-img {
         margin-top: 30px;
         border: 1px solid $prod-header-bdr;
@@ -466,21 +478,6 @@ div.product-view {
         padding:10px 0
       }
     }
-  }
-}
-table.product-info {
-  th {
-    @extend .grey-grad-header;
-    text-shadow: none;
-    color: $bc-hover-grey;
-    font-weight: normal;
-    font: $title-font-light;
-  }
-  td {
-    border-bottom:1px solid $border-grey;
-    border-left:1px solid $border-grey;
-    border-right:0;
-    &.last,&:last-child {  border-right:1px solid $border-grey; }
   }
 }
 
@@ -544,12 +541,18 @@ h2 {
         text-decoration: none;
         &:hover { text-decoration: underline;}
       }
+      padding-bottom: 15px;
 
     }
   }
 }
 .faq {
   a.back{ padding-bottom: 20px; display: block;}
+}
+#support-side {
+  h2.phone {
+    padding:15px 0 10px 0;
+  }
 }
 
 //FILE IMPORT
@@ -631,9 +634,21 @@ h2 {
       text-transform: uppercase;
       padding-bottom: 20px;
     }
-    p { color:white;}
+
+  }
+  p { color:white; font: $title-font-light;}
+  #UserForgotPasswordForm {
+    div.input, div.form-actions {
+      div.submit { padding:0;}
+      @include float-left;
+      clear:none;
+      padding:0;
+      height:auto;
+    }
+    div.input { padding-right: 20px;;}
   }
 }
+.alt-bg { background: url('../img/layout/main-bg-2.jpg') no-repeat center top  $dark-green-body-bg;  }
 
 /**** Lightbox ****/
 
@@ -676,4 +691,15 @@ h2 {
 #xsimple-modal-content img {
   max-width: 100%;
   max-height: 100%;
+}
+a.lightbox { position: relative;}
+.lightbox-zoom {
+  text-indent: -9999px;
+  display: block;
+  position: absolute;
+  right:10px;
+  bottom:10px;
+  height:13px;
+  width:13px;
+  background: url('../img/layout/zoom-lb.png') no-repeat;
 }

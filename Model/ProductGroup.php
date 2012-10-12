@@ -184,7 +184,7 @@ class ProductGroup extends AppModel {
         array('name'=>'cutter guide','field'=>'cutter_guide_file', 'type'=>'str'),
         array('name'=>'origin','field'=>'origin', 'type'=>'str'),
         array('name'=>'primary packaging','field'=>'packaging', 'type'=>'str'),
-        array('name'=>'pallet unit','field'=>'pallet_unit', 'type'=>'str'),
+        array('name'=>'pallet unit','field'=>'pallet_unit', 'type'=>'int'),
         array('name'=>'trailer load','field'=>'trailer_load', 'type'=>'str'),
         array('name'=>'hs code','field'=>'hs_code', 'type'=>'str'),
         array('name'=>'fca location','field'=>'fca_location', 'type'=>'str'),
@@ -203,6 +203,7 @@ class ProductGroup extends AppModel {
     );
 
     public function importProductCSV($csvData, $parseOnly = false){
+        debug($csvData);
         //load the Media mdel for use later
         App::uses('Media', 'Model');
         $media = new Media();
@@ -230,7 +231,7 @@ class ProductGroup extends AppModel {
             $currentGroupSlug = '';
             $currentSupplierId = 0;
             if(!isset($lastColumn)) $lastColumn = count($line) -1;
-            debug($lastColumn);
+
             //debug($line);
             foreach($line as $col =>$val){
                 $val = trim($val);
@@ -321,7 +322,12 @@ class ProductGroup extends AppModel {
                     }
                 } elseif($col >= 5 && $col <= 7){ //media files
                     if(!empty($newUnit)) $newUnit['ProductUnit'][$fields[$col]['field']] = $media->safeFilename($val);
-                } elseif( ($col >= 8 && $col <= 14) || ($col >= 16 && $col <= 25)){
+                } elseif( ($col >= 8 && $col <= 14) || ($col >= 16 && $col <= 25)){ //other fields
+                    if(!$val){
+                       if($fields[$col]['type'] == 'int' || $fields[$col]['type'] == 'dec' ){
+                           $val = 0;
+                       }
+                    }
                     if(!empty($newUnit)) $newUnit['ProductUnit'][$fields[$col]['field']] = $val;
                 } elseif($col === 15){ // supplier
                     if(!array_key_exists($val, $suppliers)){
@@ -331,6 +337,8 @@ class ProductGroup extends AppModel {
                         if(!$parseOnly){
                             $this->ProductUnit->Supplier->save($newSupplier);
                             $suppliers[$val] = $this->ProductUnit->Supplier->id;
+                        } else {
+                            $suppliers[$val] = 0;
                         }
                         $msg = "New supplier record: {$val}";
                         if(!in_array($msg,$this->importMessages)){

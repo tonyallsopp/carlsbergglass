@@ -45,6 +45,7 @@
         </tbody>
     </table>
 
+    <?php if($this->Paginator->hasNext() || $this->Paginator->hasPrev()):?>
     <div class="paging">
         <p>
             <?php
@@ -58,6 +59,7 @@
         echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
+    <?php endif;?>
 </div>
 
 

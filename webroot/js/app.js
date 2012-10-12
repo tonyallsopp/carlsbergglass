@@ -154,7 +154,7 @@ $(function(){
                 $("body").on('click', 'div[rel="ProductGroupSize"] li', function() {
                     ajaxUpdate();
                 });
-                //no colours change
+                //on colours change
                 $("body").on('click', 'div[rel="OrderItem0Colours"] li', function() {
                     ajaxUpdate();
                 });
@@ -174,11 +174,21 @@ $(function(){
                                 if(elem.length){
                                     elem.text(data['ProductUnit'][p]);
                                 }
+                                if(p == 'pallet_unit'){
+                                    updateMinQty(data['ProductUnit'][p]);
+                                }
                             }
                             //price
                             $('.prodinfo-price').text(data['OrderItem'][0]['unit_price']);
                         }
                     });
+                }
+
+                function updateMinQty($minQty){
+                    $qtyField = $('#OrderItem0Qty');
+                    if($qtyField.val() < ($minQty *1)){
+                        $qtyField.val($minQty);
+                    }
                 }
             })();
         }
@@ -200,7 +210,14 @@ $(function(){
     });
 
     //lightbox
-    $('.prod-img a.lightbox').simpleModal();
+    $('.prod-img a.lightbox').simpleModal().append('<span class="lightbox-zoom">Click for larger image</span>');;
+
+    //first column occupies full page height
+    if($('#content-inner > section.faq, #content-inner > section.faqs').length){
+        var viewHeight = $(window).height() - 206;
+        console.log(viewHeight);
+        $('#content-inner > section.faq, #content-inner > section.faqs').css({'min-height':viewHeight + 'px'});
+    }
 });
 
 function prettySelect($elem){

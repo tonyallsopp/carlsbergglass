@@ -1,6 +1,6 @@
 <header class="page-header">
     <div class="inner">
-        <div class="col-1 col">
+        <div class="col-1 col max">
             <h1>Edit FAQ</h1>
         </div>
     </div>

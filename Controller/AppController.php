@@ -324,7 +324,7 @@ class AppController extends Controller {
      * @return array
      */
     public function parseCSVFile($filepath){
-        foreach( str_getcsv ( file_get_contents( $filepath ), $line = "\n" ) as $row ) {
+        foreach( str_getcsv ( str_replace(array("\r\n","\r"),array("\n","\n"),file_get_contents( $filepath )) , $line = "\n" ) as $row ) {
             $csv[] = str_getcsv( $row, $delim = ',', $enc = '"' );
         }
         return $csv;

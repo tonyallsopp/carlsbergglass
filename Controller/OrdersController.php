@@ -32,7 +32,7 @@ class OrdersController extends AppController {
         $product = $this->Order->OrderItem->ProductUnit->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$order['OrderItem'][0]['ProductUnit']['ProductGroup']['slug']), 'contain' => $contain));
         //get available sizes
         $productSizes = $this->Order->OrderItem->ProductUnit->ProductGroup->getSizes($product);
-        debug($order);
+        //debug($order);
 
         if($this->request->is('post') || $this->request->is('put') ){
             //save address and send emails
@@ -40,7 +40,7 @@ class OrdersController extends AppController {
             $this->request->data['Address']['order_id'] = $order['Order']['id'];
             if($this->Order->Address->save($this->request->data['Address'])){
                 //send mails
-                if ($this->sendEmail('order', $this->_configs['config_order_email'],array('user'=>$this->_user['User'],'order'=>$order,'address'=>$this->request->data['Address']))) {
+                if ($this->sendEmail('order', $this->_configs['config_order_email'],array('user'=>$this->_user,'order'=>$order,'address'=>$this->request->data['Address']))) {
                     if ($this->sendEmail('order_thanks', $this->_user['email'],array('user'=>$this->_user,'order'=>$order,'address'=>$this->request->data['Address']))) {
 
                     }

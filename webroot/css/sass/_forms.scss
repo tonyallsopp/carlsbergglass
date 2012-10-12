@@ -225,11 +225,10 @@ $large-input-height : 38px;
     }
     a.submit {
       @extend .large-submit;
-      width:158px;
       height:38px;
       line-height: 38px;
-      font-size: 20px;
-      padding:0;
+      font-size: 14px;
+      padding:0 30px;
       span { display: none;}
     }
     .form-options {
@@ -240,8 +239,14 @@ $large-input-height : 38px;
         color:white; text-decoration: none;
         bottom:auto;
         float:none;
+        font: $title-font-light;
+        font-size: 13px;
         &:hover { text-decoration: underline; }
       }
+    }
+    #authMessage {
+      position:absolute;
+      top:230px;
     }
   }
   a.submit {
@@ -294,6 +299,31 @@ $large-input-height : 38px;
 }
 
 //JS pretty selectors
+.pretty-dropdown {
+  position: absolute;
+  top:27px;
+  left:0;
+  z-index: 5;
+  background: white;
+  border:1px solid $input-brdr-grey;
+  width:238px;
+  display:none;
+  max-height: 110px;
+  padding-top: 3px;
+  overflow-y: scroll;
+  li {
+    list-style: none;
+    padding:2px 5px;
+    &:hover {
+      background: #E0E0E0;
+      cursor: pointer;
+    }
+    span.value {
+      display: none;
+    }
+  }
+}
+
 div.dropdown {
   position:relative;
   @include float-left;
@@ -312,28 +342,7 @@ div.dropdown {
     }
   }
   .options {
-    position: absolute;
-    top:30px;
-    left:4px;
-    z-index: 5;
-    background: white;
-    border:1px solid $input-brdr-grey;
-    width:228px;
-    display:none;
-    @include box-shadow(3px 3px 4px $dark-grey);
-    max-height: 110px;
-    overflow-y: scroll;
-    li {
-      list-style: none;
-      padding:2px 5px;
-      &:hover {
-        background: #88BF45;
-        cursor: pointer;
-      }
-      span.value {
-        display: none;
-      }
-    }
+    @extend .pretty-dropdown;
   }
 }
 //  LARGE FORMAT SELECT
@@ -346,22 +355,14 @@ div.dropdown {
       @extend .large-input;
     }
     .options {
+      @extend .pretty-dropdown;
       top:$large-input-height;
-      left:4px;
       background: #0A9243;
       border:1px solid $large-input-brdr-green;
-      width:228px;
-      max-height: 110px;
       li {
-        list-style: none;
-        padding:2px 5px;
         color:white;
         &:hover {
           background: $dark-green-body-bg;
-          cursor: pointer;
-        }
-        span.value {
-          display: none;
         }
       }
     }
