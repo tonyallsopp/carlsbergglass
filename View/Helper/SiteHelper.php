@@ -11,7 +11,10 @@ class SiteHelper extends AppHelper {
         $content = implode('</p><p>',$contentArray);
         $contentArray = explode('\n', $content);
         $content = implode('<br/>',$contentArray);
-        return "<p>{$content}</p>";
+        if(substr($content,0,3) !== '<p>'){
+            return "<p>{$content}</p>";
+        }
+        return $content;
     }
 
     public function productImage($filename, $size = 's', $link = null, $lightbox = false, $imageDir = 'product_images'){
