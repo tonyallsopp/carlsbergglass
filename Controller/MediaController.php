@@ -98,38 +98,48 @@ class MediaController extends AppController {
     }
 
     public function admin_ajax_image_upload($mediaType = 'prod_img') {
+        Configure::write('debug', 0);
+        /*$res = $_FILES;
+        $this->set('response',  json_encode($res));
+        $this->render('/Elements/ajax','ajax');
+        return;*/
+        $res = array('success'=>false);
         if(!empty($_FILES)){
             $fName = $this->Media->safeFilename($_FILES['Filedata']['name']);
-            $ext = array_pop(explode('.',$fName));
-            if(!in_array($ext,$this->Media->imageExtensions)){
-                //file is NOT an image
-                $res = $this->uploadFile($_FILES['Filedata'],$fName, TECH_DOC_DIR);
+            $ext = strtolower(array_pop(explode('.',$fName)));
+            if(!$ext){
+                $res['error'] = 'Unknown file extension';
             } else {
-                // IS image
-                $res = $this->Media->handleImageUpload($_FILES['Filedata'], $fName, $mediaType);
-            }
-            $res['name'] = $fName;
+                if(!in_array($ext,$this->Media->imageExtensions)){
+                    //file is NOT an image
+                    $res = $this->uploadFile($_FILES['Filedata'],$fName, TECH_DOC_DIR);
+                } else {
+                    // IS image
+                    $res = $this->Media->handleImageUpload($_FILES['Filedata'], $fName, $mediaType);
+                }
+                $res['name'] = $fName;
 
-            $res['saved'] = 0;
-            $res['id'] = '';
-            if($res['success']){
-                //uploaded OK, save the record
-                //1st delete existing records with same name
-                $this->Media->deleteAll(array('Media.type' => $mediaType,'Media.filename'=>$fName));
-                //save new
-                $rec = $this->Media->create();
-                $rec['Media']['filename'] = $fName;
-                $rec['Media']['name'] = $_FILES['Filedata']['name'];
-                $rec['Media']['type'] = $mediaType;
-                if($this->Media->save($rec)){
-                    $res['saved'] = 1;
-                    $res['type'] = $mediaType;
-                    $res['dir'] = $this->Media->mediaTypes[$mediaType]['dir'];
-                    $res['id'] = $this->Media->id;
+                $res['saved'] = 0;
+                $res['id'] = '';
+                if($res['success']){
+                    //uploaded OK, save the record
+                    //1st delete existing records with same name
+                    $this->Media->deleteAll(array('Media.type' => $mediaType,'Media.filename'=>$fName));
+                    //save new
+                    $rec = $this->Media->create();
+                    $rec['Media']['filename'] = isset($res['filename']) ? $res['filename'] : $fName;
+                    $rec['Media']['name'] = $_FILES['Filedata']['name'];
+                    $rec['Media']['type'] = $mediaType;
+                    if($this->Media->save($rec)){
+                        $res['saved'] = 1;
+                        $res['type'] = $mediaType;
+                        $res['dir'] = $this->Media->mediaTypes[$mediaType]['dir'];
+                        $res['id'] = $this->Media->id;
+                    }
                 }
             }
-        } else {
-            $res = array();
+
+
         }
         $this->set('response',  json_encode($res));
         $this->render('/Elements/ajax','ajax');

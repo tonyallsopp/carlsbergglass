@@ -26,6 +26,7 @@ class UploadifyHelper extends AppHelper {
                 "fileDesc"       : "%s",
                 onComplete  : function(event, queueID, fileObj, response, data) {
                     var res = $.parseJSON(response);
+                    console.log(res);
                     if(res.success){
                         addUploadedImage(res.filename, res.id, res.type, res.dir);
                     } else {

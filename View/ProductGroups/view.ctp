@@ -22,8 +22,10 @@
                         echo $this->Site->textBlock($currentUnit['description']);
                     } ?>
                     <dl>
-                        <dt>Sizes Available:</dt>
-                        <dd><?php echo implode(', ', $productSizes)?></dd>
+                        <?php if($currentUnit['classification']):?>
+                        <dt>Classification:</dt>
+                        <dd><?php echo $currentUnit['classification'];?></dd>
+                        <?php endif;?>
 
                         <?php if($productGroup['Category']['section'] == 'branded'):?>
                         <dt>Brand:</dt>
@@ -32,10 +34,8 @@
                         <?php endif;?>
                         <dd><?php echo $productGroup['Category']['name'];?></dd>
 
-                        <?php if($currentUnit['classification']):?>
-                        <dt>Classification:</dt>
-                        <dd><?php echo $currentUnit['classification'];?></dd>
-                        <?php endif;?>
+                        <dt>Sizes Available:</dt>
+                        <dd><?php echo implode(', ', $productSizes)?></dd>
                     </dl>
 
                 </div>

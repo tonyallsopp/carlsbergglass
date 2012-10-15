@@ -164,11 +164,18 @@ class Media extends AppModel {
                                         break;
                                     }
                                 }
-                                //if the original image was not jpg, delete it
-                                if($fileExt != 'jpg'){
-                                    $this->delete_file($imgDir . $fileName);
-                                }
                             }
+                            //if the original image was not jpg, delete it. create jpg
+                            if($fileExt != 'jpg'){
+                                //convert to jpg
+                                $fileName = $preName . '.jpg';
+                                $gd = $this->createGdImage($imgDir . $fileName);
+                                imagejpeg($gd, $imgDir . $fileName, 100);
+                                imagedestroy($gd);
+                                //delete non-jpg
+                                $this->deleteFile($imgDir . $fileName);
+                            }
+                            $res['filename'] = $fileName;
                         }
                     } else {
                         $res = array('success'=>0,'error'=>'Invalid file upload');
@@ -184,18 +191,17 @@ class Media extends AppModel {
      * @param $filename
      * @param $fileType
      */
-    public function deleteFiles($filename, $fileType){
+    public function deleteFiles($filename, $mediaType){
         $fileParts = explode('.', $filename);
-        if($fileType == 'logo'){
-            $this->setImageDir(LOGO_IMG_DIR);
-            $sizesArray = $this->logoImageSizes;
+        if($mediaType == 'logo'){
+            $imageDir = LOGO_IMG_DIR;
         } else {
-            $this->setImageDir(PROD_IMG_DIR);
-            $sizesArray = $this->productImageSizes;
+            $imageDir = PROD_IMG_DIR;
         }
-        $this->deleteFile($this->imageDir . $filename);
+        $sizesArray = $this->mediaTypes[$mediaType]['sizes'];
+        $this->deleteFile($imageDir . $filename);
         foreach($sizesArray as $k=>$v){
-            $this->deleteFile($this->imageDir . $fileParts[0] . $v['suffix'] . '.' . $fileParts[1]);
+            $this->deleteFile($imageDir . $fileParts[0] . $v['suffix'] . '.' . $fileParts[1]);
         }
     }
 
@@ -224,25 +230,37 @@ class Media extends AppModel {
         $fileExt = array_pop($fileParts);
         $preName = implode('_', $fileParts);
         $preName = $this->sluggify($preName,'_');
+        //png > jpg
+        if(in_array($fileExt, $this->imageExtensions)){
+            $fileExt = 'jpg';
+        }
         $newFileName = "{$preName}.{$fileExt}";
         return $newFileName;
     }
 
-    public function resize($source_image_path, $thumbnail_image_path, $width, $height, $quality = 90, $boundryMode = 'max_size') {
-        list( $source_image_width, $source_image_height, $source_image_type ) = getimagesize($source_image_path);
-
+    private function createGdImage($imagePath){
+        list( $source_image_width, $source_image_height, $source_image_type ) = getimagesize($imagePath);
+        $source_gd_image = false;
         switch ($source_image_type) {
             case IMAGETYPE_GIF:
-                $source_gd_image = imagecreatefromgif($source_image_path);
+                $source_gd_image = imagecreatefromgif($imagePath);
                 break;
             case IMAGETYPE_JPEG:
-                $source_gd_image = imagecreatefromjpeg($source_image_path);
+                $source_gd_image = imagecreatefromjpeg($imagePath);
                 break;
             case IMAGETYPE_PNG:
-                $source_gd_image = imagecreatefrompng($source_image_path);
+                $source_gd_image = imagecreatefrompng($imagePath);
                 break;
         }
+        if ($source_gd_image === false) {
+            return false;
+        }
+        return $source_gd_image;
+    }
 
+    public function resize($source_image_path, $thumbnail_image_path, $width, $height, $quality = 90, $boundryMode = 'max_size') {
+        list( $source_image_width, $source_image_height, $source_image_type ) = getimagesize($source_image_path);
+        $source_gd_image = $this->createGdImage($source_image_path);
         if ($source_gd_image === false) {
             return false;
         }
@@ -272,8 +290,6 @@ class Media extends AppModel {
                 $thumbnail_image_height = (int) ( $thumbnail_image_width / $source_aspect_ratio );
             }
         }
-
-
         $thumbnail_gd_image = imagecreatetruecolor($thumbnail_image_width, $thumbnail_image_height);
         imagecopyresampled($thumbnail_gd_image, $source_gd_image, 0, 0, 0, 0, $thumbnail_image_width, $thumbnail_image_height, $source_image_width, $source_image_height);
         imagejpeg($thumbnail_gd_image, $thumbnail_image_path, $quality);

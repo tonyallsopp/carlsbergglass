@@ -212,13 +212,18 @@ class ProductGroup extends AppModel {
         $fields = $this->productCsvFields;
         // if we are importing the data (NOT parsing only), delete current records
         if(!$parseOnly){
+            // del product groups
             $this->deleteAll(array('ProductGroup.id >'=>0));
+            // del categories
             $this->Category->deleteAll(array('Category.id >'=>0));
+            // del product units
             $this->ProductUnit->deleteAll(array('ProductUnit.id >'=>0));
+            // del suppliers
+            $this->ProductUnit->Supplier->deleteAll(array('Supplier.id >'=>0));
         }
 
         $categories = array_flip($this->Category->find('list'));
-        $suppliers = array_flip($this->ProductUnit->Supplier->find('list'));
+        $suppliers = array_flip($this->ProductUnit->Supplier->find('list',array('fields'=>array('id','slug'))));
 
         foreach($csvData as $lineNo => $line){
             $currentSection = 'branded'; //default to branded
@@ -330,22 +335,26 @@ class ProductGroup extends AppModel {
                     }
                     if(!empty($newUnit)) $newUnit['ProductUnit'][$fields[$col]['field']] = $val;
                 } elseif($col === 15){ // supplier
-                    if(!array_key_exists($val, $suppliers)){
-                        //new supplier to add
-                        $newSupplier = array('Supplier'=>array('name'=>$val));
-                        $this->ProductUnit->Supplier->create();
-                        if(!$parseOnly){
-                            $this->ProductUnit->Supplier->save($newSupplier);
-                            $suppliers[$val] = $this->ProductUnit->Supplier->id;
-                        } else {
-                            $suppliers[$val] = 0;
-                        }
+                    $supplierSlug = $this->sluggify($val,'_');
+                    if(!array_key_exists($supplierSlug, $suppliers)){
                         $msg = "New supplier record: {$val}";
-                        if(!in_array($msg,$this->importMessages)){
-                            $this->importMessages[] = $msg;
+                        if(!$parseOnly){//new supplier to add
+                            $newSupplier = array('Supplier'=>array('name'=>$val));
+                            $this->ProductUnit->Supplier->create();
+                            if(!$this->ProductUnit->Supplier->save($newSupplier)){
+                                $this->importErrors[] = "Error importing new supplier: '{$val}'";
+                                return false;
+                            }
+                            $suppliers[$supplierSlug] = $this->ProductUnit->Supplier->id;
                         }
+                    } else {
+                        $msg = "Supplier: {$val} will be replaced";
+                        $suppliers[$supplierSlug] = rand(1,999999);
                     }
-                    $currentSupplierId = $suppliers[$val];
+                    if(!in_array($msg,$this->importMessages)){
+                        $this->importMessages[] = $msg;
+                    }
+                    $currentSupplierId = $suppliers[$supplierSlug];
                 }
                 // if no more columns save the data
                 if($col === $lastColumn){ // last column
@@ -421,7 +430,7 @@ class ProductGroup extends AppModel {
             $this->importMessages[] = 'ALL OPTIONS RECORDS WILL BE CLEARED AND REPLACED!';
         }
         $fields = $this->optionCsvFields;
-        $suppliers = array_flip($this->ProductUnit->Supplier->find('list'));
+        $suppliers = array_flip($this->ProductUnit->Supplier->find('list',array('fields'=>array('id','slug'))));
         $supplierId = 0;
         $recordType = 'colours';
         $currentQty = 0;
@@ -430,11 +439,17 @@ class ProductGroup extends AppModel {
         $groupSlug = 'xxxxx';
         $groupIds = array();
         foreach($csvData as $lineNo=>$line){
+            $lineNo +=1;
             //check for column headers
             if($line[0] == $fields[0]['name']){
                 //this line is column headers
                 $this->importMessages[] = "Column headers found on line {$lineNo}";
                 continue;
+            }
+            // if there are no columns, we have reached the end of the document
+            if(count($line) <= 1){
+                $this->importMessages[] = "End of records line: {$lineNo}";
+                return true;
             }
             //get the record type
             $recordType = $line[2];
@@ -472,10 +487,9 @@ class ProductGroup extends AppModel {
                 $this->importErrors[] = "Incorrect record type: {$line[2]}";
                 if(!$parseOnly) return false;
             }
-
-
             $record = array();
             //debug($line);
+            //iterate over lines
             foreach($line as $col =>$val){
                 $val = trim($val);
                 //check for 0 or empty
@@ -514,12 +528,13 @@ class ProductGroup extends AppModel {
                         $record['product_group_id'] = $groupId;
                         break;
                     case 1 : //supplier
-                        if(!array_key_exists($val, $suppliers)){
+                        $supplierSlug = $this->sluggify($val,'_');
+                        if(!array_key_exists($supplierSlug, $suppliers)){
                             //no supplier found
-                            $this->importErrors[] = "Supplier: \"{$val}\" does not exist";
+                            $this->importErrors[] = "Supplier: \"{$val}\", line {$lineNo} does not exist in the database";
                             if(!$parseOnly) return false;
                         }
-                        $supplierId = $suppliers[$val];
+                        $supplierId = $suppliers[$supplierSlug];
                         //reset the qty if weve changed supplier
                         if($lastSupplierId != $supplierId) $currentQty = 0;
                         $lastSupplierId = $supplierId;
