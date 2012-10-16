@@ -103,6 +103,12 @@ class AppController extends Controller {
         $this->set('_user', $this->Auth->user());
         $this->_user = $this->Auth->user();
 
+        //check that user IS admin
+        if(isset($this->request->params['admin']) && $this->_user['role']*1 !== 1){
+            $this->Session->setFlash('You are not authorised to view that page');
+            $this->redirect('/');
+        }
+
         //set the current user id for use in created_by and updated_by fields
         $this->{$this->modelClass}->currentUserId = $this->Auth->user('id');
 
