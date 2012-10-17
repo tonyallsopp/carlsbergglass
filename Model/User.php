@@ -143,6 +143,46 @@ class User extends AppModel {
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
+    public $countries = array(
+        "AT" => "Austria",
+        "BE" => "Belgium",
+        "BG" => "Bulgaria",
+        "CY" => "Cyprus",
+        "CZ" => "Czech Republic",
+        "DK" => "Denmark",
+        "EE" => "Estonia",
+        "FI" => "Finland",
+        "FR" => "France",
+        "DE" => "Germany",
+        "GR" => "Greece",
+        "HU" => "Hungary",
+        "IE" => "Ireland",
+        "IT" => "Italy",
+        "LV" => "Latvia",
+        "LT" => "Lithuania",
+        "LU" => "Luxembourg",
+        "MT" => "Malta",
+        "NL" => "Netherlands",
+        "PL" => "Poland",
+        "PT" => "Portugal",
+        "RO" => "Romania",
+        "SK" => "Slovakia (Slovak Republic)",
+        "SI" => "Slovenia",
+        "ES" => "Spain",
+        "SE" => "Sweden",
+        "CH" => "Switzerland",
+        "GB" => "United Kingdom"
+    );
+
+    public function __construct(){
+        parent::__construct();
+        $countries = array();
+        foreach($this->countries as $c){
+            $countries[$c] = $c;
+        }
+        $this->countries = $countries;
+    }
+
     public function compareFields($check, $field1, $field2) {
         return $this->data['User'][$field1] == $this->data['User'][$field2];
     }
@@ -163,9 +203,5 @@ class User extends AppModel {
 
     public $roles = array(0=>'user',1=>'admin');
 
-    public $countries = array(
-        'UK'=>'UK',
-        'Denmark'=>'Denmark',
-        'Germany'=>'Germany'
-    );
+
 }

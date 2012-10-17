@@ -210,13 +210,20 @@ $(function(){
     });
 
     //lightbox
-    $('.prod-img a.lightbox').simpleModal().append('<span class="lightbox-zoom">Click for larger image</span>');;
+    if($('.prod-img a.lightbox').length){
+        $('.prod-img a.lightbox').simpleModal().append('<span class="lightbox-zoom">Click for larger image</span>');
+    }
 
     //first column occupies full page height
     if($('#content-inner > section.faq, #content-inner > section.faqs').length){
         var viewHeight = $(window).height() - 206;
         console.log(viewHeight);
         $('#content-inner > section.faq, #content-inner > section.faqs').css({'min-height':viewHeight + 'px'});
+    }
+
+    //remove login auth message
+    if($('#authMessage').length && $('#authMessage').text() == 'Please log in to proceed'){
+        $('#authMessage').hide();
     }
 });
 

@@ -19,12 +19,16 @@ class SiteHelper extends AppHelper {
 
     public function productImage($filename, $size = 's', $link = null, $lightbox = false, $imageDir = 'product_images'){
         $fName = $size ? str_replace('.jpg', "_{$size}.jpg",$filename) : $filename;
+        $fileUrl = "/files/{$imageDir}/{$fName}";
+        if(!$filename || !file_exists(FILES_DIR . $imageDir . DS . $fName)){
+            $fileUrl = "/img/layout/product-placeholder.jpg";
+        }
         $html = '<div class="prod-img">';
         if($link){
             $class = $lightbox ? 'lightbox' : '';
-            $html .= '<a style="display:block;width:100%;height:100%;background:url(' . $this->Html->url( "/files/{$imageDir}/{$fName}") . ') center center no-repeat" href="' . $this->Html->url($link) . '" class="' . $class . '"></a>';
+            $html .= '<a style="display:block;width:100%;height:100%;background:url(' . $this->Html->url( $fileUrl) . ') center center no-repeat" href="' . $this->Html->url($link) . '" class="' . $class . '"></a>';
         } else {
-            $html .= '<div style="width:100%;height:100%;background:url(' . $this->Html->url("/files/{$imageDir}/{$fName}") . ') center center no-repeat"></div>';
+            $html .= '<div style="width:100%;height:100%;background:url(' . $this->Html->url($fileUrl) . ') center center no-repeat"></div>';
         }
         $html .= '</div>';
         return $html;
