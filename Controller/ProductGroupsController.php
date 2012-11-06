@@ -123,7 +123,7 @@ class ProductGroupsController extends AppController {
         // ajax update
         if ($this->request->is('ajax') && !empty($this->request->data)) {
             Configure::write('debug', 0);
-            $contain = array('ProductUnit','Category','CustomOption');
+            $contain = array('ProductUnit','Category','CustomOption','ColourPrice');
             $product = $this->ProductGroup->find('first', array('conditions' => array('ProductGroup.slug'=>$this->request->data['ProductGroup']['slug']), 'contain' => $contain));
             //get available sizes
             $productSizes = $this->ProductGroup->getSizes($product);
@@ -279,16 +279,24 @@ class ProductGroupsController extends AppController {
                 if($uploaded){
                     $csvData = $this->parseCSVFile(TMP_FILES . $this->request->data['ProductGroup']['csv']['name']);
                     //debug($csvData);
-                    if($sheetType == 'product'){
-                        $this->ProductGroup->importProductCSV($csvData, true);
+                    if(!empty($csvData)){
+                        if($sheetType == 'product'){
+                            $this->ProductGroup->importProductCSV($csvData, true);
+                        } else {
+                            $replaceAll = $this->request->data['ProductGroup']['replace'];
+                            $this->ProductGroup->importOptionCSV($csvData, true, $replaceAll);
+                        }
                     } else {
-                        $replaceAll = $this->request->data['ProductGroup']['replace'];
-                        $this->ProductGroup->importOptionCSV($csvData, true, $replaceAll);
+                        $this->Session->setFlash('No data found in CSV file: ' . $this->request->data['ProductGroup']['csv']['name']);
+                        unlink(TMP_FILES . $this->request->data['ProductGroup']['csv']['name']);
+                        //$this->redirect($this->referer());
                     }
                 } else {
-                    $this->Session->setFlash('Error uploading file');
+                    $this->Session->setFlash('Error uploading file: ' . $this->request->data['ProductGroup']['csv']['name']);
+                    $this->redirect($this->referer());
                 }
             } else {
+                unlink(TMP_FILES . $this->request->data['ProductGroup']['csv']['name']);
                 debug($this->ProductGroup->invalidFields());
             }
         }
@@ -327,6 +335,7 @@ class ProductGroupsController extends AppController {
         } else {
             $this->Session->setFlash("Error importing {$filename}: " . explode(' ,',$this->ProductGroup->saveErrors));
         }
+        unlink(TMP_FILES . $filename);
         $this->redirect('/admin/product_groups');
     }
 

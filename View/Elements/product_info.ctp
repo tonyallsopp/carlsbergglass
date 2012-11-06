@@ -29,16 +29,22 @@
         <td>Capacity</td>
         <td class="prodinfo-capacity last"><?php echo h($unit['capacity']); ?></td>
     </tr>
-    <?php if($unit['height']):?>
+    <?php if($unit['height'] > 0):?>
     <tr>
-        <td>Hieght</td>
-        <td class="prodinfo-height last"><?php echo h($unit['height']); ?>mm</td>
+        <td>Height (mm)</td>
+        <td class="prodinfo-height last"><?php echo h($unit['height']); ?></td>
     </tr>
         <?php endif;?>
-    <?php if($unit['max_diameter']):?>
+    <?php if($unit['diameter_max'] > 0):?>
     <tr>
-        <td>Maximum Diameter</td>
-        <td class="prodinfo-max_diameter last"><?php echo h($unit['max_diameter']); ?>mm</td>
+        <td>Maximum Diameter (mm)</td>
+        <td class="prodinfo-diameter_max last"><?php echo h($unit['diameter_max']); ?></td>
+    </tr>
+        <?php endif;?>
+    <?php if($unit['diameter_rim'] > 0):?>
+    <tr>
+        <td>Rim Diameter (mm)</td>
+        <td class="prodinfo-diameter_rim last"><?php echo h($unit['diameter_rim']); ?></td>
     </tr>
         <?php endif;?>
     <tr>
@@ -49,18 +55,18 @@
         <td>FCA Location</td>
         <td class="prodinfo-fca_location last"><?php echo h($unit['fca_location']); ?></td>
     </tr>
-    <tr>
-        <td>FCA Unit Price (1 piece in EUR)</td>
-        <td class="prodinfo-price last"><?php echo h($unit['price']); ?></td>
-    </tr>
+    <?php if($unit['pallet_unit'] > 0):?>
     <tr>
         <td>Pallet Unit 90 x 120 x 120 (in pieces)</td>
         <td class="prodinfo-pallet_unit last"><?php echo h($unit['pallet_unit']); ?></td>
     </tr>
+        <?php endif;?>
+    <?php if($unit['trailer_load'] > 0):?>
     <tr>
         <td>Full Trailer Load 66 Pallet (in pieces)</td>
         <td class="prodinfo-trailer_load last"><?php echo h($unit['trailer_load']); ?></td>
     </tr>
+        <?php endif;?>
     <tr>
         <td>HS Code</td>
         <td class="prodinfo-hs_code last"><?php echo h($unit['hs_code']); ?></td>

@@ -22,10 +22,10 @@ class UsersController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $this->Session->setFlash(__('The changes to your account have been saved'));
+                $this->redirect('/');
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The changes could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->User->read(null, $this->User->id);
@@ -231,7 +231,7 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $this->redirect('/admin/users');
             } else {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }

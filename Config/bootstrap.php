@@ -45,6 +45,10 @@ define('LOGO_IMG_DIR', FILES_DIR . 'logo_images' . DS);
 define('CAT_IMG_DIR', FILES_DIR . 'category_images' . DS);
 define('TECH_DOC_DIR', FILES_DIR . 'technical' . DS);
 define('MANUAL_DIR', FILES_DIR . 'manual' . DS);
+define('CUST_LOGO_DIR', FILES_DIR . 'customer_logos' . DS);
+
+//need this for parsing CSV/text files
+ini_set("auto_detect_line_endings", true);
 
 
 

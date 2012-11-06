@@ -105,23 +105,24 @@ class OrderItem extends AppModel {
         $i = 0;
         $totalPrice = $productUnit['price'];
         $optionAdditionalColours = 0;
-        $baseColours = $order['OrderItem'][0]['colours'];
+        $baseColours = $order['OrderItem'][0]['colours'] *1;
+
         //large / small group
         $capacityGroup = $productUnit['capacity_group'];
         foreach($data['OrderItemOption'] as $o){
             if($o['value']){
                 $order['OrderItem'][0]['OrderItemOption'][$i] = $o;
                 //get the price for this option
-                foreach($productUnit['CustomOption'] as $cOpt){
-                    if($cOpt['CustomOption']['name'] == $o['name']){
-                        $unitPrice = $cOpt['CustomOption']["{$capacityGroup}_price"];
+                foreach($productGroup['CustomOption'] as $cOpt){
+                    if($cOpt['name'] == $o['name']){
+                        $unitPrice = $cOpt["{$capacityGroup}_price"];
                         //if we have a multiplier, use it
-                        if($cOpt['CustomOption']['multiplier']){
-                            $order['OrderItem'][0]['OrderItemOption'][$i]['multiplier'] = $cOpt['CustomOption']['multiplier'];
+                        if($cOpt['multiplier']){
+                            $order['OrderItem'][0]['OrderItemOption'][$i]['multiplier'] = $cOpt['multiplier'];
                             $unitPrice = $unitPrice * $o['value'];
                         }
                         //if the option counts as an additional colour
-                        if($cOpt['CustomOption']['is_colour']){
+                        if($cOpt['is_colour']){
                             $optionAdditionalColours += 1;
                         }
                         //add the unit price
@@ -150,10 +151,10 @@ class OrderItem extends AppModel {
                     $sizeCat = "{$capacityGroup}_5_6";
                     break;
             }
-            foreach($productUnit['ColourPrice'] as $cp){
+            foreach($productGroup['ColourPrice'] as $cp){
                 //find the right qty grouping
-                if($qty >= $cp['ColourPrice']['qty_from'] && $qty <= $cp['ColourPrice']['qty_to'] ){
-                    $colourPriceAdjust = $cp['ColourPrice'][$sizeCat];
+                if($qty >= $cp['qty_from'] && $qty <= $cp['qty_to'] ){
+                    $colourPriceAdjust = $cp[$sizeCat];
                 }
             }
         }
@@ -161,7 +162,6 @@ class OrderItem extends AppModel {
         $order['OrderItem'][0]['unit_price'] = $totalPrice + $colourPriceAdjust;
         //get the product unit id
         $order['OrderItem'][0]['product_unit_id'] = $productUnit['id'];
-        debug($order['OrderItem'][0]);
     }
 
 }

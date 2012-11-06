@@ -34,7 +34,7 @@ if($admin && (!isset($this->data['User']['approved']) || !$this->data['User']['a
     echo $this->Form->input('country',$opts);
     if(!$register){
         echo $this->Form->input('new_password',array('type'=>'password','placeholder'=>'Password','value'=>'',array('class'=>'required')));
-        echo $this->Form->input('confirm_password',array('label'=>false,'type'=>'password','class'=>'no-label','placeholder'=>'Confirm new password','value'=>'',array('class'=>'required')));
+        echo $this->Form->input('confirm_password',array('label'=>'Repeat Pwd','type'=>'password','placeholder'=>'Confirm new password','value'=>'',array('class'=>'required')));
     }
     if($admin){
         echo $this->Form->input('role',array('options'=>$roles));

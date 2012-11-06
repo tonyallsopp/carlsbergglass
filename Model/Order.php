@@ -110,7 +110,7 @@ class Order extends AppModel {
         $order['Order']['sample_requested'] = $data['Order']['sample_requested'];
         //add the order item and options (or replace existing)
         $this->OrderItem->quoteItem($order, $data, $productUnit, $productGroup);
-        debug($order);
+        //debug($order);
         return $order;
     }
 

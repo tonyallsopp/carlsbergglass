@@ -39,16 +39,29 @@ class OrdersController extends AppController {
             debug($this->request->data);
             $this->request->data['Address']['order_id'] = $order['Order']['id'];
             if($this->Order->Address->save($this->request->data['Address'])){
-                //send mails
-                if ($this->sendEmail('order', $this->_configs['config_order_email'],array('user'=>$this->_user,'order'=>$order,'address'=>$this->request->data['Address']))) {
-                    if ($this->sendEmail('order_thanks', $this->_user['email'],array('user'=>$this->_user,'order'=>$order,'address'=>$this->request->data['Address']))) {
-
+                //upload any image file
+                if(!empty($this->request->data['Order']['upload_file'])){
+                    $uploadFile = $this->request->data['Order']['upload_file'];
+                    $fileName = strtolower($uploadFile['name']);
+                    $upload = $this->uploadFile($uploadFile,$fileName,CUST_LOGO_DIR);
+                    if($upload['success']){
+                        $this->Order->id = $order['Order']['id'];
+                        $this->Order->saveField('image_file', $fileName);
                     }
-                    $this->redirect(array('action'=>'thanks'));
-                } else {
-                    $this->Session->setFlash('Error processing order');
                 }
+                //send mails
+                if(Configure::read('debug') <1){
+                    if ($this->sendEmail('order', $this->_configs['config_order_email'],array('user'=>$this->_user,'order'=>$order,'address'=>$this->request->data['Address']))) {
+                        if ($this->sendEmail('order_thanks', $this->_user['email'],array('user'=>$this->_user,'order'=>$order,'address'=>$this->request->data['Address']))) {
 
+                        }
+                        $this->redirect(array('action'=>'thanks'));
+                    } else {
+                        $this->Session->setFlash('Error processing order');
+                    }
+                } else {
+                    $this->redirect(array('action'=>'thanks'));
+                }
             }
         }
 

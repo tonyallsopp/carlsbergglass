@@ -23,6 +23,8 @@ foreach($order['OrderItem'][0]['OrderItemOption'] as $option):
 endforeach;
 echo $this->Email->htmlTextBlock("Estimated cost per unit (FCA Supplier Location, excluding VAT): {$order['OrderItem'][0]['unit_price']}");
 
+if($order['Order']['quote_requested'] && $order['Order']['image_file']) echo $this->Email->htmlTextBlock("Uploaded logo file: #a=/files/customer_logos/{$order['Order']['image_file']}::{$order['Order']['image_file']}=#");
+
 if($order['Order']['sample_requested']){
     echo $this->Email->htmlTextBlock("Sample delivery address:");
     echo $this->Email->htmlTextBlock("{$address['name']}");

@@ -170,6 +170,7 @@ $large-input-height : 38px;
   width:208px;
   @include rounded(0px);
   border:1px solid $large-input-brdr-green;
+  background-color: $dark-green;
   background-color: rgba($dark-green, 0.2);
   padding:0 20px;
   display: block;
@@ -179,13 +180,14 @@ $large-input-height : 38px;
   border:1px solid $large-input-brdr-green;
   color:white;
   text-shadow: none;
-  background:$green-btn-bg ;
+  background:$green-btn-bg;
   height:$large-input-height;
   line-height: $large-input-height;
   margin:0;
   @include box-shadow(none);
   @include rounded(0px);
   @include float-right;
+  filter:none;
   width:auto;
   span { display: none;}
 }
@@ -231,6 +233,9 @@ $large-input-height : 38px;
       padding:0 30px;
       span { display: none;}
     }
+    .form-actions {
+      width:520px;
+    }
     .form-options {
       color:white;
       @include float-left;
@@ -248,7 +253,7 @@ $large-input-height : 38px;
       position:absolute;
       top:230px;
     }
-  }
+  } //end #login-form
   a.submit {
     @extend .large-submit;
     &:hover {
@@ -260,6 +265,7 @@ $large-input-height : 38px;
     clear:both;
   }
   .register {
+    width:520px;
     div.form-actions {
       padding: 0;
       div.submit {
@@ -351,7 +357,9 @@ div.dropdown {
     position:relative;
     @include float-left;
     .selected {
-      background:url('../img/layout/select-bg-green.png') no-repeat right center rgba($dark-green, 0.2);
+      background:url('../img/layout/select-bg-green.png') no-repeat right center;
+      background-color: $dark-green; //IE7
+      background-color: rgba($dark-green, 0.2);
       @extend .large-input;
     }
     .options {

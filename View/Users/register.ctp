@@ -1,7 +1,6 @@
 <h1>Register</h1>
 <div class="register">
     <?php echo $this->Form->create('User'); ?>
-    <fieldset>
         <?php
         echo $this->Form->input('id');
         $opts = array('class'=>'required');
@@ -38,7 +37,6 @@
         $opts['div'] = 'select input alt ';
         echo $this->Form->input('country',$opts);
         ?>
-    </fieldset>
     <div class="form-actions">
         <?php echo $this->Form->end('Register'); ?>
     </div>

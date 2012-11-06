@@ -179,31 +179,32 @@ class ProductGroup extends AppModel {
         array('name'=>'name','field'=>'name', 'type'=>'str'),
         array('name'=>'capacity','field'=>'capacity', 'type'=>'str'),
         array('name'=>'variant','field'=>'variant', 'type'=>'str'),
-        array('name'=>'image','field'=>'image_file', 'type'=>'str'),
-        array('name'=>'technical drawing','field'=>'drawing_file', 'type'=>'str'),
-        array('name'=>'cutter guide','field'=>'cutter_guide_file', 'type'=>'str'),
-        array('name'=>'origin','field'=>'origin', 'type'=>'str'),
-        array('name'=>'primary packaging','field'=>'packaging', 'type'=>'str'),
+        array('name'=>'image','field'=>'image_file', 'type'=>'str','default'=>''),
+        array('name'=>'technical drawing','field'=>'drawing_file', 'type'=>'str','default'=>''),
+        array('name'=>'cutter guide','field'=>'cutter_guide_file', 'type'=>'str','default'=>''),
+        array('name'=>'origin','field'=>'origin', 'type'=>'str','default'=>''),
+        array('name'=>'primary packaging','field'=>'packaging', 'type'=>'str','default'=>''),
         array('name'=>'pallet unit','field'=>'pallet_unit', 'type'=>'int'),
-        array('name'=>'trailer load','field'=>'trailer_load', 'type'=>'str'),
-        array('name'=>'hs code','field'=>'hs_code', 'type'=>'str'),
-        array('name'=>'fca location','field'=>'fca_location', 'type'=>'str'),
+        array('name'=>'trailer load','field'=>'trailer_load', 'type'=>'int','default'=>0),
+        array('name'=>'hs code','field'=>'hs_code', 'type'=>'str','default'=>''),
+        array('name'=>'fca location','field'=>'fca_location', 'type'=>'str','default'=>''),
         array('name'=>'price','field'=>'price', 'type'=>'dec'),
         array('name'=>'supplier', 'type'=>'str'),
-        array('name'=>'description','field'=>'description', 'type'=>'str'),
-        array('name'=>'classification','field'=>'classification', 'type'=>'str'),
-        array('name'=>'height','field'=>'height', 'type'=>'int'),
-        array('name'=>'max diameter','field'=>'max_diameter', 'type'=>'int'),
-        array('name'=>'misc 1 label','field'=>'misc_1_label', 'type'=>'str'),
-        array('name'=>'misc 1 value','field'=>'misc_1_value', 'type'=>'str'),
-        array('name'=>'misc 2 label','field'=>'misc_2_label', 'type'=>'str'),
-        array('name'=>'misc 2 value','field'=>'misc_2_value', 'type'=>'str'),
-        array('name'=>'misc 3 label','field'=>'misc_3_label', 'type'=>'str'),
-        array('name'=>'misc 3 value','field'=>'misc_3_value', 'type'=>'str'),
+        array('name'=>'description','field'=>'description', 'type'=>'str','default'=>''),
+        array('name'=>'classification','field'=>'classification', 'type'=>'str','default'=>''),
+        array('name'=>'height','field'=>'height', 'type'=>'dec'),
+        array('name'=>'diameter max','field'=>'diameter_max', 'type'=>'dec'),
+        array('name'=>'diameter rim','field'=>'diameter_rim', 'type'=>'dec'),
+        array('name'=>'misc 1 label','field'=>'misc_1_label', 'type'=>'str','default'=>''),
+        array('name'=>'misc 1 value','field'=>'misc_1_value', 'type'=>'str','default'=>''),
+        array('name'=>'misc 2 label','field'=>'misc_2_label', 'type'=>'str','default'=>''),
+        array('name'=>'misc 2 value','field'=>'misc_2_value', 'type'=>'str','default'=>''),
+        array('name'=>'misc 3 label','field'=>'misc_3_label', 'type'=>'str','default'=>''),
+        array('name'=>'misc 3 value','field'=>'misc_3_value', 'type'=>'str','default'=>''),
     );
 
     public function importProductCSV($csvData, $parseOnly = false){
-        debug($csvData);
+        //debug($csvData);
         //load the Media mdel for use later
         App::uses('Media', 'Model');
         $media = new Media();
@@ -235,7 +236,11 @@ class ProductGroup extends AppModel {
             $currentGroupName = '';
             $currentGroupSlug = '';
             $currentSupplierId = 0;
-            if(!isset($lastColumn)) $lastColumn = count($line) -1;
+            $columnCount = count($line);
+            $lastColumn = $columnCount -1;
+            if($lastColumn < 14){
+                $this->importErrors[] = "Incorrect number of columns found on line {$lineNo} - found {$columnCount} columns";
+            }
 
             //debug($line);
             foreach($line as $col =>$val){
@@ -248,14 +253,19 @@ class ProductGroup extends AppModel {
                     }
                     break;
                 } else { // some basic validation
+                    //does the field have a default value if empty
+                    if(isset($fields[$col]['default']) && empty($val)){
+                        $val = $fields[$col]['default'];
+                    }
+
                     if(isset($fields[$col]['value']) && !in_array($val,$fields[$col]['value'])){
-                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col}";
+                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expecting: " . explode(' | ', $fields[$col]['value']) . " found: {$val}";
                     }
                     if($val && isset($fields[$col]['type']) && $fields[$col]['type'] == 'int' && !ctype_digit($val)){
-                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expected an integer (whole number)";
+                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expected an integer (whole number) - found \"{$val}\"";
                     }
                     if($val && isset($fields[$col]['type']) && $fields[$col]['type'] == 'dec' && !is_numeric($val)){
-                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expected a number (decimal)";
+                        $this->importErrors[] = "Invalid value - line {$lineNo}, column {$col} - expected a number (decimal) - found \"{$val}\"";
                     }
                 }
                 if(!empty($this->importErrors)) return false;
@@ -291,7 +301,7 @@ class ProductGroup extends AppModel {
                 } elseif($col === 2){ //name = ProductGroup
                     $currentGroupName = $val;
                     //does the group exist?
-                    $savedGroup = $this->find('first', array('conditions' => array('slug'=>$this->sluggify($val)), 'recursive' => -1));
+                    $savedGroup = $this->find('first', array('conditions' => array('ProductGroup.slug'=>$this->sluggify($val)), 'recursive' => -1));
                     if(empty($savedGroup)){
                         //doesnt exist, create it
                         $newGroup = array('name'=>$val, 'category_id'=>$currentCatId);
@@ -315,7 +325,7 @@ class ProductGroup extends AppModel {
                     }
 
                     //check product doesnt exist
-                    $savedProd = $this->ProductUnit->find('first', array('conditions' => array('product_group_slug'=>$currentGroupSlug, 'name'=>$unit['name']), 'recursive' => -1));
+                    $savedProd = $this->ProductUnit->find('first', array('conditions' => array('ProductUnit.product_group_slug'=>$currentGroupSlug, 'ProductUnit.name'=>$unit['name']), 'recursive' => -1));
                     if(empty($savedProd)){
                         //doesnt exist
                         $newUnit = $this->ProductUnit->create();
@@ -337,6 +347,7 @@ class ProductGroup extends AppModel {
                 } elseif($col === 15){ // supplier
                     $supplierSlug = $this->sluggify($val,'_');
                     if(!array_key_exists($supplierSlug, $suppliers)){
+                        //supplier record doesnt exist
                         $msg = "New supplier record: {$val}";
                         if(!$parseOnly){//new supplier to add
                             $newSupplier = array('Supplier'=>array('name'=>$val));
@@ -346,10 +357,12 @@ class ProductGroup extends AppModel {
                                 return false;
                             }
                             $suppliers[$supplierSlug] = $this->ProductUnit->Supplier->id;
+                        } else {
+                            $suppliers[$supplierSlug] = rand(1,999999);
                         }
                     } else {
+                        //supplier record DOES exist
                         $msg = "Supplier: {$val} will be replaced";
-                        $suppliers[$supplierSlug] = rand(1,999999);
                     }
                     if(!in_array($msg,$this->importMessages)){
                         $this->importMessages[] = $msg;
@@ -362,9 +375,9 @@ class ProductGroup extends AppModel {
                     if(!empty($newGroup)){
                         $this->create();
                         if(!$parseOnly){
-                            $newGroup['image'] = $newUnit['ProductUnit']['image_file'];
-                            $newGroup['guide'] = $newUnit['ProductUnit']['cutter_guide_file'];
-                            $newGroup['drawing'] = $newUnit['ProductUnit']['drawing_file'];
+                            $newGroup['image'] = isset($newUnit['ProductUnit']['image_file']) ? $newUnit['ProductUnit']['image_file'] : '';
+                            $newGroup['guide'] = isset($newUnit['ProductUnit']['cutter_guide_file']) ? $newUnit['ProductUnit']['cutter_guide_file'] : '';
+                            $newGroup['drawing'] = isset($newUnit['ProductUnit']['drawing_file']) ? $newUnit['ProductUnit']['drawing_file'] : '';
                             if(!$this->save(array('ProductGroup'=>$newGroup))){
                                 $this->importErrors[] = "Error importing new Product group: '{$val}'";
                                 return false;
@@ -372,6 +385,7 @@ class ProductGroup extends AppModel {
                         }
                     }
                     //new unit?
+                    //debug($newUnit);
                     if(!empty($newUnit)){
                         $newUnit['ProductUnit']['supplier_id'] = $currentSupplierId;
                         //last field to import, if we have a record to save, save it
@@ -411,12 +425,12 @@ class ProductGroup extends AppModel {
         array('name'=>'small 1 - 2 colours', 'type'=>'dec'),
         array('name'=>'small 3 - 4 colours', 'type'=>'dec'),
         array('name'=>'small 5 - 6 colours', 'type'=>'dec'),
-        array('name'=>'large 1 - 2 colours', 'type'=>'dec'),
-        array('name'=>'large 3 - 4 colours', 'type'=>'dec'),
-        array('name'=>'large 5 - 6 colours', 'type'=>'dec'),
+        array('name'=>'large 1 - 2 colours', 'type'=>'dec','default'=>0),
+        array('name'=>'large 3 - 4 colours', 'type'=>'dec','default'=>0),
+        array('name'=>'large 5 - 6 colours', 'type'=>'dec','default'=>0),
         array('name'=>'option name', 'type'=>'str'),
         array('name'=>'option small price', 'type'=>'dec'),
-        array('name'=>'option large price', 'type'=>'dec'),
+        array('name'=>'option large price', 'type'=>'dec','default'=>0),
         array('name'=>'additional colour', 'type'=>'bool'),
         array('name'=>'option info', 'type'=>'str'),
         array('name'=>'multiplier', 'type'=>'str'),
@@ -464,7 +478,7 @@ class ProductGroup extends AppModel {
             //retrieve the group
             $group = $this->find('first', array('conditions' => array('ProductGroup.slug'=>$groupSlug), 'recursive' => -1));
             if(empty($group)){
-                $this->importErrors[] = 'Product group does not exist';
+                $this->importErrors[] = "Product group does not exist: {$line[0]}";
                 if(!$parseOnly) return false;
             } else {
                 $msg = "Product: {$group['ProductGroup']['name']} options will be updated";
@@ -498,6 +512,9 @@ class ProductGroup extends AppModel {
                     if(!$parseOnly) return false;
                 }
                 //some fields are specific to colour pricing, others to options
+                if(empty($val) && isset($fields[$col]['default'])){
+                    $val = $fields[$col]['default'];
+                }
                 if($recordType == 'colours'){
                     if($col >= 5 && $col <= 10){
                         if(!is_numeric($val)){
@@ -505,7 +522,7 @@ class ProductGroup extends AppModel {
                             if(!$parseOnly) return false;
                         }
                         //check for 0 or empty
-                        if($val <= 0 || !$val){
+                        if( ($val <= 0 || !$val) && !isset($fields[$col]['default']) ){
                             $this->importErrors[] = "Zero or empty value for: {$fields[$col]['name']} line {$lineNo}";
                             if(!$parseOnly) return false;
                         }
@@ -522,7 +539,7 @@ class ProductGroup extends AppModel {
                 switch($col){
                     case 0 : //name of group, must match id
                         if($group['ProductGroup']['name'] != $val){
-                            $this->importErrors[] = 'Product name does not match';
+                            $this->importErrors[] = "Product name does not match line {$lineNo}: {$val}";
                             if(!$parseOnly) return false;
                         }
                         $record['product_group_id'] = $groupId;

@@ -329,13 +329,114 @@ class AppController extends Controller {
      * @param $filepath
      * @return array
      */
-    public function parseCSVFile($filepath){
-        foreach( str_getcsv ( str_replace(array("\r\n","\r"),array("\n","\n"),file_get_contents( $filepath )) , $line = "\n" ) as $row ) {
+    /*public function parseCSVFile($filepath){
+        foreach( str_getcsv ( str_replace(array("\r\n","\r","\n"),array("\n","\n","\n"),file_get_contents( $filepath )) , $line = "\n" ) as $row ) {
             $csv[] = str_getcsv( $row, $delim = ',', $enc = '"' );
         }
         return $csv;
+    }*/
+
+    public function parseCSVFile($filepath){
+        /*$fileHandle = fopen( $filepath, 'r' );
+        while (($data = fgetcsv($fileHandle, 1000, ",",'"')) !== false) {
+            foreach ($data as $value) {
+                echo $value . "<br />\n";
+            }
+        }
+        exit;*/
+        //$csv = $this->csvToArray(file_get_contents( $filepath ));
+        foreach( str_getcsv ( str_replace(array("\r\n","\r"),array("\n","\n"),file_get_contents( $filepath )) , $line = "\n" ) as $row ) {
+            $csv[] = str_getcsv( $row, $delim = ',', $enc = '"' );
+        }
+        //debug($csv);
+        return $csv;
     }
 
+    /**
+     * Converts a csv file into an array of lines and columns.
+     * khelibert@gmail.com
+     * @param $fileContent String
+     * @param string $escape String
+     * @param string $enclosure String
+     * @param string $delimiter String
+     * @return array
+     */
+    function csvToArray($fileContent,$escape = '\\', $enclosure = '"', $delimiter = ',')
+    {
+        Configure::write('debug',1);
+        $lines = array();
+        $fields = array();
+        debug($fileContent);
+        if($escape == $enclosure)
+        {
+            $escape = '\\';
+            $fileContent = str_replace(array('\\',$enclosure.$enclosure,"\r\n","\r"),
+                array('\\\\',$escape.$enclosure,"\\n","\\n"),$fileContent);
+        }
+        else
+            $fileContent = str_replace(array("\r\n","\r"),array("\n","\n"),$fileContent);
+
+        $nb = strlen($fileContent);
+        debug($nb);
+
+        $field = '';
+        $inEnclosure = false;
+        $previous = '';
+
+        for($i = 0;$i<$nb; $i++)
+        {
+            $c = $fileContent[$i];
+            if($c === $enclosure)
+            {
+                if($previous !== $escape)
+                    $inEnclosure ^= true;
+                else
+                    $field .= $enclosure;
+            }
+            else if($c === $escape)
+            {
+                $next = $fileContent[$i+1];
+                if($next != $enclosure && $next != $escape)
+                    $field .= $escape;
+            }
+            else if($c === $delimiter)
+            {
+                if($inEnclosure)
+                    $field .= $delimiter;
+                else
+                {
+                    //end of the field
+                    $fields[] = $field;
+                    $field = '';
+                }
+            }
+            else if($c === "\n")
+            {
+                $fields[] = $field;
+                $field = '';
+                $lines[] = $fields;
+                $fields = array();
+            }
+            else
+                $field .= $c;
+            $previous = $c;
+        }
+        //we add the last element
+        if(true || $field !== '')
+        {
+            if($field) $fields[] = $field;
+            if(!empty($fields))  $lines[] = $fields;
+        }
+        return $lines;
+    }
+
+    /**
+     * @param $tmpFile
+     * @param null $newName
+     * @param null $destDir
+     * @return array
+     * Uploads a given file to web server
+     */
     public function uploadFile($tmpFile, $newName = null, $destDir = null){
         $res = array('success'=>false);
         if(!$destDir) $destDir = TMP_FILES;

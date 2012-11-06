@@ -15,13 +15,17 @@
                 </div>
             </header>
 
-            <?php echo $this->Form->create('Order');?>
+            <?php echo $this->Form->create('Order',array('type'=>'file'));?>
             <?php if ($order['Order']['quote_requested']): ?>
             <article class="quote">
                 <h2>Request a formal quote</h2>
-                <?php echo $this->element('cms_content', array('name' => 'checkout_quote_text','para'=>true));?>
                 <?php
+                echo $this->element('cms_content', array('name' => 'checkout_quote_text','para'=>true));
                 echo $this->Form->input('Address.email', array('label' => 'Email Address','default'=>$_user['email']));
+                ?>
+                <p>Upload your logo image file:</p>
+                <?php
+                echo $this->Form->input('Order.upload_file', array('label' => 'Image file','type'=>'file'));
                 ?>
             </article>
             <?php endif;?>
