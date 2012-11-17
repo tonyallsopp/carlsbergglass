@@ -321,8 +321,9 @@ class ProductGroupsController extends AppController {
                 } else {
                     $this->Session->setFlash('Cannot find specified file, parameters missing');
                 }
-                if(empty($this->ProductGroup->importErrors) && empty($this->ProductGroup->saveErrors)){
-                    //create an import record
+                if($imported || !empty($this->ProductGroup->importErrors) || !empty($this->ProductGroup->saveErrors)){
+                    debug($this->ProductGroup->saveErrors);
+                    debug($this->ProductGroup->importErrors);
                 }
             } else {
                 $this->Session->setFlash('Cannot find specified file');
@@ -333,7 +334,7 @@ class ProductGroupsController extends AppController {
         if($imported){
             $this->Session->setFlash("{$filename} imported successfully");
         } else {
-            $this->Session->setFlash("Error importing {$filename}: " . explode(' ,',$this->ProductGroup->saveErrors));
+            $this->Session->setFlash("Error importing {$filename}: " . explode(' ,',$this->ProductGroup->saveErrors) . "\n" .  explode(' ,',$this->ProductGroup->importErrors));
         }
         unlink(TMP_FILES . $filename);
         $this->redirect('/admin/product_groups');

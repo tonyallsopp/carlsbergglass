@@ -184,7 +184,7 @@ class ProductGroup extends AppModel {
         array('name'=>'cutter guide','field'=>'cutter_guide_file', 'type'=>'str','default'=>''),
         array('name'=>'origin','field'=>'origin', 'type'=>'str','default'=>''),
         array('name'=>'primary packaging','field'=>'packaging', 'type'=>'str','default'=>''),
-        array('name'=>'pallet unit','field'=>'pallet_unit', 'type'=>'int'),
+        array('name'=>'pallet unit','field'=>'pallet_unit', 'type'=>'int','default'=>0),
         array('name'=>'trailer load','field'=>'trailer_load', 'type'=>'int','default'=>0),
         array('name'=>'hs code','field'=>'hs_code', 'type'=>'str','default'=>''),
         array('name'=>'fca location','field'=>'fca_location', 'type'=>'str','default'=>''),
@@ -345,6 +345,9 @@ class ProductGroup extends AppModel {
                     }
                     if(!empty($newUnit)) $newUnit['ProductUnit'][$fields[$col]['field']] = $val;
                 } elseif($col === 15){ // supplier
+                    if(!$val){
+                        $this->importErrors[] = "Empty value - line {$lineNo}, column {$col} - expected a supplier name";
+                    }
                     $supplierSlug = $this->sluggify($val,'_');
                     if(!array_key_exists($supplierSlug, $suppliers)){
                         //supplier record doesnt exist
@@ -373,13 +376,15 @@ class ProductGroup extends AppModel {
                 if($col === $lastColumn){ // last column
                     //new group?
                     if(!empty($newGroup)){
+                        debug($newGroup);
                         $this->create();
                         if(!$parseOnly){
                             $newGroup['image'] = isset($newUnit['ProductUnit']['image_file']) ? $newUnit['ProductUnit']['image_file'] : '';
                             $newGroup['guide'] = isset($newUnit['ProductUnit']['cutter_guide_file']) ? $newUnit['ProductUnit']['cutter_guide_file'] : '';
                             $newGroup['drawing'] = isset($newUnit['ProductUnit']['drawing_file']) ? $newUnit['ProductUnit']['drawing_file'] : '';
-                            if(!$this->save(array('ProductGroup'=>$newGroup))){
-                                $this->importErrors[] = "Error importing new Product group: '{$val}'";
+                            if(!$this->save(array('ProductGroup'=>$newGroup),false)){
+                                $this->saveErrors[] = "Error saving new Product group: '{$val}'";
+                                if($this->invalidFields()) $this->saveErrors[] = explode(', ',$this->invalidFields());
                                 return false;
                             }
                         }
@@ -392,9 +397,11 @@ class ProductGroup extends AppModel {
                         $msg =   "New product unit record: {$newUnit['ProductUnit']['name']}";
                         $this->ProductUnit->create();
                         if(!$parseOnly){
-                            $saved = $this->ProductUnit->save($newUnit);
+                            debug($newUnit);
+                            $saved = $this->ProductUnit->save($newUnit,false);
                             if(!$saved){
-                                $this->importErrors[] = "Error importing new Product Unit '{$newUnit['ProductUnit']['name']}'";
+                                $this->saveErrors[] = "Error saving new Product Unit '{$newUnit['ProductUnit']['name']}'";
+                                if($this->invalidFields()) $this->saveErrors[] = explode(', ',$this->invalidFields());
                                 return false;
                             }
                         }
